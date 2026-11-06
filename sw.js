@@ -1,5 +1,5 @@
 // Ryan Golf Log — 오프라인용 서비스 워커
-const CACHE = 'rgl-v8';
+const CACHE = 'rgl-v8.2';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './qr.js'];
 
 self.addEventListener('install', e => {
