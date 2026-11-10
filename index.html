@@ -681,7 +681,7 @@ async function call(action,payload,timeout){
   if(!j||!j.ok){const m=(j&&j.error)||'error';if(m==='AUTH'&&S.mode==='app'&&action!=='ping')setTimeout(onAuthFail,0);throw new Error(m)}
   return j.data;
 }
-const APPV='8.10';
+const APPV='8.11';
 async function callAt(url,key,action,payload,timeout){
   const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),timeout||180000);let r,j;
   try{r=await fetch(url,{method:'POST',body:JSON.stringify({key,action,payload:payload||{}}),signal:ctrl.signal,redirect:'follow'});j=await r.json()}
@@ -2665,7 +2665,7 @@ async function openSettings(){
     <div class="row between" style="padding:8px 0"><span class="muted">${t('storage')}</span><b id="stStore">–</b></div></div>
    <button class="btn" style="width:100%" ${S.syncing?'disabled':''} onclick="sync(true)">${S.syncing?'<span class="spin"></span> '+(S.upProg?t('upN',{p:S.upProg}):t('syncing')):'🔄 '+t('syncNow')}</button>
    <button class="ghost" style="margin-top:10px;border-color:var(--or);color:var(--or)" onclick="disconnect()">${t('disconnect')}</button>
-   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.10</div>`;
+   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.11</div>`;
   openSheet(t('settings'),b,`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`,'settings');
   try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();const el=document.getElementById('stStore');if(el)el.textContent=(e.usage/1048576).toFixed(1)+' MB'}}catch(e){}
 }
@@ -2682,11 +2682,15 @@ function mgKey(type,r){
 }
 function mgSame(type,a,b){
   if(a.id===b.id)return true;
+  if(type==='events'&&a.kind==='tournament'&&b.kind==='tournament'&&(evCovers(a,b.date)||evCovers(b,a.date)))return true;
   if(mgKey(type,a)!==mgKey(type,b))return false;
-  if(type==='rounds'){const ea=nrm(a.event),eb=nrm(b.event),ca=nrm(a.course),cb=nrm(b.course);return (ea&&ea===eb)||(ca&&ca===cb)||(!ea&&!eb&&!ca&&!cb&&a.score===b.score)}
+  if(type==='rounds'){
+    if((a.kind||'practice')==='tournament')return true; // 대회는 하루에 하나 — 같은 날 대회 라운드는 같은 기록으로 봄
+    const c1=x=>nrm(String(x.course||'').split(/[|,\-]/)[0]),ea=nrm(a.event),eb=nrm(b.event);
+    return (ea&&ea===eb)||(c1(a)&&c1(a)===c1(b))||(a.score!=null&&a.score===b.score)||(!c1(a)||!c1(b))}
   if(type==='practice')return pMin(a)===pMin(b);
   if(type==='lessons')return !a.coach||!b.coach||nrm(a.coach)===nrm(b.coach);
-  if(type==='events'){if(a.kind!=='tournament')return nrm(a.title)===nrm(b.title);const x=cleanEv(a),y=cleanEv(b);return (nrm(x.title)&&nrm(x.title)===nrm(y.title))||(nrm(x.course)&&nrm(x.course)===nrm(y.course))}
+  if(type==='events'){if(a.kind!=='tournament')return nrm(a.title)===nrm(b.title);return true;const x=cleanEv(a),y=cleanEv(b);return (nrm(x.title)&&nrm(x.title)===nrm(y.title))||(nrm(x.course)&&nrm(x.course)===nrm(y.course))}
   return true;
 }
 const MG_SKIP=['id','by','updated','_lv','gcalId','gcalErr','ext','_file','media','before','after'];
