@@ -49,10 +49,12 @@ header .icon{background:#fff;font-size:17px}
 .seg button{flex:1;border:0;background:transparent;padding:8px 6px;border-radius:9px;font-size:13px;font-weight:600;color:var(--sub);cursor:pointer;text-align:center}
 .seg label{flex:1;padding:0;cursor:pointer;text-align:center;font-size:13px;font-weight:600;color:var(--sub)}
 .seg .on,.seg input:checked+span{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
-.seg input{display:none}.seg label span{display:block;border-radius:9px;padding:8px 6px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.seg input:focus-visible+span{outline:2px solid var(--g);outline-offset:1px}.seg label span{display:block;border-radius:9px;padding:8px 6px}
 .headline{text-align:center;margin:4px 0 14px}
 .headline b{font-size:34px;color:var(--or);letter-spacing:-1px}
-.headline b.good{color:var(--g)}
+.headline b.good{color:var(--g)}.headline.weak b{font-size:22px;color:var(--sub)}.rfbar{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:10px}.rfbar input,.rfbar select{width:100%;min-width:0;max-width:100%}.rfbar .seg button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rfbar .row{gap:8px}.rfbar select,.rfbar input{flex:1;min-width:0}.rfbar label{font-size:12px;color:var(--sub);display:block;margin-bottom:2px}.rfbar .fl{flex:1;min-width:0}
+details.adv{margin:10px 0;border:1px solid var(--line);border-radius:12px;padding:0 12px}details.adv>summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;list-style:none}details.adv>summary::before{content:'▸ ';color:var(--sub)}details.adv[open]>summary::before{content:'▾ '}
+.lown{background:#fff4dc;color:#7a4e00;border-radius:10px;padding:8px 10px;font-size:12px;margin:0 0 10px}.st tr.few td{color:var(--sub)}.st tr.few .track i{opacity:.35}
 .cmp{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
 .cmp .t{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;margin-bottom:8px}
 .badge{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px}
@@ -101,6 +103,8 @@ nav button .nd{position:absolute;top:4px;left:56%;width:8px;height:8px;border-ra
 textarea.in{min-height:84px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:360px){.grid3{grid-template-columns:1fr 1fr}.seg label span,.seg button{font-size:12px;padding:8px 4px}.fld label{font-size:12px}}
+.grid2>*,.grid3>*{min-width:0}
 .sec{font-size:13px;font-weight:800;margin:18px 0 8px;letter-spacing:-.2px}
 .catrow{display:grid;grid-template-columns:1fr 74px 74px;gap:8px;align-items:center;background:#fff;border-radius:10px;padding:6px 6px 6px 12px;margin-bottom:6px;font-size:14px;font-weight:600}
 .catrow input{border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center;width:100%;min-height:38px}
@@ -386,7 +390,7 @@ const DEFAULT_SERVER = '';
 
 /* ================= 텍스트 (한/영) ================= */
 const T={
-ko:{sub:'골프 기록',offT:'오늘은 대회·쉬는 날',offS:'토·일과 대회 날은 연습 계획과 퀘스트가 없어요. 연속 기록🔥은 끊기지 않아요.',offQ:'오늘은 퀘스트 쉬는 날',cpGoalL:'목표',cpSec:'📋 선생님 주간 숙제 (요일별)',cpPaste:'선생님이 보낸 숙제 글을 그대로 붙여넣으세요',cpAI:'🤖 AI로 요일별 정리',cpWorking:'정리하는 중… (30초~1분)',cpNone:'붙여넣고 정리하면 라이언 연습 탭에 요일별로 나와요',cpDel:'계획 지우기',cpUnclear:'확인 필요',cpNoTr:'영어 번역은 실패했어요 (한국어로 표시)',cpFrom:'선생님 숙제',cpGoals:'이번 주 목표',cpBlocks:'{a} / {b} 완료',cpClear:'숙제 클리어!',cpGoal:'목표 달성!',cpBest:'개인 최고 기록!',cpRec:'기록 저장',cpSucc:'성공',cpStreak:'최고 연속',cpCount:'개수',cpRepeat:'매주 반복 · 다음 레슨까지',cpReport:'선생님 숙제 결과',cpDone:'완료한 블록',cpPlanVs:'계획 대비',cpStarts:'{d}부터 적용',todayTodo:'오늘 할 일',nextUp:'다음 일정',noNext:'2주 안에 잡힌 일정이 없어요',focusWk:'이번 주 포커스',focusNone:'AI 분석을 하면 이번 주 포커스가 나와요',todoEmpty:'오늘 계획이 없어요. 자유 연습을 기록하거나 AI 분석으로 주간 플랜을 만들어 보세요.',todoLog:'＋ 오늘 연습 기록',tagPlan:'AI 플랜',tagHw:'숙제',didToday:'오늘 함',wkSum:'{n}번 연습',home:'홈',practice:'연습',rounds:'라운드',lessons:'레슨',report:'리포트',coach:'AI 코치',
+ko:{sub:'골프 기록',wdFull:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],qHubDrill:'성공 {a}/{b} · 시도 {c}/{d}',noteEn:'메모 (영어)',qUndo:'↩ 마지막 샷 취소',qSucc:'성공 {a}/{b}',qAtt:'시도 {a}/{b}',qRun:'연속 {a}/{b}',qSwapLeft:'남은 교체 {n}번',qSwapConfirm:'"{q}" 퀘스트를 다른 걸로 바꿀까요? 교체는 하루 1번만 할 수 있어요.',tbd:'미정',girHint:'파보다 2타 적게(파4는 2타 안) 그린에 올린 홀 수',fwHint:'파4·파5 홀 수 (18홀이면 보통 14)',dayOfN:'{n}일차 / 총 {m}일',evSum:'대회 요약',momNote:'엄마 메모 (원문)',aiReady:'기록 {n}개가 있어요. 위 버튼을 누르면 첫 분석을 시작해요.',aiReadyT:'첫 분석 준비 완료',notEnoughCmp:'아직 비교할 만한 라운드가 부족해요',notEnoughSub:'연습 {a} · 시합 {b}라운드 (양쪽 3라운드 이상 필요)',showNums:'참고용 숫자 보기',impUrl:'또는 BlueGolf 링크',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'링크로 페이지를 읽지 못했어요. 페이지 글자를 복사해서 붙여넣거나 캡처를 올려주세요.',holeSumBad:'⚠️ 홀별 합계 {a}타 ≠ 스코어 {b}타 — 확인 필요',holeMissing:'홀 {n}개 미기록 — 합계 확인 불가',bkT:'🗂 백업·복구',bkSub:'기록을 파일로 내려받거나, 지운 기록을 30일 안에 되살릴 수 있어요.',bkJson:'⬇ 전체 백업 (JSON)',bkCsvR:'⬇ 라운드 CSV',bkCsvP:'⬇ 연습 CSV',bkTrash:'🗑 휴지통 (지운 기록 복구)',trashT:'휴지통',trashNone:'지운 기록이 없어요',restore:'복구',restored:'복구했어요',histT:'수정 이력',histBtn:'🕘 수정 이력',histNone:'이전 버전이 없어요',revert:'이 버전으로 되돌리기',confirmRevert:'이 버전으로 되돌릴까요? 지금 내용은 이력에 남아요.',savedAt:'{d}에 바뀌기 전',aiLast:'마지막 분석',aiNext:'다음 자동 분석',aiNextV:'{d} 월요일 오전 6시',aiAutoErr:'최근 자동 분석 실패',aiNever:'아직 없음',a_prev:'이전',a_next:'다음',a_close:'닫기',a_minus:'빼기',a_plus:'더하기',vsSameDay:'지난주 {d}까지 대비',goalPct:'이번 주 계획 {a} 중 {p}%',modeSimple:'점수만 간단 입력',modeDetail:'홀별·샷별 상세 입력',advStats:'고급 통계 (선택)',teeN:'티',teePh:'예: Blue',yardsN:'코스 길이 (야드)',roundInfo:'라운드 정보',dayTimesL:'날짜별 티타임',officialInfo:'공식 대회 안내',resultLink:'공식 결과 보기',dayTee:'{d} 티타임',logDay:'결과 기록',evNoName:'토너먼트',srch:'검색',rt_list:'기록',rt_stats:'분석',rfSearch:'대회·골프장·메모 검색',rfAll:'전체',rfTourAll:'모든 투어',rfCourseAll:'모든 골프장',rfFrom:'시작일',rfTo:'종료일',rfCount:'{a}개 중 {b}개',rfReset:'필터 지우기',upCnt:'{n}개',showAll:'일정 {t}개 모두 보기',showLess:'접기',moreN:'외 {n}개 더 · 캘린더에서 보기',lowN:'⚠️ 참고용 · 데이터 부족 — 연습 {a} · 시합 {b}라운드. 양쪽 3라운드 이상 쌓이면 믿을 만해져요.',conv9:'9홀 {n}라운드는 ×2로 18홀 환산',conv18:'모두 18홀 기준(환산 없음)',cmpAll:'전체',cmpSim:'비슷한 조건만',simNote:'같은 골프장이거나 티 거리 ±10% 이내만 비교',simNone:'비슷한 조건의 연습·시합이 아직 없어요',fewShots:'참고',fewShotsNote:'샷 {n}개 미만은 회색 — 대표 거리로 보기엔 아직 적어요',median:'중간값',nr:'미기록',autoDone:'✓ 홀별 기록으로 자동 계산: {a}',autoMiss:'미기록(계산 안 함): {a}',autoNone:'홀별 스코어로 스코어만 계산됐어요',missingSt:'미기록 항목',endDate:'종료일 (이틀 이상 대회)',dayN:'{n}일차',total:'합계',logNextDay:'＋ {n}일차 결과 기록',offT:'오늘은 대회·쉬는 날',offS:'토·일과 대회 날은 연습 계획과 퀘스트가 없어요. 연속 기록🔥은 끊기지 않아요.',offQ:'오늘은 퀘스트 쉬는 날',cpGoalL:'목표',cpSec:'📋 선생님 주간 숙제 (요일별)',cpPaste:'선생님이 보낸 숙제 글을 그대로 붙여넣으세요',cpAI:'🤖 AI로 요일별 정리',cpWorking:'정리하는 중… (30초~1분)',cpNone:'붙여넣고 정리하면 라이언 연습 탭에 요일별로 나와요',cpDel:'계획 지우기',cpUnclear:'확인 필요',cpNoTr:'영어 번역은 실패했어요 (한국어로 표시)',cpFrom:'선생님 숙제',cpGoals:'이번 주 목표',cpBlocks:'{a} / {b} 완료',cpClear:'숙제 클리어!',cpGoal:'목표 달성!',cpBest:'개인 최고 기록!',cpRec:'기록 저장',cpSucc:'성공',cpStreak:'최고 연속',cpCount:'개수',cpRepeat:'매주 반복 · 다음 레슨까지',cpReport:'선생님 숙제 결과',cpDone:'완료한 블록',cpPlanVs:'계획 대비',cpStarts:'{d}부터 적용',todayTodo:'오늘 할 일',nextUp:'다음 일정',noNext:'2주 안에 잡힌 일정이 없어요',focusWk:'이번 주 포커스',focusNone:'AI 분석을 하면 이번 주 포커스가 나와요',todoEmpty:'오늘 계획이 없어요. 자유 연습을 기록하거나 AI 분석으로 주간 플랜을 만들어 보세요.',todoLog:'＋ 오늘 연습 기록',tagPlan:'AI 플랜',tagHw:'숙제',didToday:'오늘 함',wkSum:'{n}번 연습',home:'홈',practice:'연습',rounds:'라운드',lessons:'레슨',report:'리포트',coach:'AI 코치',
 thisWeek:'이번 주',lastWeek:'지난주',totalPractice:'총 연습',sessionsN:'{n}회',vsLast:'지난주 대비',
 byCat:'항목별 연습 시간',openHw:'진행 중인 숙제',openHwSub:'레슨에서 받은 드릴 · 다 하면 체크',noHw:'진행 중인 숙제가 없어요',
 practicedN:'연습 {n}회',compare:'연습 vs 시합',cmpSub:'연습 라운드와 토너먼트, 어디서 달라지나',year:'올해',d90:'최근 90일',all:'전체',
@@ -403,7 +407,7 @@ media:'사진·영상',addMedia:'+ 사진 / 영상 추가',waitUp:'업로드 대
 vidNote:'사진·영상은 폰에 먼저 저장되고, 와이파이에 연결되면 자동으로 Drive에 올라가요',
 kind:'구분',tour:'투어',event:'대회명',course:'골프장',holes:'홀',finished:'끝까지 침',
 score:'스코어',par:'파',putts:'퍼팅',girH:'GIR (온그린 홀)',fwHit:'페어웨이 적중',fwH:'페어웨이 홀',threeP:'3퍼팅',
-birdies:'버디',bogeys:'보기',doubles:'더블+',p3:'Par3 평균',p4:'Par4 평균',p5:'Par5 평균',place:'순위',field:'참가 인원',
+birdies:'버디',bogeys:'보기',doubles:'더블보기 이상',p3:'Par3 평균',p4:'Par4 평균',p5:'Par5 평균',place:'순위',field:'참가 인원',
 link:'결과 링크 (BlueGolf 등)',openLink:'결과 보기',other:'기타',incomplete:'미완주',
 coachN:'선생님',focus:'레슨 주제',focusPh:'예: 백스윙 템포, 벙커샷',feedback:'선생님 피드백',fbPh:'고칠 점, 핵심 포인트',
 homework:'숙제 (다음 레슨까지)',addHw:'+ 숙제 추가',hwPh:'드릴 / 내용',hwTg:'목표 (예: 매일 퍼팅 50개)',
@@ -448,7 +452,7 @@ swTitle:'스윙 영상으로 물어보기',swPick:'영상 또는 사진 고르�
 swStart:'시작',swEnd:'끝',swRangeTip:'영상이 길면 재생하다가 어드레스에서 [시작], 피니시에서 [끝]을 누른 뒤 아래 버튼으로 다시 만드세요',swView:'찍은 방향',v_dtl:'측면 (뒤에서)',v_fo:'정면',
 swClub:'클럽',swMake:'장면 다시 뽑기',swAttach:'첨부',swMaking:'장면 뽑는 중…',swBadVid:'이 영상은 열 수 없어요. 폰 카메라 영상이나 스윙 사진으로 해주세요',
 aiPlanT:'AI 연습 플랜',qTitle:'오늘의 퀘스트',qToday:"TODAY'S QUESTS",qStart:'🎯 도전 시작!',qAllDone:'🏆 오늘 퀘스트 올클리어!',qPerfect:'PERFECT!',qStreakN:'{n}일 연속!',qStreakKeep:'오늘 하면 {n}일 연속!',
-qMomTitle:'라이언 오늘 퀘스트 {a}/{b}',qToNext:'다음 레벨까지 {n} XP',qBest:'최고',qFromAI:'AI 코치 추천',qFromHw:'선생님 숙제',qReroll:'다른 퀘스트로 바꾸기 (하루 1번)',qPerfectMsg:'PERFECT DAY! 오늘 퀘스트 전부 클리어!',
+qMomTitle:'라이언 오늘 퀘스트 {a}/{b}',qToNext:'다음 레벨까지 {n} XP',qBest:'최고',qFromAI:'AI 코치 추천',qFromHw:'선생님 숙제',qReroll:'다른 퀘스트로 바꾸기',qPerfectMsg:'PERFECT DAY! 오늘 퀘스트 전부 클리어!',
 qBadges:'트로피 진열장',qSound:'소리',qAll:'퀘스트 목록',qCleared:'클리어!',qInARow:'연속 성공',qMade:'성공',qMiss:'실패',qSoClose:'아쉽다! 다시 도전하면 돼!',qRetry:'다시 도전',qLeft:'남은 기회 {n}번',
 qTempoHow:'템포 트레이너로 스윙하면 자동으로 올라가요',qPracHow:'연습을 기록하면 자동으로 올라가요',qDidIt:'했어요!',qMomPreview:'라이언 폰에서 도전하면 여기 진행이 보여요',qClear:'QUEST CLEAR!',
 qStreakBonus:'연속 보너스 +{n} XP',qPerfectBonus:'퍼펙트 보너스 +30 XP',qNewBadge:'새 트로피!',qLevelMsg:'새 레벨 달성! 계속 가보자!',qTap:'탭해서 계속',
@@ -471,9 +475,9 @@ evLink:'대회 링크 (BlueGolf 등)',logResult:'⛳ 결과 기록하기',viewRe
 gcalTag:'구글 캘린더',dayEmpty:'이 날은 일정이 없어요',addThisDay:'+ 이 날에 일정 추가',reportSub:'주간·월간 리포트 · 선생님께 PDF 공유',dToday:'오늘',dN:'D-{n}',done:'완료',
 logsDay:'이 날 한 기록',calNote:'일정은 엄마 구글 캘린더의 "Ryan Golf"에도 자동으로 들어가고, 구글 캘린더에서 넣은 일정도 여기 보여요',needDate:'날짜를 넣어주세요',
 allDay:'종일',calLegLog:'기록함',gcalErrMsg:'구글 캘린더 저장 실패 (앱에는 저장됨)'},
-en:{sub:'Golf Log',offT:'Tournament / rest day',offS:'No practice plan or quests on weekends and tournament days. Your 🔥 streak stays safe.',offQ:'No quests today',cpGoalL:'Goal',cpSec:'📋 Coach weekly homework (by day)',cpPaste:'Paste the coach\'s homework message as is',cpAI:'🤖 Organize by day with AI',cpWorking:'Organizing… (30s–1 min)',cpNone:'Paste and organize — it shows up day by day in Ryan\'s Practice tab',cpDel:'Remove plan',cpUnclear:'Please check',cpNoTr:'English translation failed (shown in Korean)',cpFrom:'Coach homework',cpGoals:'This week\'s goals',cpBlocks:'{a} / {b} done',cpClear:'HOMEWORK CLEAR!',cpGoal:'GOAL REACHED!',cpBest:'NEW PERSONAL BEST!',cpRec:'Save',cpSucc:'Made',cpStreak:'Best in a row',cpCount:'Count',cpRepeat:'Repeats weekly · until next lesson',cpReport:'Coach homework results',cpDone:'Blocks done',cpPlanVs:'Plan vs actual',cpStarts:'Starts {d}',todayTodo:'Today',nextUp:'Coming up',noNext:'Nothing scheduled in the next 2 weeks',focusWk:'Focus this week',focusNone:'Run an AI analysis to get this week\'s focus',todoEmpty:'No plan for today. Log free practice or run an AI analysis to get a weekly plan.',todoLog:'+ Log today\'s practice',tagPlan:'AI plan',tagHw:'Homework',didToday:'Done today',wkSum:'{n} sessions',home:'Home',practice:'Practice',rounds:'Rounds',lessons:'Lessons',report:'Report',coach:'AI Coach',
+en:{sub:'Golf Log',wdFull:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],qHubDrill:'{a}/{b} made · {c}/{d} tries',noteEn:'Note',qUndo:'↩ Undo last shot',qSucc:'Successes: {a}/{b}',qAtt:'Attempts: {a}/{b}',qRun:'In a row: {a}/{b}',qSwapLeft:'{n} swap left today',qSwapConfirm:'Swap "{q}" for a different quest? You can only swap once a day.',tbd:'TBD',girHint:'Holes where you reached the green in 2 fewer shots than par (e.g. in 2 on a par 4)',fwHint:'Par 4s and 5s — usually 14 in 18 holes',dayOfN:'Round {n} of {m}',evSum:'Event summary',momNote:"Mom's note (original)",aiReady:'You have {n} logged records. Tap the button above to run your first analysis.',aiReadyT:'Ready for your first analysis',notEnoughCmp:'Not enough comparable rounds yet',notEnoughSub:'Practice {a} · Tournament {b} rounds (need 3+ each)',showNums:'Show reference numbers',impUrl:'or a BlueGolf link',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'Could not read that link. Copy and paste the page text, or upload a screenshot.',holeSumBad:'⚠️ Hole total {a} ≠ score {b} — please check',holeMissing:'{n} holes not recorded — cannot check total',bkT:'🗂 Backup & restore',bkSub:'Download your records, or bring back deleted ones within 30 days.',bkJson:'⬇ Full backup (JSON)',bkCsvR:'⬇ Rounds CSV',bkCsvP:'⬇ Practice CSV',bkTrash:'🗑 Trash (restore deleted)',trashT:'Trash',trashNone:'Nothing deleted',restore:'Restore',restored:'Restored',histT:'Edit history',histBtn:'🕘 Edit history',histNone:'No earlier versions',revert:'Revert to this version',confirmRevert:'Revert to this version? The current one stays in history.',savedAt:'Before change on {d}',aiLast:'Last analysis',aiNext:'Next automatic analysis',aiNextV:'Mon {d}, 6 AM',aiAutoErr:'Last automatic analysis failed',aiNever:'None yet',a_prev:'Previous',a_next:'Next',a_close:'Close',a_minus:'Decrease',a_plus:'Increase',vsSameDay:'vs last week through {d}',goalPct:'{p}% of this week\'s {a} plan',modeSimple:'Score only (quick)',modeDetail:'Hole-by-hole / shots',advStats:'Advanced stats (optional)',teeN:'Tee',teePh:'e.g. Blue',yardsN:'Course length (yards)',roundInfo:'Round info',dayTimesL:'Tee time by day',officialInfo:'Event details',resultLink:'Official results',dayTee:'{d} tee time',logDay:'Log result',evNoName:'Tournament',srch:'Search',rt_list:'Rounds',rt_stats:'Analysis',rfSearch:'Search event, course, notes',rfAll:'All',rfTourAll:'All tours',rfCourseAll:'All courses',rfFrom:'From',rfTo:'To',rfCount:'{b} of {a}',rfReset:'Clear filters',upCnt:'{n}',showAll:'View all {t} scheduled',showLess:'Show less',moreN:'+{n} more · open calendar',lowN:'⚠️ For reference only · not enough data — practice {a} · tournament {b} rounds. Reliable once both have 3+.',conv9:'{n} nine-hole rounds scaled ×2 to 18',conv18:'All 18-hole rounds (no scaling)',cmpAll:'All',cmpSim:'Similar only',simNote:'Same course, or tee yardage within ±10%',simNone:'No similar practice/tournament rounds yet',fewShots:'ref',fewShotsNote:'Grey = fewer than {n} shots — not enough to be his typical distance',median:'Median',nr:'Not recorded',autoDone:'✓ Calculated from holes: {a}',autoMiss:'Not recorded (not calculated): {a}',autoNone:'Only the score was calculated from the holes',missingSt:'Not recorded',endDate:'End date (multi-day events)',dayN:'Round {n}',total:'Total',logNextDay:'+ Log round {n}',offT:'Tournament / rest day',offS:'No practice plan or quests on weekends and tournament days. Your 🔥 streak stays safe.',offQ:'No quests today',cpGoalL:'Goal',cpSec:'📋 Coach weekly homework (by day)',cpPaste:'Paste the coach\'s homework message as is',cpAI:'🤖 Organize by day with AI',cpWorking:'Organizing… (30s–1 min)',cpNone:'Paste and organize — it shows up day by day in Ryan\'s Practice tab',cpDel:'Remove plan',cpUnclear:'Please check',cpNoTr:'English translation failed (shown in Korean)',cpFrom:'Coach homework',cpGoals:'This week\'s goals',cpBlocks:'{a} / {b} done',cpClear:'HOMEWORK CLEAR!',cpGoal:'GOAL REACHED!',cpBest:'NEW PERSONAL BEST!',cpRec:'Save',cpSucc:'Made',cpStreak:'Best in a row',cpCount:'Count',cpRepeat:'Repeats weekly · until next lesson',cpReport:'Coach homework results',cpDone:'Blocks done',cpPlanVs:'Plan vs actual',cpStarts:'Starts {d}',todayTodo:'Today',nextUp:'Coming up',noNext:'Nothing scheduled in the next 2 weeks',focusWk:'Focus this week',focusNone:'Run an AI analysis to get this week\'s focus',todoEmpty:'No plan for today. Log free practice or run an AI analysis to get a weekly plan.',todoLog:'+ Log today\'s practice',tagPlan:'AI plan',tagHw:'Homework',didToday:'Done today',wkSum:'{n} sessions',home:'Home',practice:'Practice',rounds:'Rounds',lessons:'Lessons',report:'Report',coach:'AI Coach',
 thisWeek:'This week',lastWeek:'Last week',totalPractice:'Total practice',sessionsN:'{n} sessions',vsLast:'vs last week',
-byCat:'Practice time by area',openHw:'Open homework',openHwSub:'Drills from lessons · check when done',noHw:'No open homework',
+byCat:'Practice time by area',openHw:'Your practice assignments',openHwSub:'Drills from lessons · check when done',noHw:'No open homework',
 practicedN:'Practiced {n}×',compare:'Practice vs Tournament',cmpSub:'Where does it change under pressure?',year:'This year',d90:'Last 90 days',all:'All',
 practiceRound:'Practice round',tournament:'Tournament',pr:'Practice',tn:'Tourn.',inTourn:'In tournaments, on average',stroke:'',
 toPar:'Avg over par (18H)',putts18:'Putts (18H)',gir:'GIR',fw:'Fairways hit',tp18:'3-putts (18H)',
@@ -487,8 +491,8 @@ hwToday:'Homework done today',feel:'How did it feel?',notes:'Notes',notesPh:'Wha
 media:'Photos & videos',addMedia:'+ Add photo / video',waitUp:'Waiting',
 vidNote:'Photos and videos are saved on the phone first and upload to Drive automatically on Wi-Fi',
 kind:'Type',tour:'Tour',event:'Event',course:'Course',holes:'Holes',finished:'Finished all holes',
-score:'Score',par:'Par',putts:'Putts',girH:'GIR (greens hit)',fwHit:'Fairways hit',fwH:'Fairway holes',threeP:'3-putts',
-birdies:'Birdies',bogeys:'Bogeys',doubles:'Double+',p3:'Par 3 avg',p4:'Par 4 avg',p5:'Par 5 avg',place:'Place',field:'Field size',
+score:'Score',par:'Par',putts:'Putts',girH:'Greens in regulation (GIR)',fwHit:'Fairways hit',fwH:'Fairways possible',threeP:'3-putts',
+birdies:'Birdies',bogeys:'Bogeys',doubles:'Double bogey or worse',p3:'Par 3 avg',p4:'Par 4 avg',p5:'Par 5 avg',place:'Place',field:'Players in your division',
 link:'Results link (BlueGolf etc.)',openLink:'Results',other:'Other',incomplete:'Incomplete',
 coachN:'Coach',focus:'Lesson focus',focusPh:'e.g. backswing tempo, bunker shots',feedback:'Coach feedback',fbPh:'Fixes, key points',
 homework:'Homework (until next lesson)',addHw:'+ Add homework',hwPh:'Drill / task',hwTg:'Target (e.g. 50 putts daily)',
@@ -533,7 +537,7 @@ swTitle:'Ask with a swing video',swPick:'Choose a video or photos',swOther:'Choo
 swStart:'Start',swEnd:'End',swRangeTip:'If the clip is long, pause at address and tap [Start], at the finish tap [End], then remake below',swView:'Camera angle',v_dtl:'Down-the-line',v_fo:'Face-on',
 swClub:'Club',swMake:'Remake frames',swAttach:'Attach',swMaking:'Making frames…',swBadVid:'Can\'t open this video. Try a phone camera clip or photos',
 aiPlanT:'AI practice plan',qTitle:"Today's Quests",qToday:"TODAY'S QUESTS",qStart:'🎯 Start a quest!',qAllDone:'🏆 All quests cleared today!',qPerfect:'PERFECT!',qStreakN:'{n}-day streak!',qStreakKeep:'Play today for a {n}-day streak!',
-qMomTitle:"Ryan's quests today {a}/{b}",qToNext:'{n} XP to next level',qBest:'best',qFromAI:'AI Coach pick',qFromHw:'Coach homework',qReroll:'Swap this quest (once a day)',qPerfectMsg:'PERFECT DAY! Every quest cleared!',
+qMomTitle:"Ryan's quests today {a}/{b}",qToNext:'{n} XP to next level',qBest:'best',qFromAI:'AI Coach pick',qFromHw:'Coach homework',qReroll:'Swap this quest',qPerfectMsg:'PERFECT DAY! Every quest cleared!',
 qBadges:'Trophy case',qSound:'Sound',qAll:'All quests',qCleared:'Cleared!',qInARow:'in a row',qMade:'Made',qMiss:'Missed',qSoClose:'So close! Try again!',qRetry:'Try again',qLeft:'{n} tries left',
 qTempoHow:'Fills up automatically when you swing with the tempo trainer',qPracHow:'Fills up automatically when you log practice',qDidIt:'Done!',qMomPreview:"Ryan's progress shows here when he plays on his phone",qClear:'QUEST CLEAR!',
 qStreakBonus:'Streak bonus +{n} XP',qPerfectBonus:'Perfect bonus +30 XP',qNewBadge:'New trophy!',qLevelMsg:'New level! Keep going!',qTap:'Tap to continue',
@@ -553,7 +557,7 @@ impNone:'No rounds found',impCheck:'Check & save',impSaved:'Saved',impAll:'Save 
 impHoles:'{n} holes',impShots:'{n} shots',conf_high:'Clear',conf_medium:'Some guesses',conf_low:'Mostly guessed',impNoKey:'Claude API key is not set on the server yet',quickHole:'Quick entry (no shots)',recurNote:'This is a repeating Google Calendar event — edit or delete it in Google Calendar',cal:'Calendar',calAdd:'+ Add event',upcoming:'Coming up',seeCal:'Open calendar →',k_tournament:'Tournament',k_lesson:'Lesson',k_practice:'Practice',k_plan:'AI plan',k_other:'Other',
 evName:'Event name',teeTime:'Tee time',checkIn:'Check-in',division:'Division',divPh:'e.g. Boys 11-12',evTime:'Start time',evDur:'Length (min)',evTitle:'Title',evPlan:'Practice plan',evPlanPh:'e.g. range + short game',venue:'Place',
 evLink:'Event link (BlueGolf etc.)',logResult:'⛳ Log the result',viewResult:'⛳ View result',logLesson:'🎓 Log the lesson',viewLesson:'🎓 View lesson notes',logPractice:'🏌️ Log practice',
-gcalTag:'Google Calendar',dayEmpty:'Nothing scheduled',addThisDay:'+ Add event on this day',reportSub:'Weekly & monthly report · share a PDF with the coach',dToday:'Today',dN:'D-{n}',done:'Done',
+gcalTag:'Google Calendar',dayEmpty:'Nothing scheduled',addThisDay:'+ Add event on this day',reportSub:'Weekly & monthly report · share a PDF with the coach',dToday:'Today',dN:'In {n} days',done:'Done',
 logsDay:'Logged this day',calNote:'Events also go to Mom\'s Google Calendar "Ryan Golf", and events added there show up here',needDate:'Enter a date',
 allDay:'All day',calLegLog:'Logged',gcalErrMsg:'Google Calendar save failed (saved in the app)'}
 };
@@ -561,6 +565,11 @@ const CATS=['driver','wood','iron','wedge','chip','bunker','putt'];
 const CC={driver:'#1f7a4d',wood:'#3f9b64',iron:'#2bb5a0',wedge:'#86b93a',chip:'#c9a52a',bunker:'#df8a3a',putt:'#5b70d8',mental:'#8a5bd8',course:'#3a8fc7'};
 const FEEL=['😫','😕','🙂','😀','🔥'];
 const TOURS=['SCPGA','FCG'];
+/* 투어 저장값은 언어와 무관: 'SCPGA' | 'FCG' | 'other' | (직접 쓴 이름, 예: U.S. Kids). 예전 '기타'/'Other' 값도 'other'로 읽음 */
+function normTour(v){const s0=String(v==null?'':v).trim();if(!s0)return '';const hit=TOURS.find(x=>x.toLowerCase()===s0.toLowerCase());if(hit)return hit;if(/^(기타|other|others|기타 투어)$/i.test(s0))return 'other';return s0}
+function tourLabel(v){const n=normTour(v);return n==='other'?t('other'):n}
+function tourSelect(cur){const n=normTour(cur),opts=[...TOURS];if(n&&n!=='other'&&opts.indexOf(n)<0)opts.push(n);opts.push('other');
+  return `<select class="in" name="tour">${opts.map(x=>`<option value="${esc(x)}" ${n===x||(!n&&x===opts[0])?'selected':''}>${esc(x==='other'?t('other'):x)}</option>`).join('')}</select>`}
 const TYPES=['practice','rounds','lessons','config','events','quests'];
 const DEFAULT_CLUBS=['D','3W','5W','4H','5i','6i','7i','8i','9i','PW','50°','56°','60°','65°'];
 const RES=['fw','rough','bunker','green','fringe','ob','haz','holed'];
@@ -606,7 +615,7 @@ function canDel(r){return S.role==='parent'||(r&&r.by==='ryan')}
 function errMsg(e){const m=String(e&&e.message||e);
   const ai=m.match(/^AI_(KEY|CREDIT|PERM|MODEL|RATE|BUSY|NET|FORMAT|OTHER|TIMEOUT)\b/);
   if(ai&&ai[1]!=='TIMEOUT'){if(S.role==='kid')return t('aiErrKid');return t('aiErr'+ai[1])+(ai[1]==='OTHER'?' ('+m.split('|').slice(1).join(' ').slice(0,80)+')':'')}if(m.indexOf('LIMIT')===0)return t('limitMsg');if(m==='AI_TIMEOUT')return t('aiTimeout');if(m.indexOf('NO_KEY')>=0)return t('aiNoKey');
-  if(m==='FORBIDDEN')return t('forbidden');if(m==='LOCKED')return t('locked');if(m==='AUTH')return t('wrongPin');return t('err')+': '+m}
+  if(m==='BG_FETCH')return t('bgFetch');if(m==='FORBIDDEN')return t('forbidden');if(m==='LOCKED')return t('locked');if(m==='AUTH')return t('wrongPin');return t('err')+': '+m}
 
 /* ================= IndexedDB (폰 임시 저장) ================= */
 function idbOpen(){return new Promise((res,rej)=>{const r=indexedDB.open('ryan-golf-log',1);
@@ -628,7 +637,7 @@ async function reloadMem(){
   const d={practice:[],rounds:[],lessons:[],config:[],events:[],quests:[]};let pr=0,pm=0;
   all.forEach(([k,x])=>{if(d[x.type])d[x.type].push(x.rec);if(x.dirty){pr++;refs(x.rec).forEach(m=>{if(m.local)pm++})}});
   const dels=(await idb.get('kv','deletes'))||[];
-  S.data=d;S.analyses=(await idb.get('kv','analyses'))||[];
+  S.data=d;S.analyses=(await idb.get('kv','analyses'))||[];if(S.aiRun===undefined)S.aiRun=(await idb.get('kv','aiRun'))||null;
   S.chats=(await idb.get('kv','chats'))||[];S.gcal=(await idb.get('kv','gcal'))||[];S.chatPend=(await idb.get('kv','chatPend'))||[];
   S.pend={recs:pr+dels.length,media:pm,asks:S.chatPend.length};
 }
@@ -745,6 +754,7 @@ async function sync(manual){
     if(d.player){S.player=d.player;ls('player',d.player)}
     if(d.role){ls('role',d.role);S.role=d.role;S.who=d.role==='kid'?'ryan':'mom'}
     if(d.usage)await idb.put('kv','usage',d.usage);
+    if(d.aiRun!==undefined){S.aiRun=d.aiRun;await idb.put('kv','aiRun',d.aiRun)}
     const okId=x=>x&&ID_RE.test(String(x.id||''));
     TYPES.forEach(tp=>{if(Array.isArray(d[tp]))d[tp]=d[tp].filter(okId)});
     ['chats','analyses','gcal'].forEach(k=>{if(Array.isArray(d[k]))d[k]=d[k].filter(okId)});
@@ -773,6 +783,7 @@ async function sync(manual){
   }
   S.syncing=false;S.upProg='';
   await reloadMem();await refreshDirty();
+  if(!S.syncErr&&S.role==='parent'){try{if((await tidyEvents())+(await linkAllRounds())){await reloadMem();await refreshDirty();setTimeout(()=>sync(),300)}}catch(e){}}
   if(online()&&S.chatPend.some(x=>!x.err))setTimeout(()=>sync(),400);
   if(document.getElementById('sheetBg').classList.contains('open')){renderHdr();if(SHEET==='settings'&&!(document.activeElement&&document.activeElement.tagName==='INPUT'))openSettings()}
   else render();
@@ -859,7 +870,9 @@ function renderHdr(){
    <button class="chip" onclick="setLang()">${S.lang==='ko'?'EN':'한'}</button><button class="icon" onclick="openSettings()" aria-label="settings">⚙️</button>`;
 }
 function newAI(){const a=S.analyses[0];return a&&a.id!==ls('seenAI')}
-function render(){
+const ARIA={'‹':'prev','›':'next','×':'close','✕':'close','−':'minus','+':'plus'};
+function a11y(root){try{(root||document).querySelectorAll('button:not([aria-label])').forEach(b=>{const tx=b.textContent.trim();if(ARIA[tx])b.setAttribute('aria-label',t('a_'+ARIA[tx]));else if(!tx&&b.title)b.setAttribute('aria-label',b.title)})}catch(e){}}
+function render(){setTimeout(()=>a11y(document),0);
   if(S.mode==='setup')return showSetup();
   if(S.mode!=='app')return;
   const ae=document.activeElement,keep=ae&&ae.id==='askIn'?{s:ae.selectionStart,e:ae.selectionEnd}:null;
@@ -882,34 +895,39 @@ function setLang(l){S.lang=l||(S.lang==='ko'?'en':'ko');ls('lang',S.lang);if(SHE
 function vHome(){
   const ws=addDays(weekStart(new Date()),S.wk*7),we=addDays(ws,6);
   const ps=S.data.practice.filter(p=>inR(p.date,ws,we));
-  const prev=S.data.practice.filter(p=>inR(p.date,addDays(ws,-7),addDays(ws,-1)));
-  const tot=sumMin(ps),diff=tot-sumMin(prev),td=today();
+  const td=today(),cur=S.wk===0,cut=cur?addDays(pd(td),-7):addDays(ws,-1);
+  const prev=S.data.practice.filter(p=>inR(p.date,addDays(ws,-7),cut));
+  const tot=sumMin(ps),diff=tot-sumMin(prev);
+  let goal=0;for(let i=0;i<7;i++){const d=ymd(addDays(ws,i));if(offDay(d))continue;const cl=activeCoach(d),cb=cl?coachBlocks(cl,d):[];
+    if(cb.length)goal+=cb.reduce((a,b)=>a+(+b.minutes||0),0);else allEvents().filter(e=>e.kind==='plan'&&e.date===d).forEach(e=>(e.items||[]).forEach(it=>goal+=(+it.minutes||0)))}
   const days=[...Array(7)].map((_,i)=>{const d=ymd(addDays(ws,i));return{d,m:sumMin(ps.filter(p=>p.date===d))}});
   const dmax=Math.max(1,...days.map(x=>x.m));
   const wl=S.wk===0?t('thisWeek'):S.wk===-1?t('lastWeek'):fmtS(ws)+' – '+fmtS(we);
   const fl=unseenFlags();
   const lim=ymd(addDays(new Date(),14));
-  const next=allEvents().filter(e=>e.kind!=='plan'&&e.date>=td&&e.date<=lim).slice(0,3);
+  const nextAll=allEvents().filter(e=>e.kind!=='plan'&&evEnd(e)>=td&&e.date<=lim),next=nextAll.slice(0,3);
   const a=latestFull(),r=a&&a.result||{};
   const focus=r.headline?L(r.headline):'';
   const gap=(r.gaps||[])[0];
   const hcl=activeCoach(ymd(addDays(new Date(),1))),hg=hcl?(hcl.plan.goals||[]).slice(0,3).map(x=>esc(L(x))).join(' · '):'';
   return `${fl.length?`<section class="card flagcard tempocard" onclick="S.tab='coach';S.coachTab='ask';S.chatScroll=true;render()"><div style="font-size:26px">🚩</div><div style="flex:1"><b>${t('flagN',{n:fl.length})}</b><div class="small muted">${t('flagSub')}</div></div></section>`:''}${aiTeaser()}
+  ${todayCard()}${questCard()}<button class="addbtn" onclick="openForm('practice',null,{date:'${td}'})">${t('addP')}</button>
   <section class="card">
    <div class="row between"><button class="icon" onclick="S.wk--;render()">‹</button>
     <div class="center"><b>${wl}</b><div class="small muted">${fmtS(ws)} – ${fmtS(we)}</div></div>
     <button class="icon" ${S.wk>=0?'disabled':''} onclick="S.wk++;render()">›</button></div>
    <div class="row between" style="margin-top:10px;align-items:flex-end"><div><div class="wkTot">${fmtMin(tot)}</div><div class="small muted">${t('wkSum',{n:ps.length})}</div></div>
-    <span class="diffc ${diff>=0?'up':'down'}">${t('vsLast')} ${diff>=0?'+':'−'}${fmtMin(Math.abs(diff))}</span></div>
+    <span class="diffc ${diff>=0?'up':'down'}" title="${cur?t('vsSameDay',{d:t('wdFull')[(pd(td).getDay()+6)%7]}):t('vsLast')}">${diff>=0?'+':'−'}${fmtMin(Math.abs(diff))}</span></div>
+   <div class="small muted" style="margin-top:4px">${cur?t('vsSameDay',{d:t('wdFull')[(pd(td).getDay()+6)%7]}):t('vsLast')}${goal?' · '+t('goalPct',{a:fmtMin(goal),p:Math.round(tot/goal*100)}):''}</div>
    <div class="days sm">${days.map((x,i)=>`<div class="day ${x.d===td?'today':''}"><div class="dbar"><i style="height:${x.m/dmax*100}%"></i></div><span>${t('days')[i]}</span></div>`).join('')}</div>
   </section>
-  <section class="card"><h3>📅 ${t('nextUp')}</h3>${next.length?next.map(e=>evRow(e,true)).join(''):`<div class="small muted">${t('noNext')}</div>`}<div class="small up" style="cursor:pointer;margin-top:6px" onclick="go('cal')">${t('seeCal')}</div></section>
+  <section class="card"><h3>📅 ${t('nextUp')}</h3>${next.length?next.map(e=>evRow(e,true)).join(''):`<div class="small muted">${t('noNext')}</div>`}<div class="small up" style="cursor:pointer;margin-top:6px" onclick="go('cal')">${nextAll.length>3?t('moreN',{n:nextAll.length-3}):t('seeCal')}</div></section>
   <section class="card tempocard" onclick="go('coach')"><div style="font-size:26px">🎯</div><div style="flex:1;min-width:0"><b>${t('focusWk')}</b>${hg?`<div class="small">🎓 ${hg}</div>`:''}<div class="small ${focus||hg?'':'muted'}">${focus?'🤖 '+esc(focus):hg?'':t('focusNone')}</div>${gap&&gap.title?`<div class="small muted">🚀 ${esc(L(gap.title))}</div>`:''}</div><span class="muted" style="font-size:22px">›</span></section>
   <section class="card tempocard" onclick="go('report')"><div style="font-size:26px">📄</div><div style="flex:1"><b>${t('report')}</b><div class="small muted">${t('reportSub')}</div></div><span class="muted" style="font-size:22px">›</span></section>`;
 }
 /* 연습 탭: 오늘 할 일 (AI 플랜 + 레슨 숙제) — 기록하면 자동 체크 */
 function todayCard(){
-  if(offDay(today())){const td=today(),ev=allEvents().filter(e=>e.kind==='tournament'&&e.date===td);
+  if(offDay(today())){const td=today(),ev=allEvents().filter(e=>e.kind==='tournament'&&evCovers(e,td));
     return `<section class="card"><h3>🏆 ${t('offT')}<small>${fmtD(td)}</small></h3>${ev.map(e=>evRow(e,true)).join('')}<div class="small muted">${t('offS')}</div></section>`}
   const td=today(),tp=S.data.practice.filter(p=>p.date===td),ct=catTot(tp);
   const cl=activeCoach(td),cb=cl?coachBlocks(cl,td):[];
@@ -1102,10 +1120,14 @@ function agg(rs){
 function rangeStart(k){const n=new Date();if(k==='year')return new Date(n.getFullYear(),0,1);if(k==='d90')return addDays(n,-90);return new Date(2000,0,1)}
 function cmpCard(range,tabs,from,to){
   const a=from||rangeStart(range),b=to||new Date(2100,0,1);
-  const rs=S.data.rounds.filter(r=>r.finished!==false&&r.holes&&inR(r.date,a,b));
+  let rs=S.data.rounds.filter(r=>r.finished!==false&&r.holes&&inR(r.date,a,b));
+  const simOK=simRounds(rs);
+  if(tabs&&S.cmpSim)rs=simOK;
   const P=agg(rs.filter(r=>r.kind!=='tournament')),Tn=agg(rs.filter(r=>r.kind==='tournament'));
-  const head=`<h3>${t('compare')}<small>${t('cmpSub')}</small></h3>`+(tabs?`<div class="seg">${['year','d90','all'].map(k=>`<button class="${S.cmp===k?'on':''}" onclick="S.cmp='${k}';render()">${t(k)}</button>`).join('')}</div>`:'');
-  if(!P.n||!Tn.n)return `<section class="card">${head}<div class="empty">${t('needMore')}<br><span class="small">${t('roundsN',{a:P.n,b:Tn.n})}</span></div></section>`;
+  const n9=rs.filter(r=>+r.holes===9).length;
+  const head=`<h3>${t('compare')}<small>${t('cmpSub')}</small></h3>`+(tabs?`<div class="seg">${['year','d90','all'].map(k=>`<button class="${S.cmp===k?'on':''}" onclick="S.cmp='${k}';render()">${t(k)}</button>`).join('')}</div><div class="seg">${[['',t('cmpAll')],['1',t('cmpSim')]].map(([v,l])=>`<button class="${(S.cmpSim?'1':'')===v?'on':''}" onclick="S.cmpSim=${v?'true':'false'};render()">${l}</button>`).join('')}</div>${S.cmpSim?`<div class="small muted center" style="margin:-4px 0 8px">${t('simNote')}</div>`:''}`:'');
+  if(!P.n||!Tn.n)return `<section class="card">${head}<div class="empty">${S.cmpSim&&tabs?t('simNone'):t('needMore')}<br><span class="small">${t('roundsN',{a:P.n,b:Tn.n})}</span></div></section>`;
+  const weak=P.n<3||Tn.n<3;
   const rows=[
     {k:'toPar',l:t('toPar'),lo:true,f:v=>signed(v)},
     {k:'putts',l:t('putts18'),lo:true,f:v=>v.toFixed(1)},
@@ -1117,14 +1139,26 @@ function cmpCard(range,tabs,from,to){
   rows.forEach(x=>{x.d=Tn[x.k]-P[x.k];x.bad=x.lo?x.d>0.05:x.d<-0.5});
   const maxK=rows.filter(x=>x.k!=='toPar'&&x.bad).reduce((m,x)=>{const v=Math.abs(x.d)/(Math.abs(P[x.k])||1);return v>m.v?{k:x.k,v}:m},{k:null,v:0}).k;
   return `<section class="card">${head}
-   ${d0!=null?`<div class="headline"><div class="small muted">${t('inTourn')}</div><b class="${d0<=0?'good':''}">${signed(d0)}${t('stroke')}</b></div>`:''}
+   ${weak?`<div class="lown"><b>${t('notEnoughCmp')}</b><br>${t('notEnoughSub',{a:P.n,b:Tn.n})}</div><details class="adv"><summary>${t('showNums')}</summary>`:''}
+   ${d0!=null?`<div class="headline ${weak?'weak':''}"><div class="small muted">${t('inTourn')}${weak?' ('+t('fewShots')+')':''}</div><b class="${d0<=0&&!weak?'good':''}">${signed(d0)}${t('stroke')}</b><div class="small muted">${n9?t('conv9',{n:n9}):t('conv18')}</div></div>`:''}
    <div class="legend"><span><i class="dot" style="background:var(--teal)"></i>${t('pr')} ${P.n}</span><span><i class="dot" style="background:var(--or)"></i>${t('tn')} ${Tn.n}</span></div>
    ${rows.map(x=>{const m=Math.max(Math.abs(P[x.k]),Math.abs(Tn[x.k]),0.1);
-     return `<div class="cmp"><div class="t"><span>${x.l}${x.k===maxK?' <span class="tag">★</span>':''}</span><span class="badge ${x.bad?'bad':'ok'}">${x.d>=0?'▲':'▼'} ${Math.abs(x.d).toFixed(x.pct?0:1)}${x.pct?'%p':''}</span></div>
+     return `<div class="cmp"><div class="t"><span>${x.l}${x.k===maxK?' <span class="tag">★</span>':''}</span><span class="badge ${weak?'':x.bad?'bad':'ok'}">${x.d>=0?'▲':'▼'} ${Math.abs(x.d).toFixed(x.pct?0:1)}${x.pct?'%p':''}</span></div>
      <div class="cbar"><span class="muted">${t('pr')}</span><div class="track"><i style="width:${Math.abs(P[x.k])/m*100}%;background:var(--teal)"></i></div><span class="v">${x.f(P[x.k])}</span></div>
      <div class="cbar"><span class="muted">${t('tn')}</span><div class="track"><i style="width:${Math.abs(Tn[x.k])/m*100}%;background:var(--or)"></i></div><span class="v">${x.f(Tn[x.k])}</span></div></div>`}).join('')}
-   <div class="legend" style="margin-top:10px"><span><i class="dot" style="background:var(--g)"></i>${t('better')}</span><span><i class="dot" style="background:var(--or)"></i>${t('worse')}</span></div>
-   <div class="note center">${t('cmpNote')}</div></section>`;
+   ${weak?'':`<div class="legend" style="margin-top:10px"><span><i class="dot" style="background:var(--g)"></i>${t('better')}</span><span><i class="dot" style="background:var(--or)"></i>${t('worse')}</span></div>`}
+   ${weak?'</details>':''}<div class="note center">${t('cmpNote')}</div></section>`;
+}
+/* 비슷한 조건: 같은 골프장이 연습·시합 양쪽에 있거나, 티 거리(야드)가 ±10% 이내인 연습·시합 짝 */
+function simRounds(rs){
+  const P=rs.filter(r=>r.kind!=='tournament'),T=rs.filter(r=>r.kind==='tournament'),keep=new Set();
+  P.forEach(p=>T.forEach(t2=>{
+    const sameC=p.course&&t2.course&&nrm(p.course)===nrm(t2.course);
+    const yd=(x)=>+x.yards>0?(+x.yards)*(18/(+x.holes||18)):null;const a=yd(p),b=yd(t2);
+    const simY=a&&b&&Math.abs(a-b)/b<=0.10;
+    if(sameC||simY){keep.add(p.id);keep.add(t2.id)}
+  }));
+  return rs.filter(r=>keep.has(r.id));
 }
 
 /* ================= 목록 ================= */
@@ -1137,7 +1171,7 @@ function rowHtml(type,r){
   }
   if(type==='rounds'){
     const tp=r.score!=null&&r.par!=null?r.score-r.par:null;
-    const tag=r.kind==='tournament'?`<span class="tag t">${esc(r.tour||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`;
+    const tag=r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`;
     const stats=[r.putts!=null?t('putts')+' '+r.putts:'',r.gir!=null?'GIR '+r.gir+'/'+r.holes:'',r.place?'#'+esc(r.place):''].filter(Boolean).join(' · ');
     return `<div class="item" onclick="openDetail('rounds','${r.id}')"><div class="ic r">⛳${pendDot(type,r)}</div><div class="m"><b>${tag}${esc(r.event||r.course||'')}</b><span>${fmtD(r.date)} · ${r.holes}H${r.finished===false?' · '+t('incomplete'):''}${stats?' · '+stats:''}</span></div><div class="s">${r.score!=null?r.score:'–'}<small>${tp!=null?signed(tp,0):''}</small></div></div>`;
   }
@@ -1150,7 +1184,34 @@ function listView(type,addKey){
   <section class="card">${l.length?l.map(r=>rowHtml(type,r)).join(''):`<div class="empty">${t('none')}</div>`}</section>`;
 }
 function vPractice(){return todayCard()+questCard()+`<section class="card tempocard" onclick="openTempo()"><div style="font-size:30px">🎵</div><div style="flex:1"><b>${t('tempo')}</b><div class="small muted">${t('tempoSub')}</div></div><span class="muted" style="font-size:22px">›</span></section>`+listView('practice','addP')}
-function vRounds(){return `<section class="card tempocard" onclick="openImport()"><div style="font-size:30px">🤖</div><div style="flex:1"><b>${t('impBtn')}</b><div class="small muted">${t('impSub')}</div></div><span class="muted" style="font-size:22px">›</span></section>`+listView('rounds','addR')+shotStatsCard(S.cmp)+cmpCard(S.cmp,true)}
+function vRounds(){
+  const tab=S.rTab||'list';
+  const seg=`<div class="seg" role="tablist">${['list','stats'].map(k=>`<button role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" onclick="S.rTab='${k}';render()">${t('rt_'+k)}</button>`).join('')}</div>`;
+  if(tab==='stats')return seg+cmpCard(S.cmp,true)+shotStatsCard(S.cmp);
+  const f=S.rf||(S.rf={q:'',kind:'',tour:'',course:'',from:'',to:''});
+  const courses=[...new Set(S.data.rounds.map(r=>r.course).filter(Boolean))].sort();
+  const tours=[...new Set(S.data.rounds.filter(r=>r.kind==='tournament').map(r=>normTour(r.tour)).filter(Boolean))].sort();
+  return seg+`<section class="card tempocard" onclick="openImport()"><div style="font-size:30px">🤖</div><div style="flex:1"><b>${t('impBtn')}</b><div class="small muted">${t('impSub')}</div></div><span class="muted" style="font-size:22px">›</span></section>
+  <button class="addbtn" onclick="openForm('rounds')">${t('addR')}</button>
+  <section class="card"><div class="rfbar">
+   <div><label for="rfQ">${t('srch')}</label><input class="in" id="rfQ" type="search" value="${esc(f.q)}" placeholder="${t('rfSearch')}" oninput="S.rf.q=this.value;drawRList()"></div>
+   <div class="seg" style="margin:0">${[['',t('rfAll')],['practice',t('practiceRound')],['tournament',t('tournament')]].map(([v,l])=>`<button class="${f.kind===v?'on':''}" onclick="S.rf.kind='${v}';render()">${l}</button>`).join('')}</div>
+   <div class="row"><div class="fl"><label for="rfT">${t('tour')}</label><select class="in" id="rfT" onchange="S.rf.tour=this.value;drawRList()"><option value="">${t('rfTourAll')}</option>${tours.map(x=>`<option value="${esc(x)}" ${f.tour===x?'selected':''}>${esc(tourLabel(x))}</option>`).join('')}</select></div>
+    <div class="fl"><label for="rfC">${t('course')}</label><select class="in" id="rfC" onchange="S.rf.course=this.value;drawRList()"><option value="">${t('rfCourseAll')}</option>${courses.map(x=>`<option ${f.course===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div>
+   <div class="row"><div class="fl"><label for="rfF">${t('rfFrom')}</label><input class="in" id="rfF" type="date" value="${f.from}" onchange="S.rf.from=this.value;drawRList()"></div><div class="fl"><label for="rfTo">${t('rfTo')}</label><input class="in" id="rfTo" type="date" value="${f.to}" onchange="S.rf.to=this.value;drawRList()"></div></div>
+  </div><div id="rCount" class="small muted" style="margin-bottom:4px"></div><div id="rList">${rListHtml()}</div></section>`;
+}
+function rFiltered(){
+  const f=S.rf||{},q=nrm(f.q);
+  return S.data.rounds.filter(r=>(!f.kind||(r.kind||'practice')===f.kind)&&(!f.tour||normTour(r.tour)===f.tour)&&(!f.course||r.course===f.course)&&(!f.from||r.date>=f.from)&&(!f.to||r.date<=f.to)&&
+    (!q||nrm([r.event,r.course,r.notes,r.tour,tourLabel(r.tour),r.division,r.place].join(' ')).includes(q))).sort(byDateDesc);
+}
+function rListHtml(){
+  const l=rFiltered(),all=S.data.rounds.length,f=S.rf||{},act=f.q||f.kind||f.tour||f.course||f.from||f.to;
+  setTimeout(()=>{const c=document.getElementById('rCount');if(c)c.innerHTML=act?`${t('rfCount',{a:all,b:l.length})} · <a href="#" onclick="S.rf={q:'',kind:'',tour:'',course:'',from:'',to:''};render();return false">${t('rfReset')}</a>`:''},0);
+  return l.length?l.map(r=>rowHtml('rounds',r)).join(''):`<div class="empty">${t('none')}</div>`;
+}
+function drawRList(){const el=document.getElementById('rList');if(el)el.innerHTML=rListHtml()}
 function vLessons(){return hwCard()+listView('lessons','addL')}
 
 /* ================= 시트(모달) ================= */
@@ -1160,7 +1221,7 @@ function openSheet(title,body,foot,kind){
   document.getElementById('shTitle').textContent=title;
   document.getElementById('shBody').innerHTML=body;
   document.getElementById('shFoot').innerHTML=foot;
-  document.getElementById('sheetBg').classList.add('open');
+  document.getElementById('sheetBg').classList.add('open');setTimeout(()=>a11y(document.getElementById('sheetBg')),0);
   hydrate(document.getElementById('shBody'));
 }
 function closeSheet(){
@@ -1253,10 +1314,13 @@ function openDetail(type,id){
     if((r.media||[]).length)b+=`<div class="sec">${t('media')}</div>${mediaGrid(r.media)}`;
   }else if(type==='rounds'){
     const tp=r.score!=null&&r.par!=null?r.score-r.par:null;
-    b+=`<div class="row" style="margin-bottom:10px">${r.kind==='tournament'?`<span class="tag t">${esc(r.tour||'')} ${t('tournament')}</span>`:`<span class="tag pr">${t('practiceRound')}</span>`}<span class="small muted">${r.course?esc(r.course)+' · ':''}${r.holes}H${r.finished===false?' · '+t('incomplete'):''}</span></div>`;
+    b+=`<div class="row" style="margin-bottom:10px">${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour))} ${t('tournament')}</span>`:`<span class="tag pr">${t('practiceRound')}</span>`}<span class="small muted">${r.course?esc(r.course)+' · ':''}${r.holes}H${r.finished===false?' · '+t('incomplete'):''}</span></div>`;
     b+=`<div class="kv"><div><b>${r.score!=null?r.score:'–'}</b><span>${t('score')}</span></div><div><b>${tp!=null?signed(tp,0):'–'}</b><span>${t('par')} ${r.par!=null?r.par:''}</span></div><div><b>${r.place?'#'+esc(r.place):'–'}</b><span>${t('place')}${r.field?' / '+r.field:''}</span></div></div>`;
+    const info=[[t('division'),r.division],[t('teeN'),r.tee],[t('yardsN'),r.yards!=null?r.yards+(S.lang==='ko'?'야드':' yd'):null]].filter(x=>x[1]);
+    if(info.length)b+=`<div class="small muted" style="margin:-4px 0 8px">${info.map(x=>esc(x[0])+' '+esc(x[1])).join(' · ')}</div>`;
     const st=[[t('putts'),r.putts],[t('girH'),r.gir!=null?r.gir+'/'+r.holes:null],[t('fwHit'),r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):null],[t('threeP'),r.threePutts],[t('birdies'),r.birdies],[t('bogeys'),r.bogeys],[t('doubles'),r.doubles],[t('p3'),r.p3],[t('p4'),r.p4],[t('p5'),r.p5]].filter(x=>x[1]!=null&&x[1]!=='');
-    if(st.length)b+=`<div class="card" style="padding:6px 14px;margin-top:10px">${st.map(x=>`<div class="row between" style="padding:7px 0;border-bottom:1px solid var(--line)"><span class="muted">${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')}</div>`;
+    const ms=[[t('putts'),r.putts],['GIR',r.gir],[t('fwHit'),r.fairways]].filter(x=>x[1]==null).map(x=>x[0]);
+    if(st.length||ms.length)b+=`<div class="card" style="padding:6px 14px;margin-top:10px">${st.map(x=>`<div class="row between" style="padding:7px 0;border-bottom:1px solid var(--line)"><span class="muted">${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')}${ms.length?`<div class="row between" style="padding:7px 0"><span class="muted">${t('missingSt')}</span><span class="muted">${ms.join(' · ')}</span></div>`:''}</div>`;
     b+=scorecardHtml(r);
     if(safeUrl(r.link))b+=`<a class="btn sec" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px" href="${esc(safeUrl(r.link))}" target="_blank" rel="noopener">🔗 ${t('openLink')}</a>`;
     if(r.notes)b+=`<div class="sec">${t('notes')}</div><div class="dtext">${esc(r.notes)}</div>`;
@@ -1275,15 +1339,20 @@ function openDetail(type,id){
   }
   b+=`<div class="note">${t('by')}: ${t(r.by||'mom')}${isDirty(type,id)?' · ⏳ '+t('waitUp'):''}</div>`;
   const title=type==='practice'?t('practice')+' · '+fmtD(r.date):type==='rounds'?(r.event||r.course||t('rounds'))+' · '+fmtD(r.date):(r.coach?r.coach+' · ':'')+fmtD(r.date);
+  if(S.role==='parent')b+=`<button class="ghost" style="margin-top:12px" onclick="openHistory('${type}','${id}')">${t('histBtn')}</button>`;
   openSheet(title,b,`${canDel(r)?`<button class="btn danger" onclick="delRec('${type}','${id}')">${t('del')}</button>`:''}<button class="btn" onclick="openForm('${type}','${id}')">${t('edit')}</button>`,'detail');
 }
 async function delRec(type,id){
   if(!confirm(t('confirmDel')))return;
+  if(type==='rounds')await unlinkRound(S.data.rounds.find(x=>x.id===id));
   await removeLocal(type,id);closeSheet();toast(t('deleted'));render();sync();
 }
 
 /* ================= 입력 폼 ================= */
-function fld(label,html){return `<div class="fld"><label>${label}</label>${html}</div>`}
+let FLDN=0;
+function fld(label,html){const id='fld'+(++FLDN);let used=false;html=String(html).replace(/<(input|select|textarea)\b(?![^>]*\bid=)/,(m,tg)=>{used=true;return `<${tg} id="${id}"`});
+  if(!used){const m=String(html).match(/\bid="([^"]+)"/);return `<div class="fld"><label${m?` for="${m[1]}"`:''}>${label}</label>${html}</div>`}
+  return `<div class="fld"><label for="${id}">${label}</label>${html}</div>`}
 function inp(name,val,attrs){return `<input class="in" name="${name}" value="${esc(val==null?'':val)}" ${attrs||''}>`}
 function numIn(name,val,ph){return inp(name,val,`type="number" inputmode="decimal" step="any" placeholder="${ph||''}"`)}
 function datalist(id,vals){return `<datalist id="${id}">${[...new Set(vals.filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('')}</datalist>`}
@@ -1308,15 +1377,21 @@ function openForm(type,id,tpl){
   }else if(type==='rounds'){
     const k=r?r.kind:'practice',h=r?r.holes:18;
     b+=`<div class="seg"><label><input type="radio" name="kind" value="practice" ${k!=='tournament'?'checked':''} onchange="kindChg()"><span>${t('practiceRound')}</span></label><label><input type="radio" name="kind" value="tournament" ${k==='tournament'?'checked':''} onchange="kindChg()"><span>${t('tournament')}</span></label></div>`;
-    b+=`<div id="tourBox" style="${k==='tournament'?'':'display:none'}"><div class="grid2">${fld(t('tour'),`<select class="in" name="tour">${[...TOURS,t('other')].map(x=>`<option ${r&&r.tour===x?'selected':''}>${x}</option>`).join('')}</select>`)}${fld(t('event'),inp('event',r&&r.event,'list="evts"'))}</div>${datalist('evts',S.data.rounds.map(x=>x.event))}</div>`;
+    b+=`<div id="tourBox" style="${k==='tournament'?'':'display:none'}"><div class="grid2">${fld(t('tour'),tourSelect(r&&r.tour))}${fld(t('event'),inp('event',r&&r.event,'list="evts"'))}</div>${datalist('evts',S.data.rounds.map(x=>x.event))}</div>`;
     b+=`<div class="grid2">${fld(t('date'),inp('date',r?r.date:today(),'type="date"'))}${fld(t('course'),inp('course',r&&r.course,'list="crs" onchange="applyCoursePars(this.value)"'))}</div>${datalist('crs',S.data.rounds.map(x=>x.course))}`;
     b+=`<div class="grid2">${fld(t('holes'),`<select class="in" name="holes" onchange="holesChg(this)"><option value="18" ${h!=9?'selected':''}>18</option><option value="9" ${h==9?'selected':''}>9</option></select>`)}${fld('&nbsp;',`<label class="check" style="margin:0;min-height:42px"><input type="checkbox" name="finished" ${!r||r.finished!==false?'checked':''}>${t('finished')}</label>`)}</div>`;
-    b+=`<div class="sec">⛳ ${t('shotLog')}</div><div class="small muted" style="margin:-4px 0 8px">${t('shotLogSub')}</div><div id="holesBox"></div><div id="autoNote"></div>`;
-    b+=`<div class="grid3">${fld(t('score'),numIn('score',r&&r.score))}${fld(t('par'),numIn('par',r?r.par:72))}${fld(t('putts'),numIn('putts',r&&r.putts))}</div>`;
-    b+=`<div class="grid3">${fld(t('girH'),numIn('gir',r&&r.gir))}${fld(t('fwHit'),numIn('fairways',r&&r.fairways))}${fld(t('fwH'),numIn('fwHoles',r?r.fwHoles:14))}</div>`;
-    b+=`<div class="grid3">${fld(t('threeP'),numIn('threePutts',r&&r.threePutts))}${fld(t('birdies'),numIn('birdies',r&&r.birdies))}${fld(t('bogeys'),numIn('bogeys',r&&r.bogeys))}</div>`;
-    b+=`<div class="grid3">${fld(t('doubles'),numIn('doubles',r&&r.doubles))}${fld(t('p3'),numIn('p3',r&&r.p3))}${fld(t('p4'),numIn('p4',r&&r.p4))}</div>`;
-    b+=`<div class="grid3">${fld(t('p5'),numIn('p5',r&&r.p5))}${fld(t('place'),inp('place',r&&r.place,'placeholder="T5"'))}${fld(t('field'),numIn('field',r&&r.field))}</div>`;
+    const md=(r&&(r.holeData||[]).some(hasHole))||(r&&r.entry==='detail')?'detail':'simple';F.mode=md;
+    b+=`<div class="grid3">${fld(t('division'),inp('division',r&&r.division,'list="divs"'))}${fld(t('teeN'),inp('tee',r&&r.tee,`placeholder="${t('teePh')}"`))}${fld(t('yardsN'),numIn('yards',r&&r.yards,''))}</div>${datalist('divs',S.data.rounds.map(x=>x.division))}`;
+    b+=`<div class="seg" role="radiogroup" aria-label="${t('roundInfo')}"><label><input type="radio" name="entry" value="simple" ${md==='simple'?'checked':''} onchange="modeChg()"><span>${t('modeSimple')}</span></label><label><input type="radio" name="entry" value="detail" ${md==='detail'?'checked':''} onchange="modeChg()"><span>${t('modeDetail')}</span></label></div>`;
+    b+=`<div id="detailBox" style="${md==='detail'?'':'display:none'}"><div class="small muted" style="margin:0 0 8px">${t('shotLogSub')}</div><div id="holesBox"></div><div id="autoNote"></div></div>`;
+    b+=`<div class="grid3">${fld(t('score'),numIn('score',r&&r.score,t('nr')))}${fld(t('par'),numIn('par',r?r.par:72))}${fld(t('putts'),numIn('putts',r&&r.putts,t('nr')))}</div>`;
+    b+=`<div id="tourBox2" style="${k==='tournament'?'':'display:none'}"><div class="grid2">${fld(t('place'),inp('place',r&&r.place,'placeholder="T5"'))}${fld(t('field'),numIn('field',r&&r.field,t('nr')))}</div></div>`;
+    const advHas=r&&['gir','fairways','threePutts','birdies','bogeys','doubles','p3','p4','p5'].some(x=>r[x]!=null);
+    b+=`<details class="adv" ${advHas?'open':''}><summary>${t('advStats')}</summary>`;
+    b+=`<div class="grid3">${fld(t('girH'),numIn('gir',r&&r.gir,t('nr'))+`<div class="small muted" style="margin-top:4px">${t('girHint')}</div>`)}${fld(t('fwHit'),numIn('fairways',r&&r.fairways,t('nr')))}${fld(t('fwH'),numIn('fwHoles',r&&r.fwHoles,h==9?'7':'14')+`<div class="small muted" style="margin-top:4px">${t('fwHint')}</div>`)}</div>`;
+    b+=`<div class="grid3">${fld(t('threeP'),numIn('threePutts',r&&r.threePutts,t('nr')))}${fld(t('birdies'),numIn('birdies',r&&r.birdies,t('nr')))}${fld(t('bogeys'),numIn('bogeys',r&&r.bogeys,t('nr')))}</div>`;
+    b+=`<div class="grid3">${fld(t('doubles'),numIn('doubles',r&&r.doubles,t('nr')))}${fld(t('p3'),numIn('p3',r&&r.p3,t('nr')))}${fld(t('p4'),numIn('p4',r&&r.p4,t('nr')))}</div>`;
+    b+=`<div class="grid3">${fld(t('p5'),numIn('p5',r&&r.p5,t('nr')))}</div></details>`;
     b+=fld(t('link'),inp('link',r&&r.link,'type="url" placeholder="https://scpgajt.bluegolf.com/…"'));
     b+=fld(t('notes'),`<textarea class="in" maxlength="4000" name="notes">${esc(r&&r.notes||'')}</textarea>`);
     b+=mediaBlock('main',t('media'));
@@ -1340,10 +1415,11 @@ function openForm(type,id,tpl){
   ['main','before','after'].forEach(drawMedia);
 }
 function setFeel(n){F.feel=F.feel===n?0:n;document.querySelectorAll('#feel button').forEach((b,i)=>b.classList.toggle('on',i+1===F.feel))}
-function kindChg(){const k=document.querySelector('input[name=kind]:checked').value;document.getElementById('tourBox').style.display=k==='tournament'?'':'none'}
+function kindChg(){const k=document.querySelector('input[name=kind]:checked').value;document.getElementById('tourBox').style.display=k==='tournament'?'':'none';const b2=document.getElementById('tourBox2');if(b2)b2.style.display=k==='tournament'?'':'none'}
+function modeChg(){const m=document.querySelector('input[name=entry]:checked').value;F.mode=m;document.getElementById('detailBox').style.display=m==='detail'?'':'none';if(m==='detail'){drawHoles();recalcSummary()}}
 function holesChg(sel){const f=document.getElementById('frm'),h=+sel.value;
   if(['72','71','70','36','35','34',''].indexOf(f.par.value)>=0)f.par.value=h===9?36:72;
-  if(['14','7',''].indexOf(f.fwHoles.value)>=0)f.fwHoles.value=h===9?7:14;
+  if(['14','7'].indexOf(f.fwHoles.value)>=0)f.fwHoles.value=h===9?7:14;f.fwHoles.placeholder=h===9?'7':'14';
   if(F&&F.holes){F.holes=resizeHoles(F.holes,h,f.course.value);F.hi=Math.min(F.hi,h-1);drawHoles();recalcSummary()}}
 function addDrill(d){
   d=d||{};const el=document.createElement('div');el.className='drow';
@@ -1405,6 +1481,7 @@ async function saveForm(){
     rec.course=f.course.value.trim();rec.holes=+f.holes.value;rec.finished=f.finished.checked;
     ['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5','field'].forEach(k=>rec[k]=num(f[k].value));
     rec.place=f.place.value.trim();rec.link=f.link.value.trim();rec.media=F.media.main;
+    rec.division=f.division.value.trim();rec.tee=f.tee.value.trim();rec.yards=num(f.yards.value);rec.entry=F.mode||'simple';
     const hs=(F.holes||[]).map(h=>({n:h.n,par:h.par,pen:+h.pen||0,sc:h.shots.length?null:(h.sc!=null?h.sc:null),pt:h.shots.length?null:(h.pt!=null?h.pt:null),shots:h.shots.map(x=>({c:x.c,d:x.d,r:x.r||''}))}));
     rec.holeData=hs.some(hasHole)?hs:[];
     const sm=roundSummary(rec.holeData);
@@ -1416,9 +1493,11 @@ async function saveForm(){
     if(F.plan){rec.plan=F.plan;rec.planText=(document.getElementById('cpText')||{}).value||F.planText||''}else{delete rec.plan;delete rec.planText}
   }
   try{
+    const prevR=type==='rounds'&&S.data.rounds.find(x=>x.id===rec.id);
     await saveLocal(type,rec);
-    if(rec.eventId){const ev=allEvents().find(e=>e.id===rec.eventId);
-      if(ev){const e2=JSON.parse(JSON.stringify(ev));delete e2.ext;e2[{rounds:'roundId',lessons:'lessonId',practice:'practiceId'}[type]]=rec.id;await saveLocal('events',e2)}}
+    if(type==='rounds'){if(prevR&&prevR.eventId&&(rec.kind!=='tournament'))await unlinkRound(prevR);if(rec.kind!=='tournament')delete rec.eventId;await linkRound(S.data.rounds.find(x=>x.id===rec.id)||rec)}
+    else if(rec.eventId){const ev=allEvents().find(e=>e.id===rec.eventId);
+      if(ev){const e2=JSON.parse(JSON.stringify(ev));delete e2.ext;e2[{lessons:'lessonId',practice:'practiceId'}[type]]=rec.id;await saveLocal('events',e2)}}
     closeSheet();toast(online()?t('saved'):t('savedLocal'));render();sync();
     if(impIdx!=null&&IMP&&IMP.items&&IMP.items[impIdx]){IMP.items[impIdx].done=true;await saveImpDraft();openImport()}
   }catch(e){toast(t('err')+': '+(e&&e.message||e))}
@@ -1480,7 +1559,7 @@ function chipHtml(h,i){const c=holeCalc(h);return `<button type="button" class="
 function holeSumText(h){
   const c=holeCalc(h);if(!c)return `<span class="muted" style="font-weight:500">${t('noShotsYet')}</span>`;
   const d=c.score-h.par;
-  return `<span class="${scCls(d)}" style="color:${d<=-1?'#d1453b':d===1?'var(--bl)':d>=2?'#7a3fb0':'inherit'}">${c.score}${S.lang==='ko'?'타':''} (${signed(d,0)})</span> · ${t('putts')} ${c.putts}${c.onIn!=null?' · '+t('onN',{n:c.onIn}):''}${c.gir?' · GIR ✓':''}`;
+  return `<span class="${scCls(d)}" style="color:${d<=-1?'#d1453b':d===1?'var(--bl)':d>=2?'#7a3fb0':'inherit'}">${c.score}${S.lang==='ko'?'타':''} (${signed(d,0)})</span> · ${t('putts')}: ${c.putts!=null?c.putts:t('nr')}${c.onIn!=null?' · '+t('onN',{n:c.onIn}):''}${c.gir?' · GIR ✓':''}`;
 }
 function shotRow(s,i){
   const p=isPutter(s.c),cl=clubs();
@@ -1531,8 +1610,11 @@ function recalcSummary(){
   const el=document.getElementById('autoNote'),f=document.getElementById('frm');if(!el||!f||!F||!F.holes)return;
   const sm=roundSummary(F.holes);
   if(sm.complete){
-    ['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5'].forEach(k=>{if(f[k]&&sm[k]!=null)f[k].value=sm[k]});
-    el.innerHTML=`<div class="autonote">${t('autoCalc')}</div>`;
+    const ks=['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5'];
+    ks.forEach(k=>{if(f[k]&&sm[k]!=null)f[k].value=sm[k]});
+    const lab={score:t('score'),putts:t('putts'),gir:'GIR',fairways:t('fwHit'),threePutts:t('threeP')};
+    const done=Object.keys(lab).filter(k=>sm[k]!=null).map(k=>lab[k]),miss=Object.keys(lab).filter(k=>sm[k]==null&&!(f[k]&&f[k].value!=='')).map(k=>lab[k]);
+    el.innerHTML=`<div class="autonote">${t('autoDone',{a:done.join(' · ')})}</div>${miss.length?`<div class="autonote part">${t('autoMiss',{a:miss.join(' · ')})}</div>`:''}`;
   }else el.innerHTML=sm.done?`<div class="autonote part">${t('partial',{a:sm.done,b:sm.total})}</div>`:'';
 }
 function scorecardHtml(r){
@@ -1561,20 +1643,22 @@ function shotStatsCard(range){
   const d=shotData(S.data.rounds.filter(r=>inR(r.date,a,new Date(2100,0,1))));
   const head=`<h3>🎯 ${t('shotStats')}${d.holes?`<small>${t('shotStatsSub',{n:d.holes})}</small>`:''}</h3>`;
   if(!d.holes)return `<section class="card">${head}<div class="empty small">${t('noShots')}</div></section>`;
+  const MINS=5;
   const order=[...clubs(),...Object.keys(d.cl).filter(c=>clubs().indexOf(c)<0)].filter(c=>d.cl[c]);
   const mx=Math.max(1,...order.map(c=>d.cl[c].sum/d.cl[c].n));
+  const anyFew=order.some(c=>d.cl[c].n<MINS);
   const pct=(a,b)=>b?Math.round(a/b*100)+'%':'–';
   const rng=(b,u)=>b[1]>=999?b[0]+'+':b[0]+'–'+b[1];
   return `<section class="card">${head}
    <div class="sec" style="margin-top:0">${t('clubDist')}</div>
    <table class="st"><tr><th></th><th></th><th>${t('avg')}</th><th>${t('max')}</th><th>${t('cnt')}</th></tr>
-   ${order.map(c=>{const o=d.cl[c],av=o.sum/o.n;return `<tr><td><b>${esc(c)}</b></td><td class="bar"><div class="track"><i style="width:${av/mx*100}%;background:var(--teal)"></i></div></td><td><b>${Math.round(av)}</b></td><td>${o.max}</td><td class="muted">${o.n}</td></tr>`}).join('')}</table>
+   ${order.map(c=>{const o=d.cl[c],av=o.sum/o.n,few=o.n<MINS;return `<tr class="${few?'few':''}"><td><b>${esc(c)}</b></td><td class="bar"><div class="track"><i style="width:${av/mx*100}%;background:var(--teal)"></i></div></td><td>${few?Math.round(av)+' <small>'+t('fewShots')+'</small>':'<b>'+Math.round(av)+'</b>'}</td><td>${o.max}</td><td class="muted">${o.n}</td></tr>`}).join('')}</table>${anyFew?`<div class="small muted" style="margin-top:4px">${t('fewShotsNote',{n:MINS})}</div>`:''}
    ${Object.keys(d.pb).length?`<div class="sec">⛳ ${t('puttDist')} (${t('paces')})</div>
    <table class="st"><tr><th></th><th>${t('holesC')}</th><th>${t('avgPutts')}</th><th>${t('onePutt')}</th><th>${t('threePutt')}</th></tr>
-   ${PB.map((b,k)=>{const o=d.pb[k];if(!o)return '';return `<tr><td><b>${rng(b)}</b></td><td class="muted">${o.n}</td><td>${(o.p/o.n).toFixed(1)}</td><td class="up">${pct(o.one,o.n)}</td><td class="${o.three?'down':''}">${pct(o.three,o.n)}</td></tr>`}).join('')}</table>`:''}
+   ${PB.map((b,k)=>{const o=d.pb[k];if(!o)return '';return `<tr class="${o.n<3?'few':''}"><td><b>${rng(b)}</b></td><td class="muted">${o.n}</td><td>${(o.p/o.n).toFixed(1)}</td><td class="up">${pct(o.one,o.n)}</td><td class="${o.three?'down':''}">${pct(o.three,o.n)}</td></tr>`}).join('')}</table>`:''}
    ${Object.keys(d.ab).length?`<div class="sec">🚩 ${t('approach')} (${t('yd')})</div>
    <table class="st"><tr><th></th><th>${t('cnt')}</th><th class="bar"></th><th>${t('onGreen')}</th></tr>
-   ${AB.map((b,k)=>{const o=d.ab[k];if(!o)return '';return `<tr><td><b>${rng(b)}</b></td><td class="muted">${o.n}</td><td class="bar"><div class="track"><i style="width:${o.on/o.n*100}%;background:var(--g)"></i></div></td><td><b>${pct(o.on,o.n)}</b></td></tr>`}).join('')}</table>`:''}
+   ${AB.map((b,k)=>{const o=d.ab[k];if(!o)return '';return `<tr class="${o.n<3?'few':''}"><td><b>${rng(b)}</b></td><td class="muted">${o.n}</td><td class="bar"><div class="track"><i style="width:${o.on/o.n*100}%;background:var(--g)"></i></div></td><td><b>${pct(o.on,o.n)}</b></td></tr>`}).join('')}</table>`:''}
   </section>`;
 }
 
@@ -1586,14 +1670,20 @@ function vCoach(){
   const seg=`<div class="seg">${['analysis','ask'].map(k=>`<button class="${S.coachTab===k?'on':''}" onclick="S.coachTab='${k}';if('${k}'==='ask')S.chatScroll=true;render()">${t('ct_'+k)}</button>`).join('')}</div>`;
   return seg+(S.coachTab==='ask'?vAsk():vAnalysis());
 }
+function aiStatusHtml(){
+  const lf=latestFull(),ar=S.aiRun,nm=(()=>{let d=new Date();d.setHours(0,0,0,0);d=addDays(d,1);while(d.getDay()!==1)d=addDays(d,1);return d})();
+  const rows=[[t('aiLast'),lf?fmtD(lf.date||String(lf.created||'').slice(0,10)):t('aiNever')],[t('aiNext'),t('aiNextV',{d:fmtS(nm)})]];
+  return `<div class="card" style="padding:4px 12px;margin:12px 0 0">${rows.map((x,i)=>`<div class="row between small" style="padding:6px 0;${i?'border-top:1px solid var(--line)':''}"><span class="muted">${x[0]}</span><b>${esc(x[1])}</b></div>`).join('')}${S.role==='parent'&&ar&&ar.st==='err'?`<div class="small down" style="padding:6px 0;border-top:1px solid var(--line)">⚠️ ${t('aiAutoErr')} (${fmtS(pd(String(ar.at).slice(0,10)))}): ${esc(errMsg({message:ar.msg}))}</div>`:''}</div>`;
+}
 function vAnalysis(){
   const list=S.analyses;
   const full=S.aiSel?list.find(a=>a.id===S.aiSel):latestFull();
   const hlRec=list.find(a=>a.result&&(a.result.highlights||[]).length);
   let h=`<section class="card"><div class="row"><div style="font-size:30px">🤖</div><div><b>${t('coach')}</b><div class="small muted">${t('aiAuto')}</div></div></div>
    <button class="addbtn" style="margin:12px 0 0" ${S.aiBusy||!online()?'disabled':''} onclick="runAI()">${S.aiBusy?'<span class="spin"></span> '+t('aiRunning'):t('aiRun')}</button>
-   ${!online()?`<div class="note center">${t('needOnline')}</div>`:''}${S.aiErr?`<div class="flagline" style="white-space:pre-wrap;margin-top:10px">⚠️ ${esc(S.aiErr)}</div>`:''}</section>`;
-  if(!full&&!hlRec)return h+`<section class="card"><div class="empty">${t('aiNone')}</div></section>`;
+   ${!online()?`<div class="note center">${t('needOnline')}</div>`:''}${S.aiErr?`<div class="flagline" style="white-space:pre-wrap;margin-top:10px">⚠️ ${esc(S.aiErr)}</div>`:''}${aiStatusHtml()}</section>`;
+  const nRec=S.data.practice.length+S.data.rounds.length+S.data.lessons.length;
+  if(!full&&!hlRec)return h+`<section class="card"><div class="empty">${nRec>=2?`<b>${t('aiReadyT')}</b><br>${t('aiReady',{n:nRec})}`:t('aiNone')}</div></section>`;
   if(full){
     const r=full.result||{};
     h+=`<section class="card aihero"><div class="small muted">${fmtD(full.date)} · ${t('fullA')}</div><h2>${esc(L(r.headline))}</h2><p>${esc(L(r.status))}</p></section>`;
@@ -1643,36 +1733,125 @@ function allEvents(){
   return [...own,...(S.gcal||[]).filter(g=>!ids.has(g.gcalId)&&!del.has(g.id))].sort((a,b)=>(a.date+(a.time||'00:00')).localeCompare(b.date+(b.time||'00:00')));
 }
 function evStart(e){return e.kind==='tournament'?(e.checkIn||e.time):e.time}
+/* 대회 제목 정리: "FCG FCG - Pala Mesa Resort" → 투어 태그 FCG + 골프장 Pala Mesa Resort (정식 이름이 없으면 골프장으로 표시) */
+const CRS_W=/\b(resort|country club|cc|golf|club|course|links|gc|g\.c\.|ranch|park)\b/i,EVT_W=/\b(classic|open|championship|champ|cup|invitational|series|tour|junior|qualifier|tournament|major|challenge|am|amateur|memorial|masters|finals?)\b/i;
+function cleanEv(e){
+  let ti=String(e.title||'').trim(),co=String(e.course||'').trim();const tour=normTour(e.tour)==='other'?'':normTour(e.tour);
+  ti=ti.replace(/^\[[^\]]{1,12}\]\s*/,'');
+  if(tour){const re=new RegExp('^('+tour.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\s*)+([-–—:|@·]\\s*)?','i');for(let i=0;i<3;i++)ti=ti.replace(re,'').trim()}
+  ti=ti.replace(/^[-–—:|@·]\s*/,'').trim();
+  if(co&&ti){
+    if(nrm(ti)===nrm(co))ti='';
+    else{const m=ti.match(/^(.*?)\s*[-–—@|]\s*(.+)$/)||ti.match(/^(.*?)\s+(?:at)\s+(.+)$/i);if(m&&nrm(m[2])===nrm(co))ti=m[1].trim()}
+  }else if(!co&&ti){
+    const m=ti.match(/^(.*?)\s*[-–—@|]\s*(.+)$/);
+    if(m&&CRS_W.test(m[2])&&!EVT_W.test(m[2])){co=m[2].trim();ti=m[1].trim()}
+    else if(CRS_W.test(ti)&&!EVT_W.test(ti)){co=ti;ti=''}
+  }
+  return {title:ti,course:co};
+}
 function evName(e){
-  if(e.kind==='tournament')return (e.tour?`<span class="tag t">${esc(e.tour)}</span>`:'')+esc(e.title||t('k_tournament'));
+  if(e.kind==='tournament'){const c=cleanEv(e);return (e.tour?`<span class="tag t">${esc(tourLabel(e.tour))}</span>`:'')+esc(c.title||c.course||t('evNoName'))}
   if(e.kind==='lesson')return esc(t('k_lesson')+(e.coach?' · '+e.coach:'')+(e.title?' · '+e.title:''));
   if(e.kind==='practice')return esc(t('k_practice')+(e.title?' · '+e.title:''));
   if(e.kind==='plan')return '🤖 '+esc((e.items||[]).map(i=>t('c_'+i.cat)+' '+i.minutes+(S.lang==='ko'?'분':'m')).join(', '));
   return esc(e.title||'');
 }
+/* ===== 대회 일정 ↔ 라운드 기록 연결 ===== */
+function evEnd(e){return e.endDate&&e.endDate>e.date?e.endDate:e.date}
+function evCovers(e,d){return d>=e.date&&d<=evEnd(e)}
+function evRounds(e){if(!e||e.kind!=='tournament')return [];return S.data.rounds.filter(r=>r.kind==='tournament'&&(r.eventId===e.id||r.id===e.roundId||(!r.eventId&&evCovers(e,r.date)))).sort((a,b)=>a.date.localeCompare(b.date))}
+function nrm(x){return String(x||'').toLowerCase().replace(/[^a-z0-9가-힣]/g,'')}
+async function linkRound(rec){
+  if(!rec||rec.kind!=='tournament'||!rec.date)return;
+  const own=S.data.events||[],ae=allEvents();
+  let ev=rec.eventId&&ae.find(e=>e.id===rec.eventId);
+  if(ev&&!evCovers(ev,rec.date)){
+    if(ev.fromRound&&evRounds(ev).filter(r=>r.id!==rec.id).length===0){const e2=JSON.parse(JSON.stringify(ev));e2.date=rec.date;delete e2.endDate;await saveLocal('events',e2);return}
+    ev=null;
+  }
+  if(ev)return;
+  const cand=ae.filter(e=>e.kind==='tournament'&&evCovers(e,rec.date));
+  ev=cand.find(e=>rec.event&&nrm(e.title)===nrm(rec.event))||cand[0];
+  if(!ev){ // 이틀째 라운드: 이름 같은 대회가 3일 안에 있으면 그 대회를 늘림
+    const near=own.find(e=>e.kind==='tournament'&&rec.event&&nrm(e.title)===nrm(rec.event)&&Math.abs((pd(e.date)-pd(rec.date))/864e5)<=3||e.kind==='tournament'&&rec.event&&nrm(e.title)===nrm(rec.event)&&Math.abs((pd(evEnd(e))-pd(rec.date))/864e5)<=3);
+    if(near){const e2=JSON.parse(JSON.stringify(near));delete e2.ext;const a=[e2.date,evEnd(e2),rec.date].sort();e2.date=a[0];e2.endDate=a[2]>a[0]?a[2]:undefined;if(!e2.endDate)delete e2.endDate;await saveLocal('events',e2);ev=e2}
+  }
+  if(!ev){
+    ev={id:('er'+rec.id).slice(0,80),kind:'tournament',date:rec.date,title:rec.event||'',tour:rec.tour||'',division:rec.division||'',course:rec.course||'',link:rec.link||'',fromRound:true};
+    await saveLocal('events',ev);
+  }
+  const r2=JSON.parse(JSON.stringify(rec));r2.eventId=ev.id;if(!r2.link&&ev.link)r2.link=ev.link;
+  await saveLocal('rounds',r2);
+}
+async function unlinkRound(rec){
+  if(!rec||!rec.eventId)return;const ev=(S.data.events||[]).find(e=>e.id===rec.eventId);
+  if(ev&&ev.fromRound&&evRounds(ev).filter(r=>r.id!==rec.id).length===0)await removeLocal('events',ev.id,{gcalId:ev.gcalId||''});
+}
+/* 엄마 기기: 대회 일정 제목 정리(같은 항목을 고침, 원래 제목은 titleOrig에 보관) + 연달아 있는 같은 대회를 하나로 묶기 */
+async function tidyEvents(){
+  if(S.role!=='parent')return 0;let n=0;
+  for(const e0 of (S.data.events||[]).filter(e=>e.kind==='tournament')){
+    const c=cleanEv(e0);if(c.title===String(e0.title||'').trim()&&c.course===String(e0.course||'').trim())continue;
+    const e2=JSON.parse(JSON.stringify(e0));if(e2.titleOrig==null)e2.titleOrig=e0.title||'';e2.title=c.title;e2.course=c.course;await saveLocal('events',e2);n++;
+  }
+  if(online()){let k2=0;for(const e0 of (S.data.events||[]).filter(e=>e.notes&&/[가-힣]/.test(e.notes)&&evEnd(e)>=today()&&!(e.notesEn&&e.notesSrc===e.notes))){if(k2++>=5)break;
+    try{const tr=await call('translate',{text:e0.notes},60000);if(tr&&tr.en){const e2=JSON.parse(JSON.stringify(e0));e2.notesEn=tr.en;e2.notesSrc=e0.notes;await saveLocal('events',e2);n++}}catch(err){break}}}
+  const key=e=>{const c=cleanEv(e);return normTour(e.tour)+'|'+(nrm(c.title)||('@'+nrm(c.course)))};
+  let changed=true,guard=0;
+  while(changed&&guard++<50){changed=false;
+    const ev=(S.data.events||[]).filter(e=>e.kind==='tournament').sort((a,b)=>a.date.localeCompare(b.date));
+    for(let i=0;i<ev.length&&!changed;i++)for(let j=0;j<ev.length&&!changed;j++){
+      const a=ev[i],b=ev[j];if(a===b||b.date<=a.date)continue;
+      const k=key(a);if(k!==key(b)||/\|@?$/.test(k))continue;
+      if(ymd(addDays(pd(evEnd(a)),1))!==b.date)continue;
+      if((pd(evEnd(b))-pd(a.date))/864e5>13)continue;
+      const a2=JSON.parse(JSON.stringify(a));a2.endDate=evEnd(b);
+      const dt=a2.dayTimes||{};if(b.time||b.checkIn)dt[b.date]={time:b.time||'',checkIn:b.checkIn||''};Object.assign(dt,b.dayTimes||{});if(Object.keys(dt).length)a2.dayTimes=dt;
+      if(!a2.link&&b.link)a2.link=b.link;if(b.notes&&b.notes!==a2.notes)a2.notes=[a2.notes,b.notes].filter(Boolean).join('\n');
+      await saveLocal('events',a2);
+      for(const r of S.data.rounds.filter(r=>r.eventId===b.id)){const r2=JSON.parse(JSON.stringify(r));r2.eventId=a2.id;await saveLocal('rounds',r2)}
+      await removeLocal('events',b.id,{gcalId:b.gcalId||''});n++;changed=true;
+    }
+  }
+  return n;
+}
+/* 엄마 기기: 캘린더와 아직 연결 안 된 대회 라운드를 한 번에 연결 (지난 기록 포함) */
+let LINKING=false;
+async function linkAllRounds(){
+  if(LINKING||S.role!=='parent')return 0;
+  const todo=S.data.rounds.filter(r=>r.kind==='tournament'&&r.date&&(!r.eventId||!allEvents().some(e=>e.id===r.eventId&&evCovers(e,r.date)))).sort((a,b)=>a.date.localeCompare(b.date));
+  if(!todo.length)return 0;
+  LINKING=true;
+  try{for(const r of todo){const cur=S.data.rounds.find(x=>x.id===r.id);if(cur)await linkRound(cur)}}finally{LINKING=false}
+  return todo.length;
+}
 function evDone(e){
-  if(e.kind==='tournament')return !!(e.roundId&&S.data.rounds.find(r=>r.id===e.roundId));
+  if(e.kind==='tournament')return evRounds(e).length>0;
   if(e.kind==='lesson')return !!((e.lessonId&&S.data.lessons.find(r=>r.id===e.lessonId))||S.data.lessons.find(r=>r.date===e.date));
   if(e.kind==='practice'||e.kind==='plan')return !!S.data.practice.find(r=>r.date===e.date);
   return false;
 }
 function dLabel(date){const n=Math.round((pd(date)-pd(today()))/864e5);if(n===0)return `<span class="dday now">${t('dToday')}</span>`;if(n>0&&n<=30)return `<span class="dday">${t('dN',{n})}</span>`;return ''}
+function fmtTm(v){if(!v)return '';const m=String(v).match(/^(\d{1,2}):(\d{2})/);if(!m)return String(v);if(S.lang!=='en')return m[1].padStart(2,'0')+':'+m[2];let h=+m[1];const ap=h>=12?'PM':'AM';h=h%12||12;return h+':'+m[2]+' '+ap}
+function teeTxt(time,upcoming){return time?t('teeTime')+': '+fmtTm(time):(upcoming?t('teeTime')+': '+t('tbd'):'')}
 function evRow(e,showD){
   const k=EK[e.kind]||EK.other,st=evStart(e);
-  const sub=[showD?fmtD(e.date):'',e.kind==='tournament'?[e.checkIn?t('checkIn')+' '+e.checkIn:'',e.time?t('teeTime')+' '+e.time:''].filter(Boolean).join(' · '):(st||''),e.course].filter(Boolean).map(esc).join(' · ');
+  const ce=e.kind==='tournament'?cleanEv(e):null;
+  const sub=[showD?fmtD(e.date)+(e.endDate&&e.endDate>e.date?' – '+fmtS(pd(e.endDate)):''):'',e.kind==='tournament'?[e.checkIn?t('checkIn')+': '+fmtTm(e.checkIn):'',teeTxt(e.time,evEnd(e)>=today())].filter(Boolean).join(' · '):(st||''),ce?(ce.title?ce.course:''):e.course].filter(Boolean).map(esc).join(' · ');
   return `<div class="item" onclick="openEvent('${e.id}')"><div class="ic" style="background:${k.col}22">${k.ic}${isDirty('events',e.id)?'<span class="pend">⏳</span>':''}</div>
    <div class="m"><b>${evName(e)}${showD&&e.kind==='tournament'?dLabel(e.date):''}</b><span>${sub||t('allDay')}${e.ext?' · '+t('gcalTag'):''}</span></div><div class="s">${evDone(e)?'✅':''}</div></div>`;
 }
 function upcomingCard(){
   const td=today(),lim=ymd(addDays(new Date(),14));
-  const l=allEvents().filter(e=>e.date>=td&&e.date<=lim&&(e.kind!=='plan'||e.date===td)).slice(0,4);
+  const l=allEvents().filter(e=>evEnd(e)>=td&&e.date<=lim&&(e.kind!=='plan'||e.date===td)).slice(0,4);
   if(!l.length)return '';
   return `<section class="card"><h3>📅 ${t('upcoming')}</h3>${l.map(e=>evRow(e,true)).join('')}<div class="small up" style="cursor:pointer;margin-top:6px" onclick="go('cal')">${t('seeCal')}</div></section>`;
 }
 function logsOn(date){return [...S.data.practice.filter(r=>r.date===date).map(r=>({type:'practice',r})),...S.data.rounds.filter(r=>r.date===date).map(r=>({type:'rounds',r})),...S.data.lessons.filter(r=>r.date===date).map(r=>({type:'lessons',r}))]}
 function vCal(){
   const n=new Date(),m0=new Date(n.getFullYear(),n.getMonth()+S.calM,1),sel=S.calSel||today();
-  const gs=weekStart(m0),evs=allEvents(),byD={};evs.forEach(e=>(byD[e.date]=byD[e.date]||[]).push(e));
+  const gs=weekStart(m0),evs=allEvents(),byD={};evs.forEach(e=>{let d=pd(e.date);const z=evEnd(e);for(let i=0;i<14&&ymd(d)<=z;i++,d=addDays(d,1))(byD[ymd(d)]=byD[ymd(d)]||[]).push(e)});
   const logged=new Set([...S.data.practice,...S.data.rounds,...S.data.lessons].map(r=>r.date));
   const title=S.lang==='ko'?m0.getFullYear()+'년 '+(m0.getMonth()+1)+'월':m0.toLocaleString('en-US',{month:'long',year:'numeric'});
   let cells='';
@@ -1683,7 +1862,7 @@ function vCal(){
       <span class="dots">${es.slice(0,4).map(e=>`<i style="background:${(EK[e.kind]||EK.other).col}"></i>`).join('')}</span>${logged.has(k)?'<span class="lg">✓</span>':''}</button>`;
   }
   const dayEv=byD[sel]||[],dayLog=logsOn(sel);
-  const up=evs.filter(e=>e.date>today()&&e.kind!=='plan').slice(0,6);
+  const upAll=evs.filter(e=>e.kind!=='plan'&&(e.date>today()||(e.date<=today()&&evEnd(e)>=today()&&e.date!==sel))),up=S.upAll?upAll:upAll.slice(0,6);
   return `<button class="addbtn" onclick="openEventForm(null,'${sel}')">${t('calAdd')}</button>
   <section class="card"><div class="calhd"><button class="icon" onclick="S.calM--;render()">‹</button><b>${title}</b><button class="icon" onclick="S.calM++;render()">›</button></div>
    <div class="calgrid">${[...t('days')].map(x=>`<div class="dn">${x}</div>`).join('')}${cells}</div>
@@ -1693,35 +1872,50 @@ function vCal(){
    ${dayEv.length?dayEv.map(e=>evRow(e,false)).join(''):`<div class="empty small">${t('dayEmpty')}</div>`}
    ${dayLog.length?`<div class="sec">${t('logsDay')}</div>${dayLog.map(x=>rowHtml(x.type,x.r)).join('')}`:''}
    <button class="ghost" style="margin-top:8px" onclick="openEventForm(null,'${sel}')">${t('addThisDay')}</button></section>
-  ${up.length?`<section class="card"><h3>📅 ${t('upcoming')}</h3>${up.map(e=>evRow(e,true)).join('')}</section>`:''}
+  ${up.length?`<section class="card"><h3>📅 ${t('upcoming')}<small>${t('upCnt',{n:upAll.length})}</small></h3>${up.map(e=>evRow(e,true)).join('')}${upAll.length>6?`<button class="ghost" style="margin-top:8px" onclick="S.upAll=!S.upAll;render()">${S.upAll?t('showLess'):t('showAll',{n:upAll.length-6,t:upAll.length})}</button>`:''}</section>`:''}
   <div class="note center" style="margin-bottom:12px">${t('calNote')}</div>`;
 }
 function openEvent(id){
   const e=allEvents().find(x=>x.id===id);if(!e)return;
   const k=EK[e.kind]||EK.other,st=evStart(e);
   let b=`<div class="row" style="margin-bottom:10px"><span class="tag" style="background:${k.col}22;color:${k.col}">${k.ic} ${t('k_'+e.kind)}</span>${e.ext?`<span class="tag">${t('gcalTag')}</span>`:''}${dLabel(e.date)}</div>`;
-  const rows=[[t('date'),fmtD(e.date)]];
-  if(e.kind==='tournament'){rows.push([t('checkIn'),e.checkIn],[t('teeTime'),e.time],[t('division'),e.division])}
+  const rows=[[t('date'),fmtD(e.date)+(e.endDate&&e.endDate>e.date?' – '+fmtD(e.endDate):'')]];
+  const multi=e.kind==='tournament'&&e.endDate&&e.endDate>e.date;
+  if(multi&&evCovers(e,today())){const nd2=Math.round((pd(evEnd(e))-pd(e.date))/864e5)+1,di=Math.round((pd(today())-pd(e.date))/864e5)+1;rows.unshift([t('dToday'),t('dayOfN',{n:di,m:nd2})+' · '+(teeTxt(today()===e.date?e.time:((e.dayTimes||{})[today()]||{}).time,true))])}
+  if(e.kind==='tournament'){if(!multi)rows.push([t('checkIn'),fmtTm(e.checkIn)],[t('teeTime'),e.time?fmtTm(e.time):(evEnd(e)>=today()?t('tbd'):'')]);rows.push([t('division'),e.division])}
   else{rows.push([t('evTime'),st?st+(e.dur?' · '+e.dur+(S.lang==='ko'?'분':'m'):''):t('allDay')])}
   if(e.kind==='lesson')rows.push([t('coachN'),e.coach]);
-  rows.push([e.kind==='tournament'?t('course'):t('venue'),e.course]);
+  rows.push([e.kind==='tournament'?t('course'):t('venue'),e.kind==='tournament'?cleanEv(e).course:e.course]);
   b+=`<div class="card" style="padding:6px 14px">${rows.filter(x=>x[1]).map(x=>`<div class="row between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span class="muted">${x[0]}</span><b style="text-align:right">${esc(x[1])}</b></div>`).join('')}</div>`;
   if(e.kind==='plan')b+=`<div class="card" style="padding:10px 14px">${(e.items||[]).map(i=>`<div class="planrow"><span><i class="dot" style="background:${CC[i.cat]||'#999'}"></i>${t('c_'+i.cat)}</span><span class="small muted">${esc(L(i.task))}</span><span class="val">${fmtMin(i.minutes)}</span></div>`).join('')}</div>`;
-  if(e.notes)b+=`<div class="dtext">${esc(e.notes)}</div>`;
+  if(e.notes){const ko2=/[가-힣]/.test(e.notes),hasEn=e.notesEn&&e.notesSrc===e.notes;
+    if(S.lang==='en'&&ko2&&hasEn)b+=`<div class="sec">${t('noteEn')}</div><div class="dtext">${esc(e.notesEn)}</div><details class="adv"><summary>${t('momNote')}</summary><div class="dtext">${esc(e.notes)}</div></details>`;
+    else b+=`${S.lang==='en'&&ko2?`<div class="sec">${t('momNote')}</div>`:''}<div class="dtext">${esc(e.notes)}</div>`}
   if(e.gcalErr)b+=`<div class="note down">⚠️ ${t('gcalErrMsg')}</div>`;
-  if(safeUrl(e.link))b+=`<a class="btn sec" style="display:block;text-align:center;text-decoration:none;margin-bottom:8px" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener">🔗 ${t('openLink')}</a>`;
-  if(e.kind==='tournament'){const r=e.roundId&&S.data.rounds.find(x=>x.id===e.roundId);
-    b+=r?`<button class="addbtn" onclick="closeSheet();openDetail('rounds','${r.id}')">${t('viewResult')} · ${r.score!=null?r.score:''}</button>`:(e.date<=today()?`<button class="addbtn" onclick="logFromEvent('${e.id}')">${t('logResult')}</button>`:'')}
+  if(safeUrl(e.link))b+=`<a class="btn sec" style="display:block;text-align:center;text-decoration:none;margin-bottom:8px" href="${esc(safeUrl(e.link))}" target="_blank" rel="noopener">🔗 ${e.kind==='tournament'&&!evRounds(e).length&&evEnd(e)>=today()?t('officialInfo'):e.kind==='tournament'?t('resultLink'):t('openLink')}</a>`;
+  if(e.kind==='tournament'){const rs=evRounds(e),nd=Math.min(14,Math.round((pd(evEnd(e))-pd(e.date))/864e5)+1);
+    const days=[...Array(nd)].map((_,i)=>ymd(addDays(pd(e.date),i)));
+    const dt=d=>d===e.date?{time:e.time,checkIn:e.checkIn}:((e.dayTimes||{})[d]||{});
+    const used=new Set();
+    const rows2=days.map((d,i)=>{const r=rs.find(x=>x.date===d&&!used.has(x.id));if(r)used.add(r.id);const tt=dt(d);
+      const left=`${nd>1?t('dayN',{n:i+1})+' · ':''}${fmtD(d)} · ${esc(teeTxt(tt.time,d>=today())||t('teeTime')+': —')}${tt.checkIn?` <small class="muted">(${t('checkIn')}: ${esc(fmtTm(tt.checkIn))})</small>`:''}`;
+      const right=r?`<b style="white-space:nowrap">${r.score!=null?r.score:'–'}${r.par&&r.score!=null?` <small class="muted">(${r.score-r.par>0?'+':''}${r.score-r.par})</small>`:''} ›</b>`:(d<=today()?`<button class="chip" onclick="event.stopPropagation();logFromEvent('${e.id}','${d}')">${t('logDay')}</button>`:'');
+      return `<div class="row between" style="padding:8px 0;gap:8px;${i?'border-top:1px solid var(--line);':''}${r?'cursor:pointer':''}" ${r?`onclick="closeSheet();openDetail('rounds','${r.id}')"`:''}><span style="min-width:0">${left}</span>${right}</div>`});
+    rs.filter(r=>!used.has(r.id)).forEach(r=>rows2.push(`<div class="row between" style="padding:8px 0;border-top:1px solid var(--line);cursor:pointer" onclick="closeSheet();openDetail('rounds','${r.id}')"><span>${fmtD(r.date)}</span><b>${r.score!=null?r.score:'–'} ›</b></div>`));
+    const tot=rs.length>1&&rs.every(r=>r.score!=null)?rs.reduce((a,r)=>a+r.score,0):null;const pl=rs.map(r=>r.place).filter(Boolean).pop();
+    if(nd>1||rs.length)b+=`<div class="card" style="margin:0 0 8px;padding:4px 12px">${rows2.join('')}${tot!=null||pl?`<div class="row between" style="padding:8px 0;border-top:1px solid var(--line)"><b>${tot!=null?t('total')+' '+tot:''}</b><b class="up">${pl?esc(pl):''}</b></div>`:''}</div>`;
+    else if(e.date<=today())b+=`<button class="addbtn" onclick="logFromEvent('${e.id}','${e.date}')">${t('logResult')}</button>`}
   if(e.kind==='lesson'){const r=(e.lessonId&&S.data.lessons.find(x=>x.id===e.lessonId));
     b+=r?`<button class="addbtn" onclick="closeSheet();openDetail('lessons','${r.id}')">${t('viewLesson')}</button>`:(e.date<=today()?`<button class="addbtn" onclick="logFromEvent('${e.id}')">${t('logLesson')}</button>`:'')}
   if((e.kind==='practice'||e.kind==='plan')&&e.date<=today()&&!evDone(e))b+=`<button class="addbtn" onclick="logFromEvent('${e.id}')">${t('logPractice')}</button>`;
-  const title=e.kind==='tournament'?(e.title||t('k_tournament')):e.kind==='plan'?t('aiPlanT')||t('k_plan'):(e.title||t('k_'+e.kind));
+  const title=e.kind==='tournament'?((e.tour&&normTour(e.tour)!=='other'?tourLabel(e.tour)+' · ':'')+(cleanEv(e).title||cleanEv(e).course||t('evNoName'))):e.kind==='plan'?t('aiPlanT')||t('k_plan'):(e.title||t('k_'+e.kind));
   if(e.recurring)b+=`<div class="note">🔁 ${t('recurNote')}</div>`;
+  if(S.role==='parent'&&!e.ext&&e.kind!=='plan')b+=`<button class="ghost" style="margin-top:8px" onclick="openHistory('events','${e.id}')">${t('histBtn')}</button>`;
   openSheet(title,b,e.recurring?`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`:`${canDel(e)&&!(e.ext&&S.role!=='parent')?`<button class="btn danger" onclick="delEvent('${e.id}')">${t('del')}</button>`:''}${e.kind!=='plan'?`<button class="btn" onclick="openEventForm('${e.id}')">${t('edit')}</button>`:`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`}`,'event');
 }
-function logFromEvent(id){
+function logFromEvent(id,day){
   const e=allEvents().find(x=>x.id===id);if(!e)return;closeSheet();
-  if(e.kind==='tournament')openForm('rounds',null,{kind:'tournament',tour:e.tour||'',event:e.title||'',course:e.course||'',date:e.date,link:e.link||'',holes:18,par:72,fwHoles:14,finished:true,eventId:e.id});
+  if(e.kind==='tournament')openForm('rounds',null,{kind:'tournament',tour:e.tour||'',event:e.title||'',course:e.course||'',date:day||e.date,link:e.link||'',holes:18,par:72,fwHoles:14,finished:true,eventId:e.id});
   else if(e.kind==='lesson')openForm('lessons',null,{date:e.date,coach:e.coach||'',focus:e.title||'',eventId:e.id});
   else openForm('practice',null,{date:e.date,location:e.course||'',items:(e.items||[]).filter(i=>CATS.indexOf(i.cat)>=0).map(i=>({cat:i.cat,min:i.minutes,balls:null})),notes:'',eventId:e.id});
 }
@@ -1734,13 +1928,15 @@ async function delEvent(id){
 let EF=null;
 function openEventForm(id,date){
   const e=id?JSON.parse(JSON.stringify(allEvents().find(x=>x.id===id))):{kind:'tournament',date:date||today()};
+  if(e.kind==='tournament'){const c=cleanEv(e);e.title=c.title;e.course=c.course}
   EF={e};const k=e.kind==='plan'?'practice':e.kind;
   const grp=(kinds,html)=>`<div class="evgrp" data-k="${kinds}">${html}</div>`;
   let b=`<form id="evf" onsubmit="return false"><div class="seg">${['tournament','lesson','practice','other'].map(x=>`<label><input type="radio" name="kind" value="${x}" ${k===x?'checked':''} onchange="evKindChg()"><span>${EK[x].ic} ${t('k_'+x)}</span></label>`).join('')}</div>`;
-  b+=grp('tournament',`<div class="grid2">${fld(t('tour'),`<select class="in" name="tour">${[...TOURS,t('other')].map(x=>`<option ${e.tour===x?'selected':''}>${x}</option>`).join('')}</select>`)}${fld(t('division'),inp('division',e.division,`placeholder="${t('divPh')}"`))}</div>`);
+  b+=grp('tournament',`<div class="grid2">${fld(t('tour'),tourSelect(e.tour))}${fld(t('division'),inp('division',e.division,`placeholder="${t('divPh')}"`))}</div>`);
   b+=`<div class="fld"><label id="evTitleL"></label>${inp('title',e.title,'list="evtitles"')}</div>${datalist('evtitles',allEvents().filter(x=>x.kind==='tournament').map(x=>x.title))}`;
   b+=grp('lesson',fld(t('coachN'),inp('coach',e.coach||(S.data.lessons.slice().sort(byDateDesc)[0]||{}).coach,'list="coachesE"'))+datalist('coachesE',[...S.data.lessons.map(l=>l.coach),...allEvents().map(x=>x.coach)]));
   b+=fld(t('date'),inp('date',e.date,'type="date"'));
+  b+=grp('tournament',`<div class="fld"><label for="evEnd">${t('endDate')}</label><input class="in" id="evEnd" name="endDate" type="date" value="${esc(e.endDate||'')}" onchange="evDaysDraw()"></div><div id="dayTimes"></div>`);
   b+=grp('tournament',`<div class="grid2">${fld(t('checkIn'),inp('checkIn',e.checkIn,'type="time"'))}${fld(t('teeTime'),inp('time_t',e.kind==='tournament'?e.time:'','type="time"'))}</div>`);
   b+=grp('lesson practice other',`<div class="grid2">${fld(t('evTime'),inp('time_o',e.kind!=='tournament'?e.time:'','type="time"'))}${fld(t('evDur'),numIn('dur',e.dur,''))}</div>`);
   b+=`<div class="fld"><label id="evCourseL"></label>${inp('course',e.course,'list="crsE"')}</div>${datalist('crsE',[...S.data.rounds.map(x=>x.course),...S.data.practice.map(x=>x.location),...allEvents().map(x=>x.course)])}`;
@@ -1748,7 +1944,15 @@ function openEventForm(id,date){
   b+=fld(t('notes'),`<textarea class="in" maxlength="4000" name="notes">${esc(e.notes||'')}</textarea>`);
   b+=`<div class="note">📅 ${t('calNote')}</div></form>`;
   openSheet((id?t('edit')+' · ':'')+t('cal'),b,`<button class="btn sec" onclick="closeSheet()">${t('cancel')}</button><button class="btn" onclick="saveEvent()">${t('save')}</button>`,'evform');
-  evKindChg();
+  evKindChg();evDaysDraw();
+  const fd=document.querySelector('#evf [name=date]');if(fd)fd.addEventListener('change',evDaysDraw);
+}
+function evDaysDraw(){
+  const f=document.getElementById('evf'),box=document.getElementById('dayTimes');if(!f||!box)return;
+  const d0=f.date.value,ed=f.endDate.value,dt=(EF&&EF.e.dayTimes)||{};
+  if(!d0||!ed||ed<=d0||(pd(ed)-pd(d0))/864e5>13){box.innerHTML='';return}
+  const days=[];for(let d=addDays(pd(d0),1);ymd(d)<=ed;d=addDays(d,1))days.push(ymd(d));
+  box.innerHTML=`<div class="sec">${t('dayTimesL')}</div>`+days.map((d,i)=>`<div class="grid2"><div class="fld"><label for="dtC_${d}">${t('dayN',{n:i+2})} · ${fmtS(pd(d))} ${t('checkIn')}</label><input class="in" id="dtC_${d}" type="time" data-dt="${d}" data-k="checkIn" value="${esc((dt[d]||{}).checkIn||'')}"></div><div class="fld"><label for="dtT_${d}">${t('teeTime')}</label><input class="in" id="dtT_${d}" type="time" data-dt="${d}" data-k="time" value="${esc((dt[d]||{}).time||'')}"></div></div>`).join('');
 }
 function evKindChg(){
   const f=document.getElementById('evf'),k=f.querySelector('input[name=kind]:checked').value;
@@ -1762,10 +1966,15 @@ async function saveEvent(){
   if(!f.date.value){toast(t('needDate'));return}
   const e=Object.assign({},EF.e);delete e.ext;
   Object.assign(e,{id:e.id||'e_'+uid(),kind:k,date:f.date.value,title:f.title.value.trim(),course:f.course.value.trim(),notes:f.notes.value.trim()});
-  if(k==='tournament'){Object.assign(e,{tour:f.tour.value,division:f.division.value.trim(),checkIn:f.checkIn.value,time:f.time_t.value,link:f.link.value.trim(),dur:null})}
-  else{Object.assign(e,{time:f.time_o.value,dur:num(f.dur.value)});['tour','division','checkIn','link'].forEach(x=>delete e[x])}
+  if(k==='tournament'){Object.assign(e,{tour:f.tour.value,division:f.division.value.trim(),checkIn:f.checkIn.value,time:f.time_t.value,link:f.link.value.trim(),dur:null});
+    const ed=f.endDate.value;if(ed&&ed>e.date&&(pd(ed)-pd(e.date))/864e5<=13)e.endDate=ed;else delete e.endDate;
+    const dt={};f.querySelectorAll('[data-dt]').forEach(x=>{if(e.endDate&&x.dataset.dt<=e.endDate&&x.value)(dt[x.dataset.dt]=dt[x.dataset.dt]||{})[x.dataset.k]=x.value});
+    if(Object.keys(dt).length)e.dayTimes=dt;else delete e.dayTimes}
+  else{Object.assign(e,{time:f.time_o.value,dur:num(f.dur.value)});['tour','division','checkIn','link','endDate','dayTimes'].forEach(x=>delete e[x])}
   if(k==='lesson')e.coach=f.coach.value.trim();else delete e.coach;
   if(k!=='plan'){delete e.src;delete e.items}
+  if(e.notes&&/[가-힣]/.test(e.notes)&&S.role==='parent'&&online()&&!(e.notesEn&&e.notesSrc===e.notes)){try{const tr=await call('translate',{text:e.notes},60000);if(tr&&tr.en){e.notesEn=tr.en;e.notesSrc=e.notes}}catch(err){}}
+  if(!e.notes){delete e.notesEn;delete e.notesSrc}
   try{await saveLocal('events',e);S.calSel=e.date;closeSheet();toast(online()?t('saved'):t('savedLocal'));render();sync()}
   catch(err){toast(t('err')+': '+(err&&err.message||err))}
 }
@@ -1784,13 +1993,20 @@ function normClub(c){
   const cl=clubs(),hit=cl.find(x=>x.toLowerCase()===c.toLowerCase())||cl.find(x=>x.replace('°','')===c.replace(/[°도]/g,''));
   return hit||c;
 }
+function holeSumWarn(r){
+  const hd=(r.holeData||[]);if(!hd.length||r.score==null)return '';
+  const miss=hd.filter(h=>h.sc==null).length,want=+r.holes||18,missH=Math.max(0,want-hd.length)+miss;
+  if(missH)return `<div class="warn">${t('holeMissing',{n:missH})}</div>`;
+  const sum=hd.reduce((a,h)=>a+(+h.sc||0),0);
+  return sum!==+r.score?`<div class="warn dup">${t('holeSumBad',{a:sum,b:r.score})}</div>`:'';
+}
 function impDup(r){return S.data.rounds.some(x=>x.date===r.date&&(x.kind||'practice')===(r.kind||'practice')&&(x.score==null||r.score==null||x.score===r.score))}
 function buildRound(raw){
   const kind=raw.kind==='tournament'?'tournament':'practice';
   const hd=(raw.holeData||[]).map(h=>({n:+h.n,par:+h.par||4,pen:0,sc:h.sc!=null&&h.sc!==''?+h.sc:null,pt:h.pt!=null&&h.pt!==''?+h.pt:null,
     shots:(h.shots||[]).map(x=>({c:normClub(x.c),d:x.d!=null&&x.d!==''?+x.d:null,r:RES.indexOf(x.r)>=0?x.r:''})).filter(x=>x.c)})).filter(h=>h.n>=1&&h.n<=18);
   const holes=+raw.holes===9||(!raw.holes&&hd.length&&Math.max(...hd.map(h=>h.n))<=9)?9:18;
-  let tour=raw.tour||'';if(tour&&TOURS.indexOf(tour)<0)tour=t('other');
+  let tour=normTour(raw.tour||'');
   const rec={kind,tour:kind==='tournament'?tour:'',event:kind==='tournament'?(raw.event||''):'',course:raw.course||'',date:raw.date||today(),holes,finished:raw.finished!==false,
     par:raw.par!=null?+raw.par:(holes===9?36:72),fwHoles:raw.fwHoles!=null?+raw.fwHoles:(holes===9?7:14),place:raw.place!=null?String(raw.place):'',link:'',media:[],
     notes:[raw.division?(t('division')+': '+raw.division):'',raw.notes||''].filter(Boolean).join('\n')};
@@ -1800,7 +2016,7 @@ function buildRound(raw){
     const sm=roundSummary(rec.holeData);
     if(sm.complete)['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5'].forEach(k=>{if(sm[k]!=null)rec[k]=sm[k]});
   }else rec.holeData=[];
-  if(kind==='tournament'){const ev=allEvents().find(e=>e.kind==='tournament'&&e.date===rec.date&&!e.roundId);if(ev){rec.eventId=ev.id;rec.link=ev.link||'';if(!rec.event)rec.event=ev.title||''}}
+  if(kind==='tournament'){const ev=(S.data.events||[]).find(e=>e.kind==='tournament'&&evCovers(e,rec.date));if(ev){rec.eventId=ev.id;rec.link=rec.link||ev.link||'';if(!rec.event)rec.event=ev.title||''}}
   return rec;
 }
 function drawImport(){
@@ -1810,7 +2026,8 @@ function drawImport(){
      <div class="note" style="margin-top:0">${IMP.mode==='bluegolf'?t('impTipB'):t('impTipN')}</div>
      <div class="imgs">${IMP.imgs.map((m,i)=>`<div class="tile"><img src="data:image/jpeg;base64,${m}" alt=""><button type="button" class="rm" onclick="IMP.imgs.splice(${i},1);drawImport()">×</button></div>`).join('')}</div>
      <label class="addmedia"><input type="file" accept="image/*" multiple onchange="impPick(this)">${t('impPhotos')}</label>
-     <div class="sec">${t('impPaste')}</div><textarea class="in" id="impText" style="min-height:110px" oninput="IMP.text=this.value">${esc(IMP.text)}</textarea>
+     ${IMP.mode==='bluegolf'?`<div class="fld" style="margin-top:12px"><label for="impUrl">${t('impUrl')}</label><input class="in" id="impUrl" type="url" inputmode="url" value="${esc(IMP.url||'')}" placeholder="${t('impUrlPh')}" oninput="IMP.url=this.value"></div>`:''}
+     <div class="sec"><label for="impText">${t('impPaste')}</label></div><textarea class="in" id="impText" style="min-height:110px" oninput="IMP.text=this.value">${esc(IMP.text)}</textarea>
      ${IMP.busy?`<div class="note center" style="margin-top:12px"><span class="spin"></span> ${t('impReading')}</div>`:''}
      ${online()?'':`<div class="note center">${t('needOnline')}</div>`}`;
     ft.innerHTML=`<button class="btn sec" onclick="closeSheet()">${t('cancel')}</button><button class="btn" ${IMP.busy||!online()?'disabled':''} onclick="runImport()">${IMP.busy?'<span class="spin"></span>':t('impRun')}</button>`;
@@ -1821,12 +2038,12 @@ function drawImport(){
     const r=buildRound(it.raw),tp=r.score!=null&&r.par!=null?r.score-r.par:null,nh=(r.holeData||[]).filter(hasHole).length,ns=(r.holeData||[]).reduce((a,h)=>a+h.shots.length,0);
     const unclear=(it.raw.unclear||[]).filter(Boolean),cf=it.raw.confidence;
     return `<div class="impc ${it.done?'done':''}"><div class="row between"><span class="small muted">${fmtD(r.date)}</span>${cf?`<span class="conf ${esc(cf)}">${t('conf_'+cf)}</span>`:''}</div>
-     <div class="t">${r.kind==='tournament'?`<span class="tag t">${esc(r.tour||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`}${esc(r.event||r.course||'–')}</div>
+     <div class="t">${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`}${esc(r.event||r.course||'–')}</div>
      <div class="small muted">${[r.event&&r.course?esc(r.course):'',r.holes+'H',r.place?'#'+esc(r.place):''].filter(Boolean).join(' · ')}</div>
      <div class="row" style="margin-top:6px;gap:14px"><b style="font-size:20px">${r.score!=null?r.score:'–'}</b><span class="muted">${tp!=null?signed(tp,0):''}</span>
       <span class="small muted">${[r.putts!=null?t('putts')+' '+r.putts:'',nh?t('impHoles',{n:nh}):'',ns?t('impShots',{n:ns}):''].filter(Boolean).join(' · ')}</span></div>
      ${unclear.length?`<div class="warn">⚠️ ${unclear.map(esc).join('<br>⚠️ ')}</div>`:''}
-     ${!it.done&&impDup(r)?`<div class="warn dup">⚠️ ${t('impDup')}</div>`:''}
+     ${!it.done&&impDup(r)?`<div class="warn dup">⚠️ ${t('impDup')}</div>`:''}${!it.done?holeSumWarn(r):''}
      <div style="margin-top:8px">${it.done?`<span class="up">✅ ${t('impSaved')}</span>`:`<button class="btn" style="width:100%" onclick="impEdit(${i})">${t('impCheck')}</button>`}</div></div>`}).join('');
   ft.innerHTML=`<button class="btn sec" onclick="impReset()">${t('impAgain')}</button><button class="btn" ${left?'':'disabled'} onclick="impSaveAll()">${t('impAll')}</button>`;
 }
@@ -1837,11 +2054,13 @@ async function impPick(input){
 }
 async function runImport(){
   const el=document.getElementById('impText');if(el)IMP.text=el.value;
-  if(!IMP.imgs.length&&!IMP.text.trim())return;
+  const ue=document.getElementById('impUrl');if(ue)IMP.url=ue.value.trim();
+  const url=IMP.mode==='bluegolf'?(IMP.url||''):'';
+  if(!IMP.imgs.length&&!IMP.text.trim()&&!url)return;
   if(!online()){toast(t('needOnline'));return}
   IMP.busy=true;drawImport();const cur=IMP;
   try{
-    const r=await call('extract',{mode:cur.mode,images:cur.imgs,text:cur.text,clubs:clubs()},330000);
+    const r=await call('extract',{mode:cur.mode,images:cur.imgs,text:cur.text,url,clubs:clubs()},330000);
     if(!r.rounds||!r.rounds.length){toast(r.note||t('impNone'))}
     else{cur.items=r.rounds.map(x=>({raw:x,done:false}));if(IMP===cur)await saveImpDraft()}
   }catch(e){toast(errMsg(e))}
@@ -1859,8 +2078,7 @@ async function impEdit(i){const rec=buildRound(IMP.items[i].raw);await impMedia(
 async function impSaveAll(){
   for(const it of IMP.items){
     if(it.done)continue;const rec=buildRound(it.raw);await impMedia(rec);rec.id=uid();rec.by=S.who;
-    await saveLocal('rounds',rec);
-    if(rec.eventId){const ev=allEvents().find(e=>e.id===rec.eventId);if(ev){const e2=JSON.parse(JSON.stringify(ev));delete e2.ext;e2.roundId=rec.id;await saveLocal('events',e2)}}
+    await saveLocal('rounds',rec);await linkRound(rec);
     it.done=true;
   }
   IMP=null;await idb.put('kv','importDraft',null);toast(online()?t('saved'):t('savedLocal'));closeSheet();render();sync();
@@ -1878,14 +2096,14 @@ const QPOOL=[
  {qid:'c_towel',cat:'chip',type:'count',target:8,xp:50,title:{ko:'수건 착지 미션',en:'Towel Target'},how:{ko:'그린에 수건을 깔고 공을 수건 위에 8번 떨어뜨리기',en:'Land 8 chips on a towel on the green'}},
  {qid:'c_3clubs',cat:'chip',type:'count',target:9,xp:50,title:{ko:'클럽 3개 칩샷',en:'Three-Club Chip'},how:{ko:'같은 거리를 다른 클럽 3개로 각 3번씩',en:'Same chip with 3 different clubs, 3 each'}},
  {qid:'w_30',cat:'wedge',type:'drill',target:7,of:10,xp:70,title:{ko:'30야드 그린 안착',en:'30-Yard Lander'},how:{ko:'30야드 웨지 10개 중 7개를 그린 위에',en:'7 of 10 wedges from 30 yds on the green'}},
- {qid:'w_50',cat:'wedge',type:'drill',target:6,of:10,xp:80,title:{ko:'50야드 핀 공략',en:'50-Yard Dart'},how:{ko:'50야드에서 10개 중 6개를 깃대 5걸음 안에',en:'6 of 10 from 50 yds within 5 steps of the pin'}},
+ {qid:'w_50',cat:'wedge',type:'drill',target:6,of:10,xp:80,ok:{ko:'5걸음 안',en:'Within 5 steps'},no:{ko:'5걸음 밖',en:'Outside 5 steps'},title:{ko:'50야드 핀 공략',en:'50-Yard Dart'},how:{ko:'50야드에서 10개 중 6개를 깃대 5걸음 안에',en:'6 of 10 from 50 yds within 5 steps of the pin'}},
  {qid:'w_ladder',cat:'wedge',type:'count',target:12,xp:60,title:{ko:'웨지 사다리',en:'Wedge Ladder'},how:{ko:'20·30·40·50야드 각 3개씩, 거리 순서대로',en:'3 balls each at 20, 30, 40, 50 yds'}},
  {qid:'i_line',cat:'iron',type:'drill',target:7,of:10,xp:60,title:{ko:'7번 아이언 레이저',en:'7-Iron Laser'},how:{ko:'목표를 정하고 10개 중 7개를 그 방향으로',en:'7 of 10 starting on your target line'}},
  {qid:'i_hold',cat:'iron',type:'count',target:20,xp:40,title:{ko:'피니시 3초 정지',en:'Hold the Finish'},how:{ko:'하프스윙 20번, 매번 피니시에서 3초 멈추기',en:'20 half swings, hold every finish for 3 seconds'}},
  {qid:'i_minutes',cat:'iron',type:'minutes',target:15,xp:40,title:{ko:'아이언 집중 15분',en:'Iron Focus 15'},how:{ko:'아이언만 15분 집중 연습',en:'15 focused minutes with irons only'}},
  {qid:'d_fw',cat:'driver',type:'drill',target:6,of:10,xp:70,title:{ko:'페어웨이 키퍼',en:'Fairway Finder'},how:{ko:'두 목표 사이를 페어웨이로 정하고 10개 중 6개',en:'Pick two targets as a fairway — hit 6 of 10 between'}},
  {qid:'d_routine',cat:'driver',type:'count',target:10,xp:40,title:{ko:'티샷 루틴 10번',en:'Tee Shot Routine'},how:{ko:'매번 같은 루틴(뒤에서 보기→연습스윙→셋업)으로 10번',en:'Same routine every time, 10 drives'}},
- {qid:'b_out',cat:'bunker',type:'drill',target:7,of:10,xp:60,title:{ko:'벙커 탈출왕',en:'Bunker Escape'},how:{ko:'벙커샷 10개 중 7개를 한 번에 그린으로',en:'7 of 10 bunker shots out onto the green'}},
+ {qid:'b_out',cat:'bunker',type:'drill',target:7,of:10,xp:60,ok:{ko:'그린에 올림',en:'On the green'},no:{ko:'그린 못 올림',en:'Missed the green'},title:{ko:'벙커 탈출왕',en:'Bunker Escape'},how:{ko:'벙커샷 10개 중 7개를 한 번에 그린으로',en:'7 of 10 bunker shots out onto the green'}},
  {qid:'t_full',cat:'tempo',type:'tempo',target:30,xp:40,title:{ko:'템포 30스윙',en:'Tempo 30'},how:{ko:'템포 트레이너 소리에 맞춰 30번 스윙',en:'30 swings with the tempo trainer'}},
  {qid:'t_putt',cat:'tempo',type:'tempo',target:20,xp:40,title:{ko:'리듬 20스윙',en:'Rhythm 20'},how:{ko:'템포 트레이너(퍼팅 2:1도 OK)로 20번',en:'20 swings or putts with the tempo trainer'}},
  {qid:'pr_30',cat:'routine',type:'practice',target:30,xp:50,title:{ko:'오늘 30분 연습',en:'30-Minute Session'},how:{ko:'오늘 연습을 30분 이상 기록하기',en:'Log at least 30 minutes of practice today'}},
@@ -1910,7 +2128,7 @@ function totalXP(){return (S.data.quests||[]).reduce((a,r)=>a+recXP(r),0)+coachX
 function doneDays(){const s=new Set((S.data.quests||[]).filter(r=>(r.items||[]).some(q=>q.done)).map(r=>r.date));S.data.practice.forEach(p=>{if(p.coach&&Object.values(p.coach).some(c=>c&&c.done))s.add(p.date)});return s}
 function streakNow(){const s=doneDays();let n=0,d=new Date();if(!s.has(ymd(d)))d=addDays(d,-1);for(let k=0;k<400;k++){const x=ymd(d);if(s.has(x))n++;else if(!offDay(x))break;d=addDays(d,-1)}return n}
 /* 토·일, 대회 있는 날 = 연습 계획·퀘스트 없음 */
-function offDay(d){const w=pd(d).getDay();if(w===0||w===6)return true;return allEvents().some(e=>e.kind==='tournament'&&e.date===d)}
+function offDay(d){const w=pd(d).getDay();if(w===0||w===6)return true;return allEvents().some(e=>e.kind==='tournament'&&evCovers(e,d))}
 function bestStreak(){const ds=[...doneDays()].sort();let best=0,cur=0,prev=null;ds.forEach(x=>{cur=prev&&ymd(addDays(pd(prev),1))===x?cur+1:1;best=Math.max(best,cur);prev=x});return best}
 function hwQuests(){
   const out=[];S.data.lessons.slice().sort(byDateDesc).forEach(l=>(l.homework||[]).forEach(h=>{if(h.done)return;
@@ -1956,7 +2174,7 @@ function autoProg(q){
   return q.prog||0;
 }
 function qProgText(q){
-  if(q.type==='drill')return (q.made||0)+'/'+q.target+' · '+(q.att||0)+'/'+q.of;
+  if(q.type==='drill')return t('qHubDrill',{a:q.made||0,b:q.target,c:q.att||0,d:q.of});
   if(q.type==='streak')return (q.run||0)+'/'+q.target+(q.best?' · '+t('qBest')+' '+q.best:'');
   if(q.type==='check')return q.done?'✓':'0/1';
   const p=Math.min(q.target,autoProg(q));return p+'/'+q.target+(q.type==='minutes'||q.type==='practice'?(S.lang==='ko'?'분':'m'):'');
@@ -2000,7 +2218,7 @@ function drawQuest(soft){
        <div class="qring" style="--p:${qPct(q)}"><span>${q.done?'✅':qIcon(q)}</span></div>
        <div style="flex:1;min-width:0"><b>${esc(L(q.title))}</b><div class="small qdim">${q.src==='ai'?'🤖 '+t('qFromAI')+' · ':q.src==='hw'?'🎓 '+t('qFromHw')+' · ':''}${esc(qProgText(q))}</div></div>
        <div class="qxp">+${q.xp}<small>XP</small></div></div>
-       ${!q.done&&!qStarted(q)&&(r.rerolls||0)<1&&S.role==='kid'?`<button class="qreroll" onclick="event.stopPropagation();rerollQ(${i})">🎲 ${t('qReroll')}</button>`:''}`).join('')}
+       ${!q.done&&!qStarted(q)&&(r.rerolls||0)<1&&S.role==='kid'?`<button class="qreroll" onclick="event.stopPropagation();rerollQ(${i})">🎲 ${t('qReroll')} · ${t('qSwapLeft',{n:1-(r.rerolls||0)})}</button>`:''}`).join('')}
      ${r.items.every(q=>q.done)?`<div class="perfectbox">🏆 ${t('qPerfectMsg')}</div>`:''}
      <div class="qhead" style="margin-top:18px">${t('qBadges')} <span class="qdim small">${bd.filter(x=>x.got).length}/${bd.length}</span></div>
      <div class="badges">${bd.map(x=>`<div class="bdg ${x.got?'got':''}" title="${esc(L(x.d))}"><span>${x.got?x.i:'🔒'}</span><small>${esc(L(x.n))}</small></div>`).join('')}</div>
@@ -2011,12 +2229,12 @@ function drawQuest(soft){
   const ro=S.role!=='kid'&&r.preview;
   let body='';
   if(q.done)body=`<div class="qdone">✅ ${t('qCleared')}<div class="qbigxp">+${q.xpEarned||q.xp} XP</div></div>`;
-  else if(q.type==='streak')body=`<div class="qbig ${Q.shake?'shake':''}">${q.run||0}<small>/ ${q.target}</small></div><div class="qsub">${t('qInARow')} · ${t('qBest')} ${q.best||0}</div>
-    <div class="qbtns"><button class="qyes" onclick="qHit(true)">✅ ${t('qMade')}</button><button class="qno" onclick="qHit(false)">❌ ${t('qMiss')}</button></div>`;
+  else if(q.type==='streak')body=`<div class="qbig ${Q.shake?'shake':''}">${q.run||0}<small>/ ${q.target}</small></div><div class="qsub">${t('qRun',{a:q.run||0,b:q.target})} · ${t('qBest')} ${q.best||0}</div>
+    <div class="qbtns"><button class="qyes" onclick="qHit(true)">✅ ${esc(qLab(q,'ok'))}</button><button class="qno" onclick="qHit(false)">❌ ${esc(qLab(q,'no'))}</button></div>${qUndoBtn(q)}`;
   else if(q.type==='drill'){const left=q.of-(q.att||0),need=q.target-(q.made||0),fail=need>left;
-    body=`<div class="qbig">${q.made||0}<small>/ ${q.target}</small></div><div class="dots">${[...Array(q.of)].map((_,k)=>`<i class="${(q.res||[])[k]===1?'y':(q.res||[])[k]===0?'n':''}"></i>`).join('')}</div>
-    ${fail?`<div class="qsub">${t('qSoClose')}</div><div class="qbtns"><button class="qyes" onclick="qRetry()">🔄 ${t('qRetry')}</button></div>`
-      :`<div class="qsub">${t('qLeft',{n:left})}</div><div class="qbtns"><button class="qyes" onclick="qHit(true)">✅ ${t('qMade')}</button><button class="qno" onclick="qHit(false)">❌ ${t('qMiss')}</button></div>`}`}
+    body=`<div class="qbig">${q.made||0}<small>/ ${q.target}</small></div><div class="qsub" style="margin-top:-4px">${t('qSucc',{a:q.made||0,b:q.target})} · ${t('qAtt',{a:q.att||0,b:q.of})}</div><div class="dots">${[...Array(q.of)].map((_,k)=>`<i class="${(q.res||[])[k]===1?'y':(q.res||[])[k]===0?'n':''}"></i>`).join('')}</div>
+    ${fail?`<div class="qsub">${t('qSoClose')}</div><div class="qbtns"><button class="qyes" onclick="qRetry()">🔄 ${t('qRetry')}</button></div>${qUndoBtn(q)}`
+      :`<div class="qsub">${t('qLeft',{n:left})}</div><div class="qbtns"><button class="qyes" onclick="qHit(true)">✅ ${esc(qLab(q,'ok'))}</button><button class="qno" onclick="qHit(false)">❌ ${esc(qLab(q,'no'))}</button></div>${qUndoBtn(q)}`}`}
   else if(q.type==='count')body=`<div class="qbig ${Q.pop?'pop':''}">${q.prog||0}<small>/ ${q.target}</small></div><div class="qbtns"><button class="qplus" onclick="qCount(1)">+1</button></div><div><button class="qminus" onclick="qCount(-1)">−1</button></div>`;
   else if(q.type==='minutes'){const sec=Math.floor((+q.sec||0)+(q.tStart?(Date.now()-q.tStart)/1000:0));
     body=`<div class="qbig mono">${fmtClock(sec)}<small>/ ${q.target}:00</small></div><div class="qbtns"><button class="qyes" onclick="qTimer()">${q.tStart?'⏸ '+t('tStop'):'▶ '+t('tStart')}</button></div>`}
@@ -2028,10 +2246,15 @@ function drawQuest(soft){
    <h2>${esc(L(q.title))}</h2><div class="qhow">${esc(L(q.how))}</div><div class="qreward">🎁 +${q.xp} XP</div>${ro?'':body}${ro?`<div class="qsub">${t('qMomPreview')}</div>`:''}</div>`;
   Q.shake=false;Q.pop=false;
 }
+function qLab(q,k){const p=QPOOL.find(x=>x.qid===q.qid)||{};const v=q[k]||p[k];return v?L(v):t(k==='ok'?'qMade':'qMiss')}
+function qUndoBtn(q){const st=(Q.undo||{})[q.qid];return st&&st.length?`<div><button class="qminus" style="opacity:1;margin-top:10px" onclick="qUndo()">${t('qUndo')}</button></div>`:''}
+function qUndo(){const q=curQ();if(!q||q.done)return;const st=(Q.undo||{})[q.qid];if(!st||!st.length)return;Object.assign(q,st.pop());if(!q.res)delete q.res;sfx('tick');drawQuest();qPersist()}
+function qSnap(q){Q.undo=Q.undo||{};const st=Q.undo[q.qid]=Q.undo[q.qid]||[];st.push({run:q.run||0,best:q.best||0,att:q.att||0,made:q.made||0,res:(q.res||[]).slice()});if(st.length>30)st.shift()}
 function qStarted(q){return (q.att||0)>0||(q.prog||0)>0||(q.sec||0)>0||!!q.tStart}
 function qPersist(){const r=todayQ();if(!r)return;clearTimeout(QSAVE);QSAVE=setTimeout(()=>{saveLocal('quests',r).then(()=>{if(SHEET!=='quest')render()})},600)}
 function qHit(ok){
   const q=curQ();if(!q||q.done)return;
+  if((q.type==='drill'&&(q.res||[]).length<q.of)||q.type==='streak')qSnap(q);
   if(q.type==='streak'){q.att=(q.att||0)+1;if(ok){q.run=(q.run||0)+1;q.best=Math.max(q.best||0,q.run);sfx('tick')}else{q.run=0;Q.shake=true;sfx('miss')}
     if(q.run>=q.target)return completeQuest(q)}
   if(q.type==='drill'){q.res=q.res||[];if(q.res.length>=q.of)return;q.res.push(ok?1:0);q.att=q.res.length;q.made=q.res.filter(x=>x).length;sfx(ok?'tick':'miss');
@@ -2044,6 +2267,7 @@ function qCheck(){const q=curQ();if(q&&!q.done){q.prog=1;completeQuest(q)}}
 function qTimer(){const q=curQ();if(!q||q.done)return;if(q.tStart){q.sec=(+q.sec||0)+(Date.now()-q.tStart)/1000;q.tStart=null}else q.tStart=Date.now();drawQuest();qPersist()}
 function rerollQ(i){
   const r=todayQ();if(!r||(r.rerolls||0)>=1)return;const q=r.items[i];if(!q||q.done||qStarted(q))return;
+  if(!confirm(t('qSwapConfirm',{q:L(q.title)})))return;
   const nq=pickQuests(today()+'#r'+i,r.items.map(x=>x.qid)).find(x=>x.cat!==q.cat)||pickQuests(today()+'#r'+i,r.items.map(x=>x.qid))[0];if(!nq)return;
   r.items[i]=nq;r.rerolls=(r.rerolls||0)+1;sfx('tick');drawQuest();qPersist();
 }
@@ -2338,7 +2562,7 @@ function vReport(){
   ${empty?`<section class="card"><div class="empty">${t('noData')}</div></section>`:`
   <section class="card"><h3>${t('summary')}</h3><div class="kv"><div><b>${fmtMin(d.tot)}</b><span>${t('practiceTime')}</span></div><div><b>${d.ps.length}</b><span>${t('sessions')}</span></div><div><b>${d.rs.length} / ${d.lsn.length}</b><span>${t('rounds')} / ${t('lessons')}</span></div></div>
    <div style="margin-top:12px">${CATS.filter(c=>d.ct[c]).map(c=>`<div class="hbar"><span><i class="dot" style="background:${CC[c]}"></i>${t('c_'+c)}</span><div class="track"><i style="width:${d.ct[c]/cmax*100}%;background:${CC[c]}"></i></div><span class="val">${fmtMin(d.ct[c])}</span></div>`).join('')}</div></section>
-  ${d.rs.length?`<section class="card"><h3>${t('rounds')}</h3><table class="rt"><tr><th>${t('date')}</th><th>${t('course')}</th><th>${t('score')}</th><th>${t('putts')}</th><th>GIR</th><th>FW</th></tr>${d.rs.map(r=>`<tr><td>${fmtS(pd(r.date))}</td><td>${r.kind==='tournament'?`<span class="tag t">${esc(r.tour||'T')}</span>`:''}${esc(r.event||r.course||'')}</td><td><b>${r.score!=null?r.score:'–'}</b> <span class="muted">${r.score!=null&&r.par!=null?signed(r.score-r.par,0):''}</span></td><td>${r.putts!=null?r.putts:'–'}</td><td>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td></tr>`).join('')}</table></section>`:''}
+  ${d.rs.length?`<section class="card"><h3>${t('rounds')}</h3><table class="rt"><tr><th>${t('date')}</th><th>${t('course')}</th><th>${t('score')}</th><th>${t('putts')}</th><th>GIR</th><th>FW</th></tr>${d.rs.map(r=>`<tr><td>${fmtS(pd(r.date))}</td><td>${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||'T')}</span>`:''}${esc(r.event||r.course||'')}</td><td><b>${r.score!=null?r.score:'–'}</b> <span class="muted">${r.score!=null&&r.par!=null?signed(r.score-r.par,0):''}</span></td><td>${r.putts!=null?r.putts:'–'}</td><td>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td></tr>`).join('')}</table></section>`:''}
   ${cmpCard(null,false,a,b)}
   ${cpReportCard(a,b)}
   ${d.lsn.length?`<section class="card"><h3>${t('lessons')}</h3>${d.lsn.map(l=>`<div style="padding:8px 0;border-top:1px solid var(--line)"><b>${fmtD(l.date)} · ${esc(l.focus||'')}</b> <span class="small muted">${esc(l.coach||'')}</span>${l.feedback?`<div class="small" style="white-space:pre-wrap;margin-top:4px">${esc(l.feedback)}</div>`:''}${(l.homework||[]).map(h=>`<div class="small" style="margin-top:4px">${h.done?'✅':'⬜'} ${esc(h.text)} <span class="cnt">${t('practicedN',{n:hwCount(h.id)})}</span></div>`).join('')}</div>`).join('')}</section>`:''}
@@ -2354,7 +2578,7 @@ function pdfHtml(a,b){
   if(cats.length)x+=h2(t('byCat'))+`<table style="border-collapse:collapse;width:100%"><tr>${cats.map(c=>`<th ${th}>${t('c_'+c)}</th>`).join('')}</tr><tr>${cats.map(c=>`<td ${td}>${fmtMin(d.ct[c])}</td>`).join('')}</tr></table>`;
   const dr=[];d.ps.forEach(p=>(p.drills||[]).forEach(q=>dr.push(Object.assign({date:p.date},q))));
   if(dr.length)x+=h2(t('drills'))+`<table style="border-collapse:collapse;width:100%"><tr><th ${th}>${t('date')}</th><th ${th}>${t('cat')}</th><th ${th}>${t('drills')}</th><th ${th}>${t('made')}/${t('att')}</th></tr>${dr.map(q=>`<tr><td ${td}>${fmtS(pd(q.date))}</td><td ${td}>${t('c_'+q.cat)}</td><td ${tdl}>${esc(q.name)}</td><td ${td}>${q.made!=null?q.made:'–'}/${q.att!=null?q.att:'–'}</td></tr>`).join('')}</table>`;
-  if(d.rs.length)x+=h2(t('rounds'))+`<table style="border-collapse:collapse;width:100%"><tr><th ${th}>${t('date')}</th><th ${th}>${t('kind')}</th><th ${th}>${t('course')}</th><th ${th}>${t('score')}</th><th ${th}>${t('putts')}</th><th ${th}>GIR</th><th ${th}>FW</th><th ${th}>3P</th><th ${th}>${t('place')}</th></tr>${d.rs.map(r=>`<tr><td ${td}>${fmtS(pd(r.date))}</td><td ${td}>${r.kind==='tournament'?esc(r.tour||t('tournament')):t('pr')}</td><td ${tdl}>${esc(r.event||'')}${r.event&&r.course?' / ':''}${esc(r.course||'')} (${r.holes}H)</td><td ${td}><b>${r.score!=null?r.score:'–'}</b> ${r.score!=null&&r.par!=null?'('+signed(r.score-r.par,0)+')':''}</td><td ${td}>${r.putts!=null?r.putts:'–'}</td><td ${td}>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td ${td}>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td><td ${td}>${r.threePutts!=null?r.threePutts:'–'}</td><td ${td}>${esc(r.place||'')}</td></tr>`).join('')}</table>`;
+  if(d.rs.length)x+=h2(t('rounds'))+`<table style="border-collapse:collapse;width:100%"><tr><th ${th}>${t('date')}</th><th ${th}>${t('kind')}</th><th ${th}>${t('course')}</th><th ${th}>${t('score')}</th><th ${th}>${t('putts')}</th><th ${th}>GIR</th><th ${th}>FW</th><th ${th}>3P</th><th ${th}>${t('place')}</th></tr>${d.rs.map(r=>`<tr><td ${td}>${fmtS(pd(r.date))}</td><td ${td}>${r.kind==='tournament'?esc(tourLabel(r.tour)||t('tournament')):t('pr')}</td><td ${tdl}>${esc(r.event||'')}${r.event&&r.course?' / ':''}${esc(r.course||'')} (${r.holes}H)</td><td ${td}><b>${r.score!=null?r.score:'–'}</b> ${r.score!=null&&r.par!=null?'('+signed(r.score-r.par,0)+')':''}</td><td ${td}>${r.putts!=null?r.putts:'–'}</td><td ${td}>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td ${td}>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td><td ${td}>${r.threePutts!=null?r.threePutts:'–'}</td><td ${td}>${esc(r.place||'')}</td></tr>`).join('')}</table>`;
   {const c=cpReport(a,b);if(c.planned||c.targets.length){x+=h2(t('cpReport'))+`<div style="font-size:12px">${t('cpDone')}: <b>${c.planned?c.done+' / '+c.planned:c.done}</b></div>`;
     if(c.targets.length)x+=`<table style="border-collapse:collapse;width:100%;margin-top:6px"><tr><th ${th}>${t('cpReport')}</th><th ${th}>${t('date')}</th><th ${th}>${t('summary')}</th></tr>${c.targets.map(o=>`<tr><td ${tdl}>${esc(o.label)}${o.type==='ratio'?` (${o.goal||o.n}/${o.n})`:''}</td><td ${tdl}>${o.rows.map(r=>`${fmtS(pd(r.date))} ${r.val}${o.type==='ratio'?'/'+o.n:''}${r.ok?' ✓':''}`).join(', ')}</td><td ${td}>${esc(o.sum)}</td></tr>`).join('')}</table>`}}
   if(d.lsn.length){x+=h2(t('lessons'));d.lsn.forEach(l=>{x+=`<div style="border:1px solid #d6dcd4;padding:8px;margin-bottom:6px;font-size:12px"><b>${fmtD(l.date)} · ${esc(l.focus||'')}</b> <span style="color:#6b756f">${esc(l.coach||'')}</span>${l.feedback?`<div style="margin-top:4px;white-space:pre-wrap">${esc(l.feedback)}</div>`:''}${(l.homework||[]).map(h=>`<div style="margin-top:3px">${h.done?'[✓]':'[ ]'} ${esc(h.text)}${h.target?' — '+esc(h.target):''} · ${t('practicedN',{n:hwCount(h.id)})}</div>`).join('')}</div>`})}
@@ -2388,6 +2612,8 @@ async function openSettings(){
    ${par?`<div class="sec">📱 ${t('devices')}</div><div class="small muted">${t('devicesSub')}</div><button class="ghost" style="margin-top:8px" id="qrBtn" onclick="toggleQR()">${t('showQR')}</button><div id="qrBox"></div>
    <div class="sec">🏌️ ${t('clubs')}</div><div class="small muted" style="margin-bottom:6px">${t('clubsSub')}</div>
    <div class="linkbox" style="margin-top:0"><input class="in" id="stClubs" value="${esc(clubs().join(', '))}"><button class="chip" onclick="saveClubs()">${t('save')}</button></div>`:''}
+   ${par?`<div class="sec">${t('bkT')}</div><div class="small muted" style="margin-bottom:6px">${t('bkSub')}</div>
+   <div class="grid2"><button class="ghost" onclick="exportJSON()">${t('bkJson')}</button><button class="ghost" onclick="openTrash()">${t('bkTrash')}</button><button class="ghost" onclick="exportCSV('rounds')">${t('bkCsvR')}</button><button class="ghost" onclick="exportCSV('practice')">${t('bkCsvP')}</button></div>`:''}
    <div class="sec">${t('language')}</div><div class="seg"><button class="${S.lang==='ko'?'on':''}" onclick="setLang('ko')">한국어</button><button class="${S.lang==='en'?'on':''}" onclick="setLang('en')">English</button></div>
    <div class="card" style="padding:6px 14px">
     <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span class="muted">${t('lastSync')}</span><b>${fmtTime(ls('lastSync'))}</b></div>
@@ -2398,9 +2624,49 @@ async function openSettings(){
     <div class="row between" style="padding:8px 0"><span class="muted">${t('storage')}</span><b id="stStore">–</b></div></div>
    <button class="btn" style="width:100%" ${S.syncing?'disabled':''} onclick="sync(true)">${S.syncing?'<span class="spin"></span> '+(S.upProg?t('upN',{p:S.upProg}):t('syncing')):'🔄 '+t('syncNow')}</button>
    <button class="ghost" style="margin-top:10px;border-color:var(--or);color:var(--or)" onclick="disconnect()">${t('disconnect')}</button>
-   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.6</div>`;
+   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.9</div>`;
   openSheet(t('settings'),b,`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`,'settings');
   try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();const el=document.getElementById('stStore');if(el)el.textContent=(e.usage/1048576).toFixed(1)+' MB'}}catch(e){}
+}
+/* ===== 백업 · 휴지통 · 수정 이력 ===== */
+function dl(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+function exportJSON(){
+  const clean=l=>(l||[]).map(r=>{const o=Object.assign({},r);delete o._lv;return o});
+  const d={app:'Ryan Golf Log',exported:new Date().toISOString(),player:S.player||'Ryan',practice:clean(S.data.practice),rounds:clean(S.data.rounds),lessons:clean(S.data.lessons),events:clean(S.data.events),quests:clean(S.data.quests),config:clean(S.data.config),analyses:S.analyses||[]};
+  dl('ryan-golf-backup-'+today()+'.json',JSON.stringify(d,null,1),'application/json');
+}
+function csvCell(v){if(v==null)return '';const s=String(v);return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function exportCSV(type){
+  let cols,rows;
+  if(type==='rounds'){cols=['date','kind','tour','event','course','division','tee','yards','holes','par','score','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','place','field','link','notes'];rows=S.data.rounds.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(r=>cols.map(c=>r[c]))}
+  else{cols=['date','by','location','totalMinutes',...CATS.map(c=>c+'_min'),'notes'];rows=S.data.practice.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(p=>{const m={};(p.items||[]).forEach(i=>m[i.cat]=(m[i.cat]||0)+(+i.min||0));return [p.date,p.by,p.location,pMin(p),...CATS.map(c=>m[c]!=null?m[c]:null),p.notes]})}
+  dl('ryan-golf-'+type+'-'+today()+'.csv','﻿'+[cols,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv');
+}
+function oldSummary(type,r){
+  if(type==='rounds')return [r.date,r.kind==='tournament'?tourLabel(r.tour)+' '+(r.event||''):t('practiceRound'),r.course,r.score!=null?r.score+(S.lang==='ko'?'타':''):''].filter(Boolean).join(' · ');
+  if(type==='events')return [r.date,r.title||r.course,t('k_'+r.kind)].filter(Boolean).join(' · ');
+  if(type==='lessons')return [r.date,t('k_lesson'),r.coach,r.focus].filter(Boolean).join(' · ');
+  return [r.date,t('practice'),pMin(r)?fmtMin(pMin(r)):'',r.location].filter(Boolean).join(' · ');
+}
+async function openTrash(){
+  if(!online()){toast(t('needOnline'));return}
+  openSheet(t('trashT'),'<div id="trBox"><div class="note center"><span class="spin"></span></div></div>',`<button class="btn sec" onclick="openSettings()">${t('close')}</button>`,'trash');
+  try{const l=await call('trashList',{},60000);const el=document.getElementById('trBox');if(!el)return;
+    el.innerHTML=l.length?l.map(x=>`<div class="row between" style="padding:10px 0;border-bottom:1px solid var(--line);gap:8px"><div style="min-width:0"><b class="small">${esc(oldSummary(x.type,x.rec||{}))}</b><div class="small muted">${t('deleted')} ${fmtTime(x.at)}</div></div><button class="chip" onclick="restoreOld('trash','${esc(x.hid)}',this)">${t('restore')}</button></div>`).join(''):`<div class="empty">${t('trashNone')}</div>`}
+  catch(e){const el=document.getElementById('trBox');if(el)el.innerHTML=`<div class="note down">${esc(errMsg(e))}</div>`}
+}
+async function restoreOld(from,hid,btn){
+  if(from==='history'&&!confirm(t('confirmRevert')))return;
+  if(btn)btn.disabled=true;
+  try{await call('restore',{from,hid},60000);toast(t('restored'));await sync(true);if(from==='trash')openTrash();else closeSheet()}
+  catch(e){toast(errMsg(e));if(btn)btn.disabled=false}
+}
+async function openHistory(type,id){
+  if(!online()){toast(t('needOnline'));return}
+  openSheet(t('histT'),'<div id="hiBox"><div class="note center"><span class="spin"></span></div></div>',`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`,'history');
+  try{const l=await call('historyList',{type,id},60000);const el=document.getElementById('hiBox');if(!el)return;
+    el.innerHTML=l.length?l.map(x=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)"><div class="small muted">${t('savedAt',{d:fmtTime(x.at)})}</div><b class="small">${esc(oldSummary(type,x.rec||{}))}</b>${type==='rounds'?`<div class="small muted">${[[t('putts'),x.rec.putts],['GIR',x.rec.gir],[t('place'),x.rec.place]].map(([k,v])=>k+' '+(v==null||v===''?t('nr'):esc(v))).join(' · ')}</div>`:''}<button class="chip" style="margin-top:6px" onclick="restoreOld('history','${esc(x.hid)}',this)">${t('revert')}</button></div>`).join(''):`<div class="empty">${t('histNone')}</div>`}
+  catch(e){const el=document.getElementById('hiBox');if(el)el.innerHTML=`<div class="note down">${esc(errMsg(e))}</div>`}
 }
 function loadQRLib(){return window.qrcode?Promise.resolve():new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='qr.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc)})}
 function qrSvg(text){const q=qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag({cellSize:4,margin:2,scalable:true})}
