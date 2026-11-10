@@ -275,6 +275,7 @@ table.rt td:nth-child(2){text-align:left}
 .impc{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;background:#fff}
 .impc.done{opacity:.6}
 .impc .t{font-weight:800;font-size:15px}
+.warn{font-size:13px;color:#7a4e00;background:#fff4dc;border-radius:10px;padding:8px 10px;margin-top:6px}.warn.dup{color:#9a3412;background:#ffedd5}
 .impc .warn{font-size:12px;color:#8a6a00;background:#fff6d8;border-radius:8px;padding:6px 8px;margin-top:6px}
 .impc .dup{color:var(--or);background:var(--or2)}
 .conf{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:6px}
@@ -390,7 +391,8 @@ const DEFAULT_SERVER = '';
 
 /* ================= 텍스트 (한/영) ================= */
 const T={
-ko:{sub:'골프 기록',wdFull:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],qHubDrill:'성공 {a}/{b} · 시도 {c}/{d}',noteEn:'메모 (영어)',qUndo:'↩ 마지막 샷 취소',qSucc:'성공 {a}/{b}',qAtt:'시도 {a}/{b}',qRun:'연속 {a}/{b}',qSwapLeft:'남은 교체 {n}번',qSwapConfirm:'"{q}" 퀘스트를 다른 걸로 바꿀까요? 교체는 하루 1번만 할 수 있어요.',tbd:'미정',girHint:'파보다 2타 적게(파4는 2타 안) 그린에 올린 홀 수',fwHint:'파4·파5 홀 수 (18홀이면 보통 14)',dayOfN:'{n}일차 / 총 {m}일',evSum:'대회 요약',momNote:'엄마 메모 (원문)',aiReady:'기록 {n}개가 있어요. 위 버튼을 누르면 첫 분석을 시작해요.',aiReadyT:'첫 분석 준비 완료',notEnoughCmp:'아직 비교할 만한 라운드가 부족해요',notEnoughSub:'연습 {a} · 시합 {b}라운드 (양쪽 3라운드 이상 필요)',showNums:'참고용 숫자 보기',impUrl:'또는 BlueGolf 링크',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'링크로 페이지를 읽지 못했어요. 페이지 글자를 복사해서 붙여넣거나 캡처를 올려주세요.',holeSumBad:'⚠️ 홀별 합계 {a}타 ≠ 스코어 {b}타 — 확인 필요',holeMissing:'홀 {n}개 미기록 — 합계 확인 불가',bkT:'🗂 백업·복구',bkSub:'기록을 파일로 내려받거나, 지운 기록을 30일 안에 되살릴 수 있어요.',bkJson:'⬇ 전체 백업 (JSON)',bkCsvR:'⬇ 라운드 CSV',bkCsvP:'⬇ 연습 CSV',bkTrash:'🗑 휴지통 (지운 기록 복구)',trashT:'휴지통',trashNone:'지운 기록이 없어요',restore:'복구',restored:'복구했어요',histT:'수정 이력',histBtn:'🕘 수정 이력',histNone:'이전 버전이 없어요',revert:'이 버전으로 되돌리기',confirmRevert:'이 버전으로 되돌릴까요? 지금 내용은 이력에 남아요.',savedAt:'{d}에 바뀌기 전',aiLast:'마지막 분석',aiNext:'다음 자동 분석',aiNextV:'{d} 월요일 오전 6시',aiAutoErr:'최근 자동 분석 실패',aiNever:'아직 없음',a_prev:'이전',a_next:'다음',a_close:'닫기',a_minus:'빼기',a_plus:'더하기',vsSameDay:'지난주 {d}까지 대비',goalPct:'이번 주 계획 {a} 중 {p}%',modeSimple:'점수만 간단 입력',modeDetail:'홀별·샷별 상세 입력',advStats:'고급 통계 (선택)',teeN:'티',teePh:'예: Blue',yardsN:'코스 길이 (야드)',roundInfo:'라운드 정보',dayTimesL:'날짜별 티타임',officialInfo:'공식 대회 안내',resultLink:'공식 결과 보기',dayTee:'{d} 티타임',logDay:'결과 기록',evNoName:'토너먼트',srch:'검색',rt_list:'기록',rt_stats:'분석',rfSearch:'대회·골프장·메모 검색',rfAll:'전체',rfTourAll:'모든 투어',rfCourseAll:'모든 골프장',rfFrom:'시작일',rfTo:'종료일',rfCount:'{a}개 중 {b}개',rfReset:'필터 지우기',upCnt:'{n}개',showAll:'일정 {t}개 모두 보기',showLess:'접기',moreN:'외 {n}개 더 · 캘린더에서 보기',lowN:'⚠️ 참고용 · 데이터 부족 — 연습 {a} · 시합 {b}라운드. 양쪽 3라운드 이상 쌓이면 믿을 만해져요.',conv9:'9홀 {n}라운드는 ×2로 18홀 환산',conv18:'모두 18홀 기준(환산 없음)',cmpAll:'전체',cmpSim:'비슷한 조건만',simNote:'같은 골프장이거나 티 거리 ±10% 이내만 비교',simNone:'비슷한 조건의 연습·시합이 아직 없어요',fewShots:'참고',fewShotsNote:'샷 {n}개 미만은 회색 — 대표 거리로 보기엔 아직 적어요',median:'중간값',nr:'미기록',autoDone:'✓ 홀별 기록으로 자동 계산: {a}',autoMiss:'미기록(계산 안 함): {a}',autoNone:'홀별 스코어로 스코어만 계산됐어요',missingSt:'미기록 항목',endDate:'종료일 (이틀 이상 대회)',dayN:'{n}일차',total:'합계',logNextDay:'＋ {n}일차 결과 기록',offT:'오늘은 대회·쉬는 날',offS:'토·일과 대회 날은 연습 계획과 퀘스트가 없어요. 연속 기록🔥은 끊기지 않아요.',offQ:'오늘은 퀘스트 쉬는 날',cpGoalL:'목표',cpSec:'📋 선생님 주간 숙제 (요일별)',cpPaste:'선생님이 보낸 숙제 글을 그대로 붙여넣으세요',cpAI:'🤖 AI로 요일별 정리',cpWorking:'정리하는 중… (30초~1분)',cpNone:'붙여넣고 정리하면 라이언 연습 탭에 요일별로 나와요',cpDel:'계획 지우기',cpUnclear:'확인 필요',cpNoTr:'영어 번역은 실패했어요 (한국어로 표시)',cpFrom:'선생님 숙제',cpGoals:'이번 주 목표',cpBlocks:'{a} / {b} 완료',cpClear:'숙제 클리어!',cpGoal:'목표 달성!',cpBest:'개인 최고 기록!',cpRec:'기록 저장',cpSucc:'성공',cpStreak:'최고 연속',cpCount:'개수',cpRepeat:'매주 반복 · 다음 레슨까지',cpReport:'선생님 숙제 결과',cpDone:'완료한 블록',cpPlanVs:'계획 대비',cpStarts:'{d}부터 적용',todayTodo:'오늘 할 일',nextUp:'다음 일정',noNext:'2주 안에 잡힌 일정이 없어요',focusWk:'이번 주 포커스',focusNone:'AI 분석을 하면 이번 주 포커스가 나와요',todoEmpty:'오늘 계획이 없어요. 자유 연습을 기록하거나 AI 분석으로 주간 플랜을 만들어 보세요.',todoLog:'＋ 오늘 연습 기록',tagPlan:'AI 플랜',tagHw:'숙제',didToday:'오늘 함',wkSum:'{n}번 연습',home:'홈',practice:'연습',rounds:'라운드',lessons:'레슨',report:'리포트',coach:'AI 코치',
+ko:{sub:'골프 기록',mgQ:'퀘스트 기록',nRounds:'{n}라운드',mgT:'🔁 이전 서버에서 기록 옮기기',mgSub:'이전 서버 기록을 이 서버로 복사해요. 이전 서버 데이터는 지우지 않아요.',mgUrl:'이전 서버 주소 (/exec)',mgKey:'이전 서버의 엄마 연결 키',mgKeyHelp:'이전 서버 Apps Script → ⚙ 프로젝트 설정 → 스크립트 속성의 PARENT_KEY',mgLoad:'불러와서 비교하기',mgLoading:'이전 서버 기록을 불러오는 중…',mgSame:'지금 연결된 서버와 같은 주소예요',mgNeedMom:'엄마 연결 키가 필요해요 (라이언 키로는 옮길 수 없어요)',mgPlan:'비교 결과',mgColOld:'이전',mgColNew:'지금',mgColAdd:'옮길 것',mgColDup:'겹침',mgDupT:'양쪽에 다 있는 기록 (중복 없이 하나로)',mgKeepNew:'지금 서버 기록 유지',mgFilled:'빈 칸 {n}개를 이전 기록에서 채움',mgMedia:'사진·영상 {n}개는 이전 서버 Drive에 그대로 있어요 (기록에 위치만 보관)',mgGo:'양쪽 백업하고 옮기기',mgWorking:'옮기는 중… {a}/{b}',mgBackup:'백업 저장: {a}',mgDone:'옮기기 완료',mgVerify:'확인 결과',mgOk:'이전 서버 기록 {a}개 중 {b}개가 이 서버에 있어요',mgMiss:'못 옮긴 기록 {n}개',mgSkip:'안 옮긴 것: AI 분석·AI 질문 기록 (지금 서버 것 유지)',mgOldRyan:'⚠️ 라이언이 이전 서버에 {d}까지 기록했어요. 라이언 폰이 아직 이전 서버에 연결돼 있을 수 있어요.',prevWarn:'이전 서버(…{u})에는 기록이 {a}개 있었는데, 지금 서버에는 {b}개예요.',prevWarnBtn:'이전 서버에서 옮기기',switchWarn:'⚠️ 다른 서버로 바꾸려고 해요.\n\n지금 서버(…{u})의 기록 {n}개는 새 서버로 자동으로 넘어가지 않아요.\n바꾼 뒤 설정 → "이전 서버에서 기록 옮기기"로 옮길 수 있어요.\n\n계속할까요?',devT:'📱 이 서버에 연결된 기기',devKid:'라이언 폰',devMom:'엄마 기기',devNever:'아직 이 서버에 연결된 적 없음',devAgo:'{t} 마지막 연결',
+badPlace:'순위는 숫자나 T5 형식으로 넣어주세요 (CUT·WD·DQ 가능). 모르면 비워 두세요.',bigField:'참가 인원이 {n}명이에요. 맞나요?',oddShots:'확인이 필요한 샷 거리가 있어요:\n{l}\n\n그대로 저장할까요?',chkNeed:'⚠️ 확인 필요',chkPlace:'순위 값이 이상해요: {v}',chkField:'참가 인원이 너무 커요: {v}',chkShot:'{h}번 홀 {c} {d}야드',wdFull:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],qHubDrill:'성공 {a}/{b} · 시도 {c}/{d}',noteEn:'메모 (영어)',qUndo:'↩ 마지막 샷 취소',qSucc:'성공 {a}/{b}',qAtt:'시도 {a}/{b}',qRun:'연속 {a}/{b}',qSwapLeft:'남은 교체 {n}번',qSwapConfirm:'"{q}" 퀘스트를 다른 걸로 바꿀까요? 교체는 하루 1번만 할 수 있어요.',tbd:'미정',girHint:'파보다 2타 적게(파4는 2타 안) 그린에 올린 홀 수',fwHint:'파4·파5 홀 수 (18홀이면 보통 14)',dayOfN:'{n}일차 / 총 {m}일',evSum:'대회 요약',momNote:'엄마 메모 (원문)',aiReady:'기록 {n}개가 있어요. 위 버튼을 누르면 첫 분석을 시작해요.',aiReadyT:'첫 분석 준비 완료',notEnoughCmp:'아직 비교할 만한 라운드가 부족해요',notEnoughSub:'연습 {a} · 시합 {b}라운드 (양쪽 3라운드 이상 필요)',showNums:'참고용 숫자 보기',impUrl:'또는 BlueGolf 링크',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'링크로 페이지를 읽지 못했어요. 페이지 글자를 복사해서 붙여넣거나 캡처를 올려주세요.',holeSumBad:'⚠️ 홀별 합계 {a}타 ≠ 스코어 {b}타 — 확인 필요',holeMissing:'홀 {n}개 미기록 — 합계 확인 불가',bkT:'🗂 백업·복구',bkSub:'기록을 파일로 내려받거나, 지운 기록을 30일 안에 되살릴 수 있어요.',bkJson:'⬇ 전체 백업 (JSON)',bkCsvR:'⬇ 라운드 CSV',bkCsvP:'⬇ 연습 CSV',bkTrash:'🗑 휴지통 (지운 기록 복구)',trashT:'휴지통',trashNone:'지운 기록이 없어요',restore:'복구',restored:'복구했어요',histT:'수정 이력',histBtn:'🕘 수정 이력',histNone:'이전 버전이 없어요',revert:'이 버전으로 되돌리기',confirmRevert:'이 버전으로 되돌릴까요? 지금 내용은 이력에 남아요.',savedAt:'{d}에 바뀌기 전',aiLast:'마지막 분석',aiNext:'다음 자동 분석',aiNextV:'{d} 월요일 오전 6시',aiAutoErr:'최근 자동 분석 실패',aiNever:'아직 없음',a_prev:'이전',a_next:'다음',a_close:'닫기',a_minus:'빼기',a_plus:'더하기',vsSameDay:'지난주 {d}까지 대비',goalPct:'이번 주 계획 {a} 중 {p}%',modeSimple:'점수만 간단 입력',modeDetail:'홀별·샷별 상세 입력',advStats:'고급 통계 (선택)',teeN:'티',teePh:'예: Blue',yardsN:'코스 길이 (야드)',roundInfo:'라운드 정보',dayTimesL:'날짜별 티타임',officialInfo:'공식 대회 안내',resultLink:'공식 결과 보기',dayTee:'{d} 티타임',logDay:'결과 기록',evNoName:'토너먼트',srch:'검색',rt_list:'기록',rt_stats:'분석',rfSearch:'대회·골프장·메모 검색',rfAll:'전체',rfTourAll:'모든 투어',rfCourseAll:'모든 골프장',rfFrom:'시작일',rfTo:'종료일',rfCount:'{a}개 중 {b}개',rfReset:'필터 지우기',upCnt:'{n}개',showAll:'일정 {t}개 모두 보기',showLess:'접기',moreN:'외 {n}개 더 · 캘린더에서 보기',lowN:'⚠️ 참고용 · 데이터 부족 — 연습 {a} · 시합 {b}라운드. 양쪽 3라운드 이상 쌓이면 믿을 만해져요.',conv9:'9홀 {n}라운드는 ×2로 18홀 환산',conv18:'모두 18홀 기준(환산 없음)',cmpAll:'전체',cmpSim:'비슷한 조건만',simNote:'같은 골프장이거나 티 거리 ±10% 이내만 비교',simNone:'비슷한 조건의 연습·시합이 아직 없어요',fewShots:'참고',fewShotsNote:'샷 {n}개 미만은 회색 — 대표 거리로 보기엔 아직 적어요',median:'중간값',nr:'미기록',autoDone:'✓ 홀별 기록으로 자동 계산: {a}',autoMiss:'미기록(계산 안 함): {a}',autoNone:'홀별 스코어로 스코어만 계산됐어요',missingSt:'미기록 항목',endDate:'종료일 (이틀 이상 대회)',dayN:'{n}일차',total:'합계',logNextDay:'＋ {n}일차 결과 기록',offT:'오늘은 대회·쉬는 날',offS:'토·일과 대회 날은 연습 계획과 퀘스트가 없어요. 연속 기록🔥은 끊기지 않아요.',offQ:'오늘은 퀘스트 쉬는 날',cpGoalL:'목표',cpSec:'📋 선생님 주간 숙제 (요일별)',cpPaste:'선생님이 보낸 숙제 글을 그대로 붙여넣으세요',cpAI:'🤖 AI로 요일별 정리',cpWorking:'정리하는 중… (30초~1분)',cpNone:'붙여넣고 정리하면 라이언 연습 탭에 요일별로 나와요',cpDel:'계획 지우기',cpUnclear:'확인 필요',cpNoTr:'영어 번역은 실패했어요 (한국어로 표시)',cpFrom:'선생님 숙제',cpGoals:'이번 주 목표',cpBlocks:'{a} / {b} 완료',cpClear:'숙제 클리어!',cpGoal:'목표 달성!',cpBest:'개인 최고 기록!',cpRec:'기록 저장',cpSucc:'성공',cpStreak:'최고 연속',cpCount:'개수',cpRepeat:'매주 반복 · 다음 레슨까지',cpReport:'선생님 숙제 결과',cpDone:'완료한 블록',cpPlanVs:'계획 대비',cpStarts:'{d}부터 적용',todayTodo:'오늘 할 일',nextUp:'다음 일정',noNext:'2주 안에 잡힌 일정이 없어요',focusWk:'이번 주 포커스',focusNone:'AI 분석을 하면 이번 주 포커스가 나와요',todoEmpty:'오늘 계획이 없어요. 자유 연습을 기록하거나 AI 분석으로 주간 플랜을 만들어 보세요.',todoLog:'＋ 오늘 연습 기록',tagPlan:'AI 플랜',tagHw:'숙제',didToday:'오늘 함',wkSum:'{n}번 연습',home:'홈',practice:'연습',rounds:'라운드',lessons:'레슨',report:'리포트',coach:'AI 코치',
 thisWeek:'이번 주',lastWeek:'지난주',totalPractice:'총 연습',sessionsN:'{n}회',vsLast:'지난주 대비',
 byCat:'항목별 연습 시간',openHw:'진행 중인 숙제',openHwSub:'레슨에서 받은 드릴 · 다 하면 체크',noHw:'진행 중인 숙제가 없어요',
 practicedN:'연습 {n}회',compare:'연습 vs 시합',cmpSub:'연습 라운드와 토너먼트, 어디서 달라지나',year:'올해',d90:'최근 90일',all:'전체',
@@ -475,7 +477,8 @@ evLink:'대회 링크 (BlueGolf 등)',logResult:'⛳ 결과 기록하기',viewRe
 gcalTag:'구글 캘린더',dayEmpty:'이 날은 일정이 없어요',addThisDay:'+ 이 날에 일정 추가',reportSub:'주간·월간 리포트 · 선생님께 PDF 공유',dToday:'오늘',dN:'D-{n}',done:'완료',
 logsDay:'이 날 한 기록',calNote:'일정은 엄마 구글 캘린더의 "Ryan Golf"에도 자동으로 들어가고, 구글 캘린더에서 넣은 일정도 여기 보여요',needDate:'날짜를 넣어주세요',
 allDay:'종일',calLegLog:'기록함',gcalErrMsg:'구글 캘린더 저장 실패 (앱에는 저장됨)'},
-en:{sub:'Golf Log',wdFull:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],qHubDrill:'{a}/{b} made · {c}/{d} tries',noteEn:'Note',qUndo:'↩ Undo last shot',qSucc:'Successes: {a}/{b}',qAtt:'Attempts: {a}/{b}',qRun:'In a row: {a}/{b}',qSwapLeft:'{n} swap left today',qSwapConfirm:'Swap "{q}" for a different quest? You can only swap once a day.',tbd:'TBD',girHint:'Holes where you reached the green in 2 fewer shots than par (e.g. in 2 on a par 4)',fwHint:'Par 4s and 5s — usually 14 in 18 holes',dayOfN:'Round {n} of {m}',evSum:'Event summary',momNote:"Mom's note (original)",aiReady:'You have {n} logged records. Tap the button above to run your first analysis.',aiReadyT:'Ready for your first analysis',notEnoughCmp:'Not enough comparable rounds yet',notEnoughSub:'Practice {a} · Tournament {b} rounds (need 3+ each)',showNums:'Show reference numbers',impUrl:'or a BlueGolf link',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'Could not read that link. Copy and paste the page text, or upload a screenshot.',holeSumBad:'⚠️ Hole total {a} ≠ score {b} — please check',holeMissing:'{n} holes not recorded — cannot check total',bkT:'🗂 Backup & restore',bkSub:'Download your records, or bring back deleted ones within 30 days.',bkJson:'⬇ Full backup (JSON)',bkCsvR:'⬇ Rounds CSV',bkCsvP:'⬇ Practice CSV',bkTrash:'🗑 Trash (restore deleted)',trashT:'Trash',trashNone:'Nothing deleted',restore:'Restore',restored:'Restored',histT:'Edit history',histBtn:'🕘 Edit history',histNone:'No earlier versions',revert:'Revert to this version',confirmRevert:'Revert to this version? The current one stays in history.',savedAt:'Before change on {d}',aiLast:'Last analysis',aiNext:'Next automatic analysis',aiNextV:'Mon {d}, 6 AM',aiAutoErr:'Last automatic analysis failed',aiNever:'None yet',a_prev:'Previous',a_next:'Next',a_close:'Close',a_minus:'Decrease',a_plus:'Increase',vsSameDay:'vs last week through {d}',goalPct:'{p}% of this week\'s {a} plan',modeSimple:'Score only (quick)',modeDetail:'Hole-by-hole / shots',advStats:'Advanced stats (optional)',teeN:'Tee',teePh:'e.g. Blue',yardsN:'Course length (yards)',roundInfo:'Round info',dayTimesL:'Tee time by day',officialInfo:'Event details',resultLink:'Official results',dayTee:'{d} tee time',logDay:'Log result',evNoName:'Tournament',srch:'Search',rt_list:'Rounds',rt_stats:'Analysis',rfSearch:'Search event, course, notes',rfAll:'All',rfTourAll:'All tours',rfCourseAll:'All courses',rfFrom:'From',rfTo:'To',rfCount:'{b} of {a}',rfReset:'Clear filters',upCnt:'{n}',showAll:'View all {t} scheduled',showLess:'Show less',moreN:'+{n} more · open calendar',lowN:'⚠️ For reference only · not enough data — practice {a} · tournament {b} rounds. Reliable once both have 3+.',conv9:'{n} nine-hole rounds scaled ×2 to 18',conv18:'All 18-hole rounds (no scaling)',cmpAll:'All',cmpSim:'Similar only',simNote:'Same course, or tee yardage within ±10%',simNone:'No similar practice/tournament rounds yet',fewShots:'ref',fewShotsNote:'Grey = fewer than {n} shots — not enough to be his typical distance',median:'Median',nr:'Not recorded',autoDone:'✓ Calculated from holes: {a}',autoMiss:'Not recorded (not calculated): {a}',autoNone:'Only the score was calculated from the holes',missingSt:'Not recorded',endDate:'End date (multi-day events)',dayN:'Round {n}',total:'Total',logNextDay:'+ Log round {n}',offT:'Tournament / rest day',offS:'No practice plan or quests on weekends and tournament days. Your 🔥 streak stays safe.',offQ:'No quests today',cpGoalL:'Goal',cpSec:'📋 Coach weekly homework (by day)',cpPaste:'Paste the coach\'s homework message as is',cpAI:'🤖 Organize by day with AI',cpWorking:'Organizing… (30s–1 min)',cpNone:'Paste and organize — it shows up day by day in Ryan\'s Practice tab',cpDel:'Remove plan',cpUnclear:'Please check',cpNoTr:'English translation failed (shown in Korean)',cpFrom:'Coach homework',cpGoals:'This week\'s goals',cpBlocks:'{a} / {b} done',cpClear:'HOMEWORK CLEAR!',cpGoal:'GOAL REACHED!',cpBest:'NEW PERSONAL BEST!',cpRec:'Save',cpSucc:'Made',cpStreak:'Best in a row',cpCount:'Count',cpRepeat:'Repeats weekly · until next lesson',cpReport:'Coach homework results',cpDone:'Blocks done',cpPlanVs:'Plan vs actual',cpStarts:'Starts {d}',todayTodo:'Today',nextUp:'Coming up',noNext:'Nothing scheduled in the next 2 weeks',focusWk:'Focus this week',focusNone:'Run an AI analysis to get this week\'s focus',todoEmpty:'No plan for today. Log free practice or run an AI analysis to get a weekly plan.',todoLog:'+ Log today\'s practice',tagPlan:'AI plan',tagHw:'Homework',didToday:'Done today',wkSum:'{n} sessions',home:'Home',practice:'Practice',rounds:'Rounds',lessons:'Lessons',report:'Report',coach:'AI Coach',
+en:{sub:'Golf Log',mgQ:'Quest days',nRounds:'{n} rounds',mgT:'🔁 Move records from a previous server',mgSub:'Copies records from the old server to this one. Nothing is deleted on the old server.',mgUrl:'Old server address (/exec)',mgKey:"Old server's Mom key",mgKeyHelp:'Old Apps Script → ⚙ Project settings → Script properties → PARENT_KEY',mgLoad:'Load and compare',mgLoading:'Loading old server records…',mgSame:'That is the server you are connected to now',mgNeedMom:'A Mom key is needed (Ryan key cannot move records)',mgPlan:'Comparison',mgColOld:'Old',mgColNew:'Now',mgColAdd:'To add',mgColDup:'Both',mgDupT:'On both servers (merged into one)',mgKeepNew:'Kept the current server record',mgFilled:'filled {n} empty fields from the old record',mgMedia:'{n} photos/videos stay in the old Drive (location kept on the record)',mgGo:'Back up both and move',mgWorking:'Moving… {a}/{b}',mgBackup:'Backup saved: {a}',mgDone:'Move complete',mgVerify:'Check',mgOk:'{b} of {a} old-server records are now on this server',mgMiss:'{n} records not moved',mgSkip:'Not moved: AI analyses and AI chat (kept this server’s)',mgOldRyan:'⚠️ Ryan logged on the old server up to {d}. His phone may still be connected to the old server.',prevWarn:'The previous server (…{u}) had {a} records; this server has {b}.',prevWarnBtn:'Move from previous server',switchWarn:'⚠️ You are switching to a different server.\n\nThe {n} records on the current server (…{u}) will NOT move automatically.\nAfter switching, use Settings → "Move records from a previous server".\n\nContinue?',devT:'📱 Devices connected to this server',devKid:"Ryan's phone",devMom:"Mom's device",devNever:'Never connected to this server',devAgo:'last seen {t}',
+badPlace:'Enter the place as a number or like T5 (CUT, WD, DQ ok). Leave it empty if unknown.',bigField:'Players in division is {n}. Is that right?',oddShots:'Some shot distances look unusual:\n{l}\n\nSave anyway?',chkNeed:'⚠️ Please check',chkPlace:'Place looks wrong: {v}',chkField:'Players in division looks too big: {v}',chkShot:'Hole {h} {c} {d} yd',wdFull:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],qHubDrill:'{a}/{b} made · {c}/{d} tries',noteEn:'Note',qUndo:'↩ Undo last shot',qSucc:'Successes: {a}/{b}',qAtt:'Attempts: {a}/{b}',qRun:'In a row: {a}/{b}',qSwapLeft:'{n} swap left today',qSwapConfirm:'Swap "{q}" for a different quest? You can only swap once a day.',tbd:'TBD',girHint:'Holes where you reached the green in 2 fewer shots than par (e.g. in 2 on a par 4)',fwHint:'Par 4s and 5s — usually 14 in 18 holes',dayOfN:'Round {n} of {m}',evSum:'Event summary',momNote:"Mom's note (original)",aiReady:'You have {n} logged records. Tap the button above to run your first analysis.',aiReadyT:'Ready for your first analysis',notEnoughCmp:'Not enough comparable rounds yet',notEnoughSub:'Practice {a} · Tournament {b} rounds (need 3+ each)',showNums:'Show reference numbers',impUrl:'or a BlueGolf link',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'Could not read that link. Copy and paste the page text, or upload a screenshot.',holeSumBad:'⚠️ Hole total {a} ≠ score {b} — please check',holeMissing:'{n} holes not recorded — cannot check total',bkT:'🗂 Backup & restore',bkSub:'Download your records, or bring back deleted ones within 30 days.',bkJson:'⬇ Full backup (JSON)',bkCsvR:'⬇ Rounds CSV',bkCsvP:'⬇ Practice CSV',bkTrash:'🗑 Trash (restore deleted)',trashT:'Trash',trashNone:'Nothing deleted',restore:'Restore',restored:'Restored',histT:'Edit history',histBtn:'🕘 Edit history',histNone:'No earlier versions',revert:'Revert to this version',confirmRevert:'Revert to this version? The current one stays in history.',savedAt:'Before change on {d}',aiLast:'Last analysis',aiNext:'Next automatic analysis',aiNextV:'Mon {d}, 6 AM',aiAutoErr:'Last automatic analysis failed',aiNever:'None yet',a_prev:'Previous',a_next:'Next',a_close:'Close',a_minus:'Decrease',a_plus:'Increase',vsSameDay:'vs last week through {d}',goalPct:'{p}% of this week\'s {a} plan',modeSimple:'Score only (quick)',modeDetail:'Hole-by-hole / shots',advStats:'Advanced stats (optional)',teeN:'Tee',teePh:'e.g. Blue',yardsN:'Course length (yards)',roundInfo:'Round info',dayTimesL:'Tee time by day',officialInfo:'Event details',resultLink:'Official results',dayTee:'{d} tee time',logDay:'Log result',evNoName:'Tournament',srch:'Search',rt_list:'Rounds',rt_stats:'Analysis',rfSearch:'Search event, course, notes',rfAll:'All',rfTourAll:'All tours',rfCourseAll:'All courses',rfFrom:'From',rfTo:'To',rfCount:'{b} of {a}',rfReset:'Clear filters',upCnt:'{n}',showAll:'View all {t} scheduled',showLess:'Show less',moreN:'+{n} more · open calendar',lowN:'⚠️ For reference only · not enough data — practice {a} · tournament {b} rounds. Reliable once both have 3+.',conv9:'{n} nine-hole rounds scaled ×2 to 18',conv18:'All 18-hole rounds (no scaling)',cmpAll:'All',cmpSim:'Similar only',simNote:'Same course, or tee yardage within ±10%',simNone:'No similar practice/tournament rounds yet',fewShots:'ref',fewShotsNote:'Grey = fewer than {n} shots — not enough to be his typical distance',median:'Median',nr:'Not recorded',autoDone:'✓ Calculated from holes: {a}',autoMiss:'Not recorded (not calculated): {a}',autoNone:'Only the score was calculated from the holes',missingSt:'Not recorded',endDate:'End date (multi-day events)',dayN:'Round {n}',total:'Total',logNextDay:'+ Log round {n}',offT:'Tournament / rest day',offS:'No practice plan or quests on weekends and tournament days. Your 🔥 streak stays safe.',offQ:'No quests today',cpGoalL:'Goal',cpSec:'📋 Coach weekly homework (by day)',cpPaste:'Paste the coach\'s homework message as is',cpAI:'🤖 Organize by day with AI',cpWorking:'Organizing… (30s–1 min)',cpNone:'Paste and organize — it shows up day by day in Ryan\'s Practice tab',cpDel:'Remove plan',cpUnclear:'Please check',cpNoTr:'English translation failed (shown in Korean)',cpFrom:'Coach homework',cpGoals:'This week\'s goals',cpBlocks:'{a} / {b} done',cpClear:'HOMEWORK CLEAR!',cpGoal:'GOAL REACHED!',cpBest:'NEW PERSONAL BEST!',cpRec:'Save',cpSucc:'Made',cpStreak:'Best in a row',cpCount:'Count',cpRepeat:'Repeats weekly · until next lesson',cpReport:'Coach homework results',cpDone:'Blocks done',cpPlanVs:'Plan vs actual',cpStarts:'Starts {d}',todayTodo:'Today',nextUp:'Coming up',noNext:'Nothing scheduled in the next 2 weeks',focusWk:'Focus this week',focusNone:'Run an AI analysis to get this week\'s focus',todoEmpty:'No plan for today. Log free practice or run an AI analysis to get a weekly plan.',todoLog:'+ Log today\'s practice',tagPlan:'AI plan',tagHw:'Homework',didToday:'Done today',wkSum:'{n} sessions',home:'Home',practice:'Practice',rounds:'Rounds',lessons:'Lessons',report:'Report',coach:'AI Coach',
 thisWeek:'This week',lastWeek:'Last week',totalPractice:'Total practice',sessionsN:'{n} sessions',vsLast:'vs last week',
 byCat:'Practice time by area',openHw:'Your practice assignments',openHwSub:'Drills from lessons · check when done',noHw:'No open homework',
 practicedN:'Practiced {n}×',compare:'Practice vs Tournament',cmpSub:'Where does it change under pressure?',year:'This year',d90:'Last 90 days',all:'All',
@@ -671,12 +674,19 @@ async function call(action,payload,timeout){
   const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),timeout||120000);
   let r,j;
   try{
-    r=await fetch(cfg.url,{method:'POST',body:JSON.stringify({key:cfg.key,action,payload:payload||{}}),signal:ctrl.signal,redirect:'follow'});
+    r=await fetch(cfg.url,{method:'POST',body:JSON.stringify({key:cfg.key,action,payload:payload||{},v:APPV}),signal:ctrl.signal,redirect:'follow'});
     j=await r.json();
   }catch(e){throw new Error(e&&e.name==='AbortError'?'timeout':(r?'bad response ('+r.status+')':'network'))}
   finally{clearTimeout(to)}
   if(!j||!j.ok){const m=(j&&j.error)||'error';if(m==='AUTH'&&S.mode==='app'&&action!=='ping')setTimeout(onAuthFail,0);throw new Error(m)}
   return j.data;
+}
+const APPV='8.10';
+async function callAt(url,key,action,payload,timeout){
+  const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),timeout||180000);let r,j;
+  try{r=await fetch(url,{method:'POST',body:JSON.stringify({key,action,payload:payload||{}}),signal:ctrl.signal,redirect:'follow'});j=await r.json()}
+  catch(e){throw new Error(e&&e.name==='AbortError'?'timeout':(r?'bad response ('+r.status+')':'network'))}finally{clearTimeout(to)}
+  if(!j||!j.ok)throw new Error((j&&j.error)||'error');return j.data;
 }
 function onAuthFail(){ls('key',null);cfg.key='';toast(t('wrongPin'));showSetup()}
 
@@ -750,11 +760,14 @@ async function sync(manual){
     // 4) 서버 기록 내려받기
     const d=await call('load',{rev:Object.keys(S.itemErrs||{}).length?'':(ls('rev')||'')});
     if(d.same&&Array.isArray(d.gcal))await idb.put('kv','gcal',d.gcal.filter(x=>x&&ID_RE.test(String(x.id||''))));
+    if(d.devices)S.devices=d.devices;
     if(!d.same){
     if(d.player){S.player=d.player;ls('player',d.player)}
     if(d.role){ls('role',d.role);S.role=d.role;S.who=d.role==='kid'?'ryan':'mom'}
     if(d.usage)await idb.put('kv','usage',d.usage);
     if(d.aiRun!==undefined){S.aiRun=d.aiRun;await idb.put('kv','aiRun',d.aiRun)}
+    if(d.devices)S.devices=d.devices;
+    try{ls('lastCounts',JSON.stringify({url:cfg.url,rounds:(d.rounds||[]).length,practice:(d.practice||[]).length,lessons:(d.lessons||[]).length,events:(d.events||[]).length,at:new Date().toISOString()}))}catch(e){}
     const okId=x=>x&&ID_RE.test(String(x.id||''));
     TYPES.forEach(tp=>{if(Array.isArray(d[tp]))d[tp]=d[tp].filter(okId)});
     ['chats','analyses','gcal'].forEach(k=>{if(Array.isArray(d[k]))d[k]=d[k].filter(okId)});
@@ -829,9 +842,13 @@ async function connectWith(url,key,er){
   if(!key)return false;
   if(!online()){er.textContent=t('needOnline');return false}
   er.innerHTML='<span class="spin"></span>';
+  const prevUrl=ls('url');let lc=null;try{lc=JSON.parse(ls('lastCounts')||'null')}catch(e){}
+  if(prevUrl&&prevUrl!==url&&lc&&lc.url===prevUrl){const n=(lc.rounds||0)+(lc.practice||0)+(lc.lessons||0)+(lc.events||0);
+    if(n>0&&!confirm(t('switchWarn',{n,u:prevUrl.replace(/\/exec$/,'').slice(-8)}))){er.textContent='';return false}}
   const old={...cfg};cfg={url,key};
   try{
     const r=await call('ping',{},30000);
+    if(prevUrl&&prevUrl!==url){try{const ps=JSON.parse(ls('prevServers')||'[]').filter(x=>x.url!==prevUrl&&x.url!==url);ps.unshift({url:prevUrl,counts:lc&&lc.url===prevUrl?lc:null,until:new Date().toISOString()});ls('prevServers',JSON.stringify(ps.slice(0,5)))}catch(e){}}
     if(ls('url')&&ls('url')!==url){await idb.batch('recs',(await idb.entries('recs')).map(([k])=>['del',k]));['rev','lastSync'].forEach(k=>ls(k,null))}
     ls('url',url);ls('key',key);ls('role',r.role);S.role=r.role;S.who=r.role==='kid'?'ryan':'mom';S.coachTab=S.who==='ryan'?'ask':'analysis';
     if(r.player){S.player=r.player;ls('player',r.player)}
@@ -910,7 +927,9 @@ function vHome(){
   const focus=r.headline?L(r.headline):'';
   const gap=(r.gaps||[])[0];
   const hcl=activeCoach(ymd(addDays(new Date(),1))),hg=hcl?(hcl.plan.goals||[]).slice(0,3).map(x=>esc(L(x))).join(' · '):'';
-  return `${fl.length?`<section class="card flagcard tempocard" onclick="S.tab='coach';S.coachTab='ask';S.chatScroll=true;render()"><div style="font-size:26px">🚩</div><div style="flex:1"><b>${t('flagN',{n:fl.length})}</b><div class="small muted">${t('flagSub')}</div></div></section>`:''}${aiTeaser()}
+  let pw='';if(S.role==='parent'){const ps=prevServer();if(ps&&ps.counts&&!ls('migrated_'+ps.url.slice(-12))){const a=(ps.counts.rounds||0)+(ps.counts.practice||0)+(ps.counts.lessons||0)+(ps.counts.events||0),b=S.data.rounds.length+S.data.practice.length+S.data.lessons.length+(S.data.events||[]).length;
+    if(a>b)pw=`<section class="card" style="border:2px solid var(--or)"><div class="small">${t('prevWarn',{u:esc(ps.url.replace(/\/exec$/,'').slice(-8)),a,b})}</div><button class="addbtn" style="margin-top:8px" onclick="openMigrate('${esc(ps.url)}')">${t('prevWarnBtn')}</button></section>`}}
+  return `${pw}${fl.length?`<section class="card flagcard tempocard" onclick="S.tab='coach';S.coachTab='ask';S.chatScroll=true;render()"><div style="font-size:26px">🚩</div><div style="flex:1"><b>${t('flagN',{n:fl.length})}</b><div class="small muted">${t('flagSub')}</div></div></section>`:''}${aiTeaser()}
   ${todayCard()}${questCard()}<button class="addbtn" onclick="openForm('practice',null,{date:'${td}'})">${t('addP')}</button>
   <section class="card">
    <div class="row between"><button class="icon" onclick="S.wk--;render()">‹</button>
@@ -1316,6 +1335,7 @@ function openDetail(type,id){
     const tp=r.score!=null&&r.par!=null?r.score-r.par:null;
     b+=`<div class="row" style="margin-bottom:10px">${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour))} ${t('tournament')}</span>`:`<span class="tag pr">${t('practiceRound')}</span>`}<span class="small muted">${r.course?esc(r.course)+' · ':''}${r.holes}H${r.finished===false?' · '+t('incomplete'):''}</span></div>`;
     b+=`<div class="kv"><div><b>${r.score!=null?r.score:'–'}</b><span>${t('score')}</span></div><div><b>${tp!=null?signed(tp,0):'–'}</b><span>${t('par')} ${r.par!=null?r.par:''}</span></div><div><b>${r.place?'#'+esc(r.place):'–'}</b><span>${t('place')}${r.field?' / '+r.field:''}</span></div></div>`;
+    const chk=roundChecks(r);if(chk.length)b+=`<div class="warn dup" style="margin-bottom:8px"><b>${t('chkNeed')}</b><br>${chk.map(esc).join('<br>')}</div>`;
     const info=[[t('division'),r.division],[t('teeN'),r.tee],[t('yardsN'),r.yards!=null?r.yards+(S.lang==='ko'?'야드':' yd'):null]].filter(x=>x[1]);
     if(info.length)b+=`<div class="small muted" style="margin:-4px 0 8px">${info.map(x=>esc(x[0])+' '+esc(x[1])).join(' · ')}</div>`;
     const st=[[t('putts'),r.putts],[t('girH'),r.gir!=null?r.gir+'/'+r.holes:null],[t('fwHit'),r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):null],[t('threeP'),r.threePutts],[t('birdies'),r.birdies],[t('bogeys'),r.bogeys],[t('doubles'),r.doubles],[t('p3'),r.p3],[t('p4'),r.p4],[t('p5'),r.p5]].filter(x=>x[1]!=null&&x[1]!=='');
@@ -1482,10 +1502,15 @@ async function saveForm(){
     ['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5','field'].forEach(k=>rec[k]=num(f[k].value));
     rec.place=f.place.value.trim();rec.link=f.link.value.trim();rec.media=F.media.main;
     rec.division=f.division.value.trim();rec.tee=f.tee.value.trim();rec.yards=num(f.yards.value);rec.entry=F.mode||'simple';
+    if(rec.place&&!PLACE_RE.test(rec.place)){alert(t('badPlace'));f.place.focus();return}
+    if(rec.place)rec.place=rec.place.toUpperCase();
+    if(rec.field!=null&&(+rec.field<1||+rec.field!==Math.round(+rec.field))){f.field.focus();toast(t('badPlace'));return}
+    if(rec.field!=null&&+rec.field>300&&!confirm(t('bigField',{n:rec.field}))){f.field.focus();return}
     const hs=(F.holes||[]).map(h=>({n:h.n,par:h.par,pen:+h.pen||0,sc:h.shots.length?null:(h.sc!=null?h.sc:null),pt:h.shots.length?null:(h.pt!=null?h.pt:null),shots:h.shots.map(x=>({c:x.c,d:x.d,r:x.r||''}))}));
     rec.holeData=hs.some(hasHole)?hs:[];
     const sm=roundSummary(rec.holeData);
     if(sm.complete)['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5'].forEach(k=>{if(sm[k]!=null)rec[k]=sm[k]});
+    const odd=oddShots(rec.holeData);if(odd.length&&!confirm(t('oddShots',{l:odd.slice(0,8).join('\n')})))return;
   }else{
     rec.coach=f.coach.value.trim();rec.focus=f.focus.value.trim();rec.feedback=f.feedback.value.trim();
     rec.homework=[...f.querySelectorAll('.hrow')].map(r=>({id:r.dataset.id,text:r.querySelector('[data-h=text]').value.trim(),target:r.querySelector('[data-h=target]').value.trim(),done:r.querySelector('[data-h=done]').checked})).filter(h=>h.text);
@@ -1833,12 +1858,15 @@ function evDone(e){
   return false;
 }
 function dLabel(date){const n=Math.round((pd(date)-pd(today()))/864e5);if(n===0)return `<span class="dday now">${t('dToday')}</span>`;if(n>0&&n<=30)return `<span class="dday">${t('dN',{n})}</span>`;return ''}
+function fmtRange(a,b){const A=pd(a),B=pd(b);if(S.lang==='en'){const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return A.getMonth()===B.getMonth()?`${M[A.getMonth()]} ${A.getDate()}–${B.getDate()}`:`${M[A.getMonth()]} ${A.getDate()}–${M[B.getMonth()]} ${B.getDate()}`}
+  return A.getMonth()===B.getMonth()?`${A.getMonth()+1}/${A.getDate()}–${B.getDate()}`:`${A.getMonth()+1}/${A.getDate()}–${B.getMonth()+1}/${B.getDate()}`}
+function evDays(e){return Math.round((pd(evEnd(e))-pd(e.date))/864e5)+1}
 function fmtTm(v){if(!v)return '';const m=String(v).match(/^(\d{1,2}):(\d{2})/);if(!m)return String(v);if(S.lang!=='en')return m[1].padStart(2,'0')+':'+m[2];let h=+m[1];const ap=h>=12?'PM':'AM';h=h%12||12;return h+':'+m[2]+' '+ap}
 function teeTxt(time,upcoming){return time?t('teeTime')+': '+fmtTm(time):(upcoming?t('teeTime')+': '+t('tbd'):'')}
 function evRow(e,showD){
   const k=EK[e.kind]||EK.other,st=evStart(e);
   const ce=e.kind==='tournament'?cleanEv(e):null;
-  const sub=[showD?fmtD(e.date)+(e.endDate&&e.endDate>e.date?' – '+fmtS(pd(e.endDate)):''):'',e.kind==='tournament'?[e.checkIn?t('checkIn')+': '+fmtTm(e.checkIn):'',teeTxt(e.time,evEnd(e)>=today())].filter(Boolean).join(' · '):(st||''),ce?(ce.title?ce.course:''):e.course].filter(Boolean).map(esc).join(' · ');
+  const sub=[showD?(e.endDate&&e.endDate>e.date?fmtRange(e.date,e.endDate)+' · '+t('nRounds',{n:evDays(e)}):fmtD(e.date)):'',e.kind==='tournament'?[e.checkIn?t('checkIn')+': '+fmtTm(e.checkIn):'',teeTxt(e.time,evEnd(e)>=today())].filter(Boolean).join(' · '):(st||''),ce?(ce.title?ce.course:''):e.course].filter(Boolean).map(esc).join(' · ');
   return `<div class="item" onclick="openEvent('${e.id}')"><div class="ic" style="background:${k.col}22">${k.ic}${isDirty('events',e.id)?'<span class="pend">⏳</span>':''}</div>
    <div class="m"><b>${evName(e)}${showD&&e.kind==='tournament'?dLabel(e.date):''}</b><span>${sub||t('allDay')}${e.ext?' · '+t('gcalTag'):''}</span></div><div class="s">${evDone(e)?'✅':''}</div></div>`;
 }
@@ -1879,6 +1907,10 @@ function openEvent(id){
   const e=allEvents().find(x=>x.id===id);if(!e)return;
   const k=EK[e.kind]||EK.other,st=evStart(e);
   let b=`<div class="row" style="margin-bottom:10px"><span class="tag" style="background:${k.col}22;color:${k.col}">${k.ic} ${t('k_'+e.kind)}</span>${e.ext?`<span class="tag">${t('gcalTag')}</span>`:''}${dLabel(e.date)}</div>`;
+  if(e.kind==='tournament'){const ce2=cleanEv(e),md=e.endDate&&e.endDate>e.date,nd3=evDays(e),inR2=md&&evCovers(e,today());
+    const dTee=inR2?(today()===e.date?e.time:((e.dayTimes||{})[today()]||{}).time):e.time;
+    const parts=[md?(inR2?t('dayOfN',{n:Math.round((pd(today())-pd(e.date))/864e5)+1,m:nd3}):fmtRange(e.date,e.endDate)+' · '+t('nRounds',{n:nd3})):fmtD(e.date),e.division,ce2.course,evEnd(e)>=today()?teeTxt(dTee,true):''].filter(Boolean);
+    b+=`<div class="autonote" style="margin:0 0 10px">${parts.map(esc).join(' · ')}</div>`}
   const rows=[[t('date'),fmtD(e.date)+(e.endDate&&e.endDate>e.date?' – '+fmtD(e.endDate):'')]];
   const multi=e.kind==='tournament'&&e.endDate&&e.endDate>e.date;
   if(multi&&evCovers(e,today())){const nd2=Math.round((pd(evEnd(e))-pd(e.date))/864e5)+1,di=Math.round((pd(today())-pd(e.date))/864e5)+1;rows.unshift([t('dToday'),t('dayOfN',{n:di,m:nd2})+' · '+(teeTxt(today()===e.date?e.time:((e.dayTimes||{})[today()]||{}).time,true))])}
@@ -1993,6 +2025,13 @@ function normClub(c){
   const cl=clubs(),hit=cl.find(x=>x.toLowerCase()===c.toLowerCase())||cl.find(x=>x.replace('°','')===c.replace(/[°도]/g,''));
   return hit||c;
 }
+/* 입력값 검사: 순위·참가 인원·샷 거리 */
+const PLACE_RE=/^(T?\d{1,3}|CUT|MC|WD|DQ|NS)$/i;
+function oddShot(c,d){if(d==null||isPutter(c))return false;d=+d;const k=String(c||'').toUpperCase();
+  if(k==='D')return d<100||d>340;if(/W$/.test(k)&&!/^(PW|GW|SW|LW|AW)$/.test(k))return d<70||d>300;if(/H$/.test(k))return d<50||d>260;
+  if(/^\d{1,2}I$/.test(k))return d<40||d>250;if(/^(PW|GW|SW|LW|AW)$/.test(k)||/°$/.test(c))return d>170;return d>350}
+function oddShots(hs){const o=[];(hs||[]).forEach(h=>(h.shots||[]).forEach(x=>{if(oddShot(x.c,x.d))o.push(t('chkShot',{h:h.n,c:clubLabel?clubLabel(x.c):x.c,d:x.d}))}));return o}
+function roundChecks(r){const o=[];if(r.place&&!PLACE_RE.test(String(r.place).trim()))o.push(t('chkPlace',{v:r.place}));if(r.field!=null&&+r.field>300)o.push(t('chkField',{v:r.field}));return o.concat(oddShots(r.holeData))}
 function holeSumWarn(r){
   const hd=(r.holeData||[]);if(!hd.length||r.score==null)return '';
   const miss=hd.filter(h=>h.sc==null).length,want=+r.holes||18,missH=Math.max(0,want-hd.length)+miss;
@@ -2609,10 +2648,12 @@ async function openSettings(){
   const b=`<div class="card" style="padding:6px 14px">
     <div class="row between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span class="muted">${t('roleL')}</span><b>${t(S.who)}</b></div>
     <div class="row between" style="padding:8px 0"><span class="muted">${t('serverL')}</span><b class="small" style="max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(cfg.url.replace(/^https:\/\//,''))}</b></div></div>
+   ${par?`<div class="sec">${t('devT')}</div><div class="card" style="padding:4px 14px">${[['kid',t('devKid')],['parent',t('devMom')]].map(([k,l],i)=>{const d=(S.devices||{})[k];return `<div class="row between small" style="padding:7px 0;${i?'border-top:1px solid var(--line)':''}"><span class="muted">${l}</span><b>${d&&d.at?t('devAgo',{t:fmtTime(d.at)})+(d.v?' · v'+esc(d.v):''):'<span class="down">'+t('devNever')+'</span>'}</b></div>`}).join('')}</div>`:''}
    ${par?`<div class="sec">📱 ${t('devices')}</div><div class="small muted">${t('devicesSub')}</div><button class="ghost" style="margin-top:8px" id="qrBtn" onclick="toggleQR()">${t('showQR')}</button><div id="qrBox"></div>
    <div class="sec">🏌️ ${t('clubs')}</div><div class="small muted" style="margin-bottom:6px">${t('clubsSub')}</div>
    <div class="linkbox" style="margin-top:0"><input class="in" id="stClubs" value="${esc(clubs().join(', '))}"><button class="chip" onclick="saveClubs()">${t('save')}</button></div>`:''}
    ${par?`<div class="sec">${t('bkT')}</div><div class="small muted" style="margin-bottom:6px">${t('bkSub')}</div>
+   <button class="ghost" style="margin-bottom:8px" onclick="openMigrate()">${t('mgT')}</button>
    <div class="grid2"><button class="ghost" onclick="exportJSON()">${t('bkJson')}</button><button class="ghost" onclick="openTrash()">${t('bkTrash')}</button><button class="ghost" onclick="exportCSV('rounds')">${t('bkCsvR')}</button><button class="ghost" onclick="exportCSV('practice')">${t('bkCsvP')}</button></div>`:''}
    <div class="sec">${t('language')}</div><div class="seg"><button class="${S.lang==='ko'?'on':''}" onclick="setLang('ko')">한국어</button><button class="${S.lang==='en'?'on':''}" onclick="setLang('en')">English</button></div>
    <div class="card" style="padding:6px 14px">
@@ -2624,9 +2665,115 @@ async function openSettings(){
     <div class="row between" style="padding:8px 0"><span class="muted">${t('storage')}</span><b id="stStore">–</b></div></div>
    <button class="btn" style="width:100%" ${S.syncing?'disabled':''} onclick="sync(true)">${S.syncing?'<span class="spin"></span> '+(S.upProg?t('upN',{p:S.upProg}):t('syncing')):'🔄 '+t('syncNow')}</button>
    <button class="ghost" style="margin-top:10px;border-color:var(--or);color:var(--or)" onclick="disconnect()">${t('disconnect')}</button>
-   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.9</div>`;
+   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.10</div>`;
   openSheet(t('settings'),b,`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`,'settings');
   try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();const el=document.getElementById('stStore');if(el)el.textContent=(e.usage/1048576).toFixed(1)+' MB'}}catch(e){}
+}
+/* ===== 이전 서버 → 이 서버로 옮기기 ===== */
+let MG=null;
+const MG_TYPES=['rounds','practice','lessons','events','quests'];
+function prevServer(){try{return JSON.parse(ls('prevServers')||'[]')[0]||null}catch(e){return null}}
+function mgKey(type,r){
+  if(type==='rounds')return r.date+'|'+(r.kind||'practice');
+  if(type==='practice')return r.date+'|'+(r.by||'');
+  if(type==='lessons')return r.date;
+  if(type==='quests')return r.date+'|'+(r.by||'ryan');
+  return r.date+'|'+(r.kind||'');
+}
+function mgSame(type,a,b){
+  if(a.id===b.id)return true;
+  if(mgKey(type,a)!==mgKey(type,b))return false;
+  if(type==='rounds'){const ea=nrm(a.event),eb=nrm(b.event),ca=nrm(a.course),cb=nrm(b.course);return (ea&&ea===eb)||(ca&&ca===cb)||(!ea&&!eb&&!ca&&!cb&&a.score===b.score)}
+  if(type==='practice')return pMin(a)===pMin(b);
+  if(type==='lessons')return !a.coach||!b.coach||nrm(a.coach)===nrm(b.coach);
+  if(type==='events'){if(a.kind!=='tournament')return nrm(a.title)===nrm(b.title);const x=cleanEv(a),y=cleanEv(b);return (nrm(x.title)&&nrm(x.title)===nrm(y.title))||(nrm(x.course)&&nrm(x.course)===nrm(y.course))}
+  return true;
+}
+const MG_SKIP=['id','by','updated','_lv','gcalId','gcalErr','ext','_file','media','before','after'];
+function emptyV(v){return v==null||v===''||(Array.isArray(v)&&!v.length)}
+function mgFill(nw,old){const o=JSON.parse(JSON.stringify(nw)),f=[];Object.keys(old).forEach(k=>{if(MG_SKIP.indexOf(k)>=0)return;
+  const bad=(k==='place'&&o.place&&!PLACE_RE.test(String(o.place).trim())&&PLACE_RE.test(String(old.place||'').trim()))||(k==='field'&&+o.field>300&&+old.field>0&&+old.field<=300);
+  if((emptyV(o[k])||bad)&&!emptyV(old[k])){o[k]=JSON.parse(JSON.stringify(old[k]));f.push(k)}});return{rec:o,filled:f}}
+function mgClean(r){const o=JSON.parse(JSON.stringify(r));['gcalId','gcalErr','ext','_file','_lv','flag'].forEach(k=>delete o[k]);
+  const med={};let n=0;['media','before','after'].forEach(k=>{if(Array.isArray(o[k])&&o[k].length){med[k]=o[k];n+=o[k].length;o[k]=[]}});if(n)o.oldMedia=med;return{rec:o,media:n}}
+function openMigrate(url){
+  const ps=prevServer();MG={url:url||(ps&&ps.url)||'',key:'',plan:null,busy:false};
+  openSheet(t('mgT'),'<div id="mgBox"></div>','<div id="mgFoot" style="display:flex;gap:8px;flex:1"></div>','migrate');drawMigrate();
+}
+function drawMigrate(){
+  const box=document.getElementById('mgBox'),ft=document.getElementById('mgFoot');if(!box||!MG)return;
+  if(MG.result){const r=MG.result;
+    box.innerHTML=`<div class="autonote">✅ ${t('mgDone')}</div>${r.backups.map(b=>`<div class="small muted">💾 ${t('mgBackup',{a:esc(b)})}</div>`).join('')}
+     <div class="sec">${t('mgVerify')}</div><table class="st"><tr><th></th><th>${t('mgColOld')}</th><th>${t('mgColNew')}</th></tr>${MG_TYPES.filter(x=>x!=='quests').map(tp=>`<tr><td><b>${t(tp==='events'?'cal':tp)}</b></td><td>${r.old[tp]}</td><td>${r.now[tp]}</td></tr>`).join('')}</table>
+     <div class="small" style="margin-top:8px">${t('mgOk',{a:r.oldTotal,b:r.present})}</div>${r.missing.length?`<div class="warn dup">${t('mgMiss',{n:r.missing.length})}: ${r.missing.slice(0,10).map(esc).join(', ')}</div>`:''}
+     <div class="small muted" style="margin-top:6px">${t('mgSkip')}</div>`;
+    ft.innerHTML=`<button class="btn" onclick="MG=null;closeSheet();render()">${t('close')}</button>`;return}
+  if(!MG.plan){
+    box.innerHTML=`<div class="small muted" style="margin-bottom:10px">${t('mgSub')}</div>
+     <div class="fld"><label for="mgUrl">${t('mgUrl')}</label><input class="in" id="mgUrl" type="url" value="${esc(MG.url)}" placeholder="https://script.google.com/macros/s/…/exec"></div>
+     <div class="fld"><label for="mgKeyIn">${t('mgKey')}</label><input class="in" id="mgKeyIn" autocomplete="off" value="${esc(MG.key)}"><div class="small muted" style="margin-top:4px">${t('mgKeyHelp')}</div></div>
+     <div id="mgErr" class="small down"></div>${MG.busy?`<div class="note center"><span class="spin"></span> ${t('mgLoading')}</div>`:''}`;
+    ft.innerHTML=`<button class="btn sec" onclick="closeSheet()">${t('cancel')}</button><button class="btn" ${MG.busy||!online()?'disabled':''} onclick="mgLoad()">${t('mgLoad')}</button>`;return}
+  const P=MG.plan;
+  box.innerHTML=`<div class="sec" style="margin-top:0">${t('mgPlan')}</div>
+   <table class="st"><tr><th></th><th>${t('mgColOld')}</th><th>${t('mgColNew')}</th><th>${t('mgColAdd')}</th><th>${t('mgColDup')}</th></tr>${MG_TYPES.map(tp=>`<tr><td><b>${t(tp==='events'?'cal':tp==='quests'?'mgQ':tp)}</b></td><td>${P.c[tp].old}</td><td>${P.c[tp].now}</td><td class="up">${P.c[tp].add}</td><td>${P.c[tp].dup}</td></tr>`).join('')}</table>
+   ${P.ryanLast?`<div class="warn" style="margin-top:8px">${t('mgOldRyan',{d:fmtD(P.ryanLast)})}</div>`:''}
+   ${P.media?`<div class="small muted" style="margin-top:6px">📷 ${t('mgMedia',{n:P.media})}</div>`:''}
+   ${P.dups.length?`<div class="sec">${t('mgDupT')} (${P.dups.length})</div>${P.dups.slice(0,60).map(d=>`<div class="small" style="padding:5px 0;border-bottom:1px solid var(--line)"><b>${esc(d.label)}</b><div class="muted">${t('mgKeepNew')}${d.filled.length?' · '+t('mgFilled',{n:d.filled.length})+' ('+d.filled.slice(0,5).map(esc).join(', ')+')':''}</div></div>`).join('')}`:''}
+   <div class="small muted" style="margin-top:8px">${t('mgSkip')}</div>
+   ${MG.busy?`<div class="note center"><span class="spin"></span> ${esc(MG.prog||'')}</div>`:''}`;
+  ft.innerHTML=`<button class="btn sec" ${MG.busy?'disabled':''} onclick="MG.plan=null;drawMigrate()">${t('cancel')}</button><button class="btn" ${MG.busy||!online()?'disabled':''} onclick="mgRun()">${t('mgGo')}</button>`;
+}
+function mgLabel(tp,r){return oldSummary(tp==='quests'?'practice':tp,r)}
+async function mgLoad(){
+  const url=document.getElementById('mgUrl').value.trim(),key=document.getElementById('mgKeyIn').value.trim(),er=document.getElementById('mgErr');
+  MG.url=url;MG.key=key;
+  if(!URL_RE.test(url)){er.textContent=t('badUrl');return}if(url===cfg.url){er.textContent=t('mgSame');return}if(!key)return;
+  MG.busy=true;drawMigrate();
+  try{
+    const old=await callAt(url,key,'load',{},300000);
+    if(old.role&&old.role!=='parent')throw new Error('NEEDMOM');
+    await sync(true);
+    const P={c:{},adds:[],merges:[],dups:[],media:0,old};
+    MG_TYPES.forEach(tp=>{
+      const ol=(old[tp]||[]).filter(r=>r&&ID_RE.test(String(r.id||''))&&!(tp==='events'&&(r.ext||r.kind==='plan')));
+      const nw=(S.data[tp]||[]);const used=new Set();let add=0,dup=0;
+      ol.forEach(r=>{
+        const m=nw.find(x=>!used.has(x.id)&&mgSame(tp,r,x));
+        if(m){used.add(m.id);dup++;const f=mgFill(m,mgClean(r).rec);if(tp!=='quests')P.dups.push({tp,label:t(tp==='events'?'cal':tp)+' · '+mgLabel(tp,m),filled:f.filled});if(f.filled.length)P.merges.push({tp,rec:f.rec})}
+        else{const c=mgClean(r);P.media+=c.media;P.adds.push({tp,rec:c.rec});add++}
+      });
+      P.c[tp]={old:ol.length,now:nw.length,add,dup};
+    });
+    const rl=[...(old.practice||[]),...(old.rounds||[])].filter(r=>r.by==='ryan').map(r=>String(r.updated||r.date).slice(0,10)).sort().pop();
+    if(rl&&rl>=ymd(addDays(new Date(),-3)))P.ryanLast=rl;
+    MG.plan=P;
+  }catch(e){MG.busy=false;drawMigrate();const er2=document.getElementById('mgErr');if(er2)er2.textContent=String(e.message)==='NEEDMOM'?t('mgNeedMom'):String(e.message)==='AUTH'?t('wrongPin'):t('connFail')+' ('+e.message+')';return}
+  MG.busy=false;drawMigrate();
+}
+async function mgRun(){
+  const P=MG.plan;if(!P||MG.busy)return;MG.busy=true;MG.prog=t('mgWorking',{a:0,b:P.adds.length+P.merges.length});drawMigrate();
+  const backups=[];
+  try{
+    const nowSnap={exported:new Date().toISOString(),server:cfg.url,practice:S.data.practice,rounds:S.data.rounds,lessons:S.data.lessons,events:S.data.events,quests:S.data.quests,config:S.data.config,analyses:S.analyses||[]};
+    const oldSnap=Object.assign({exported:new Date().toISOString(),server:MG.url},P.old);
+    dl('ryan-golf-backup-OLD-server-'+today()+'.json',JSON.stringify(oldSnap),'application/json');
+    dl('ryan-golf-backup-CURRENT-server-'+today()+'.json',JSON.stringify(nowSnap),'application/json');
+    for(const [nm,data] of [['이전 서버 백업',oldSnap],['지금 서버 백업 (옮기기 전)',nowSnap]]){try{const b=await call('backup',{name:nm,data:JSON.stringify(data)},300000);backups.push(b.name)}catch(e){backups.push(nm+' (Drive 저장 실패, 내려받은 파일 확인)')}}
+    let i=0;const tot=P.adds.length+P.merges.length;
+    for(const x of [...P.adds,...P.merges]){await saveLocal(x.tp,x.rec);
+      if(++i%10===0){MG.prog=t('mgWorking',{a:i,b:tot});drawMigrate()}}
+    await reloadMem();await refreshDirty();
+    for(let k=0;k<6&&S.pend.recs>0;k++)await sync(true);
+    const old=P.old,now={},oldC={};let present=0,oldTotal=0;const missing=[];
+    const realEv=l=>(l||[]).filter(e=>!e.fromRound&&e.kind!=='plan');
+    MG_TYPES.forEach(tp=>{const ol=(old[tp]||[]).filter(r=>r&&ID_RE.test(String(r.id||''))&&!(tp==='events'&&(r.ext||r.kind==='plan')));oldC[tp]=tp==='events'?realEv(ol).length:ol.length;now[tp]=tp==='events'?realEv(S.data.events).length:(S.data[tp]||[]).length;
+      if(tp==='quests')return;oldTotal+=ol.length;ol.forEach(r=>{if((S.data[tp]||[]).some(x=>mgSame(tp,r,x)))present++;else missing.push(mgLabel(tp,r))})});
+    MG.result={backups,old:oldC,now,present,oldTotal,missing};
+    try{await call('backup',{name:'옮기기 결과',data:JSON.stringify({at:new Date().toISOString(),from:MG.url,result:MG.result,merged:P.dups})},120000)}catch(e){}
+    try{ls('migrated_'+MG.url.slice(-12),'1')}catch(e){}
+  }catch(e){toast(errMsg(e))}
+  MG.busy=false;drawMigrate();
 }
 /* ===== 백업 · 휴지통 · 수정 이력 ===== */
 function dl(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
