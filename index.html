@@ -54,6 +54,7 @@ header .icon{background:#fff;font-size:17px}
 .headline b{font-size:34px;color:var(--or);letter-spacing:-1px}
 .headline b.good{color:var(--g)}.headline.weak b{font-size:22px;color:var(--sub)}.rfbar{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-bottom:10px}.rfbar input,.rfbar select{width:100%;min-width:0;max-width:100%}.rfbar .seg button{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rfbar .row{gap:8px}.rfbar select,.rfbar input{flex:1;min-width:0}.rfbar label{font-size:12px;color:var(--sub);display:block;margin-bottom:2px}.rfbar .fl{flex:1;min-width:0}
 details.adv{margin:10px 0;border:1px solid var(--line);border-radius:12px;padding:0 12px}details.adv>summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;list-style:none}details.adv>summary::before{content:'▸ ';color:var(--sub)}details.adv[open]>summary::before{content:'▾ '}
+.trt td,.trt th{text-align:center;padding:7px 4px;font-size:13px}.trt td:first-child,.trt th:first-child{text-align:left}.trt th small{display:block;font-weight:400;color:var(--sub);font-size:10px}.trt td.few{color:var(--sub)}.trt .ar{font-size:11px;margin-left:2px}.trt .ar.g{color:var(--g)}.trt .ar.b{color:var(--or)}
 .lown{background:#fff4dc;color:#7a4e00;border-radius:10px;padding:8px 10px;font-size:12px;margin:0 0 10px}.st tr.few td{color:var(--sub)}.st tr.few .track i{opacity:.35}
 .cmp{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
 .cmp .t{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;margin-bottom:8px}
@@ -391,7 +392,7 @@ const DEFAULT_SERVER = '';
 
 /* ================= 텍스트 (한/영) ================= */
 const T={
-ko:{sub:'골프 기록',mgQ:'퀘스트 기록',nRounds:'{n}라운드',mgT:'🔁 이전 서버에서 기록 옮기기',mgSub:'이전 서버 기록을 이 서버로 복사해요. 이전 서버 데이터는 지우지 않아요.',mgUrl:'이전 서버 주소 (/exec)',mgKey:'이전 서버의 엄마 연결 키',mgKeyHelp:'이전 서버 Apps Script → ⚙ 프로젝트 설정 → 스크립트 속성의 PARENT_KEY',mgLoad:'불러와서 비교하기',mgLoading:'이전 서버 기록을 불러오는 중…',mgSame:'지금 연결된 서버와 같은 주소예요',mgNeedMom:'엄마 연결 키가 필요해요 (라이언 키로는 옮길 수 없어요)',mgPlan:'비교 결과',mgColOld:'이전',mgColNew:'지금',mgColAdd:'옮길 것',mgColDup:'겹침',mgDupT:'양쪽에 다 있는 기록 (중복 없이 하나로)',mgKeepNew:'지금 서버 기록 유지',mgFilled:'빈 칸 {n}개를 이전 기록에서 채움',mgMedia:'사진·영상 {n}개는 이전 서버 Drive에 그대로 있어요 (기록에 위치만 보관)',mgGo:'양쪽 백업하고 옮기기',mgWorking:'옮기는 중… {a}/{b}',mgBackup:'백업 저장: {a}',mgDone:'옮기기 완료',mgVerify:'확인 결과',mgOk:'이전 서버 기록 {a}개 중 {b}개가 이 서버에 있어요',mgMiss:'못 옮긴 기록 {n}개',mgSkip:'안 옮긴 것: AI 분석·AI 질문 기록 (지금 서버 것 유지)',mgOldRyan:'⚠️ 라이언이 이전 서버에 {d}까지 기록했어요. 라이언 폰이 아직 이전 서버에 연결돼 있을 수 있어요.',prevWarn:'이전 서버(…{u})에는 기록이 {a}개 있었는데, 지금 서버에는 {b}개예요.',prevWarnBtn:'이전 서버에서 옮기기',switchWarn:'⚠️ 다른 서버로 바꾸려고 해요.\n\n지금 서버(…{u})의 기록 {n}개는 새 서버로 자동으로 넘어가지 않아요.\n바꾼 뒤 설정 → "이전 서버에서 기록 옮기기"로 옮길 수 있어요.\n\n계속할까요?',devT:'📱 이 서버에 연결된 기기',devKid:'라이언 폰',devMom:'엄마 기기',devNever:'아직 이 서버에 연결된 적 없음',devAgo:'{t} 마지막 연결',
+ko:{sub:'골프 기록',wrT:'주간 리포트',wrPrac:'연습',wrRounds:'이번 주 라운드',wrNoRound:'이번 주 라운드 없음',wrHw:'숙제 이행',wrHwV:'{d} / {p} 블록 완료 ({c}%)',wrHwNone:'이번 주 선생님 숙제 없음',wrAI:'AI 한 줄 분석',wrAIwait:'일요일까지 진행 중 — 월요일 아침 자동 분석 때 요약이 만들어져요',wrAInone:'이 주의 AI 요약이 없어요',wrPdf:'📄 선생님용 리포트 (PDF)',wrTgt:'{l}: 목표 달성 {a}/{b}일',photosVideos:'사진·영상',trT:'시간 흐름 비교',trSub:'지금 vs 한 달 전 vs 세 달 전',trNow:'지금',trNowS:'최근 30일',trM1:'1개월 전',trM1S:'30~59일 전',trM3:'3개월 전',trM3S:'75~104일 전',trAll:'전체 라운드',trTour:'토너먼트만',trPrac:'연습만',trRounds:'라운드 수',trToPar:'평균 (파 대비)',trPutts:'퍼팅 / 18홀',trGir:'GIR',trFw:'페어웨이',trTp:'3퍼트 / 18홀',trPm:'연습 시간 / 주',trHw:'숙제 완료',trNote:'9홀은 ×2로 18홀 환산 · 회색 = 라운드 1개뿐이라 참고용 · 초록 ▲ = 그때보다 좋아짐, 주황 ▼ = 나빠짐',trEmpty:'아직 비교할 기록이 없어요',trend:'시간 흐름',weekAI:'지난주 AI 요약',mgQ:'퀘스트 기록',nRounds:'{n}라운드',mgT:'🔁 이전 서버에서 기록 옮기기',mgSub:'이전 서버 기록을 이 서버로 복사해요. 이전 서버 데이터는 지우지 않아요.',mgUrl:'이전 서버 주소 (/exec)',mgKey:'이전 서버의 엄마 연결 키',mgKeyHelp:'이전 서버 Apps Script → ⚙ 프로젝트 설정 → 스크립트 속성의 PARENT_KEY',mgLoad:'불러와서 비교하기',mgLoading:'이전 서버 기록을 불러오는 중…',mgSame:'지금 연결된 서버와 같은 주소예요',mgNeedMom:'엄마 연결 키가 필요해요 (라이언 키로는 옮길 수 없어요)',mgPlan:'비교 결과',mgColOld:'이전',mgColNew:'지금',mgColAdd:'옮길 것',mgColDup:'겹침',mgDupT:'양쪽에 다 있는 기록 (중복 없이 하나로)',mgKeepNew:'지금 서버 기록 유지',mgFilled:'빈 칸 {n}개를 이전 기록에서 채움',mgMedia:'사진·영상 {n}개는 이전 서버 Drive에 그대로 있어요 (기록에 위치만 보관)',mgGo:'양쪽 백업하고 옮기기',mgWorking:'옮기는 중… {a}/{b}',mgBackup:'백업 저장: {a}',mgDone:'옮기기 완료',mgVerify:'확인 결과',mgOk:'이전 서버 기록 {a}개 중 {b}개가 이 서버에 있어요',mgMiss:'못 옮긴 기록 {n}개',mgSkip:'안 옮긴 것: AI 분석·AI 질문 기록 (지금 서버 것 유지)',mgOldRyan:'⚠️ 라이언이 이전 서버에 {d}까지 기록했어요. 라이언 폰이 아직 이전 서버에 연결돼 있을 수 있어요.',prevWarn:'이전 서버(…{u})에는 기록이 {a}개 있었는데, 지금 서버에는 {b}개예요.',prevWarnBtn:'이전 서버에서 옮기기',switchWarn:'⚠️ 다른 서버로 바꾸려고 해요.\n\n지금 서버(…{u})의 기록 {n}개는 새 서버로 자동으로 넘어가지 않아요.\n바꾼 뒤 설정 → "이전 서버에서 기록 옮기기"로 옮길 수 있어요.\n\n계속할까요?',devT:'📱 이 서버에 연결된 기기',devKid:'라이언 폰',devMom:'엄마 기기',devNever:'아직 이 서버에 연결된 적 없음',devAgo:'{t} 마지막 연결',
 badPlace:'순위는 숫자나 T5 형식으로 넣어주세요 (CUT·WD·DQ 가능). 모르면 비워 두세요.',bigField:'참가 인원이 {n}명이에요. 맞나요?',oddShots:'확인이 필요한 샷 거리가 있어요:\n{l}\n\n그대로 저장할까요?',chkNeed:'⚠️ 확인 필요',chkPlace:'순위 값이 이상해요: {v}',chkField:'참가 인원이 너무 커요: {v}',chkShot:'{h}번 홀 {c} {d}야드',wdFull:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],qHubDrill:'성공 {a}/{b} · 시도 {c}/{d}',noteEn:'메모 (영어)',qUndo:'↩ 마지막 샷 취소',qSucc:'성공 {a}/{b}',qAtt:'시도 {a}/{b}',qRun:'연속 {a}/{b}',qSwapLeft:'남은 교체 {n}번',qSwapConfirm:'"{q}" 퀘스트를 다른 걸로 바꿀까요? 교체는 하루 1번만 할 수 있어요.',tbd:'미정',girHint:'파보다 2타 적게(파4는 2타 안) 그린에 올린 홀 수',fwHint:'파4·파5 홀 수 (18홀이면 보통 14)',dayOfN:'{n}일차 / 총 {m}일',evSum:'대회 요약',momNote:'엄마 메모 (원문)',aiReady:'기록 {n}개가 있어요. 위 버튼을 누르면 첫 분석을 시작해요.',aiReadyT:'첫 분석 준비 완료',notEnoughCmp:'아직 비교할 만한 라운드가 부족해요',notEnoughSub:'연습 {a} · 시합 {b}라운드 (양쪽 3라운드 이상 필요)',showNums:'참고용 숫자 보기',impUrl:'또는 BlueGolf 링크',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'링크로 페이지를 읽지 못했어요. 페이지 글자를 복사해서 붙여넣거나 캡처를 올려주세요.',holeSumBad:'⚠️ 홀별 합계 {a}타 ≠ 스코어 {b}타 — 확인 필요',holeMissing:'홀 {n}개 미기록 — 합계 확인 불가',bkT:'🗂 백업·복구',bkSub:'기록을 파일로 내려받거나, 지운 기록을 30일 안에 되살릴 수 있어요.',bkJson:'⬇ 전체 백업 (JSON)',bkCsvR:'⬇ 라운드 CSV',bkCsvP:'⬇ 연습 CSV',bkTrash:'🗑 휴지통 (지운 기록 복구)',trashT:'휴지통',trashNone:'지운 기록이 없어요',restore:'복구',restored:'복구했어요',histT:'수정 이력',histBtn:'🕘 수정 이력',histNone:'이전 버전이 없어요',revert:'이 버전으로 되돌리기',confirmRevert:'이 버전으로 되돌릴까요? 지금 내용은 이력에 남아요.',savedAt:'{d}에 바뀌기 전',aiLast:'마지막 분석',aiNext:'다음 자동 분석',aiNextV:'{d} 월요일 오전 6시',aiAutoErr:'최근 자동 분석 실패',aiNever:'아직 없음',a_prev:'이전',a_next:'다음',a_close:'닫기',a_minus:'빼기',a_plus:'더하기',vsSameDay:'지난주 {d}까지 대비',goalPct:'이번 주 계획 {a} 중 {p}%',modeSimple:'점수만 간단 입력',modeDetail:'홀별·샷별 상세 입력',advStats:'고급 통계 (선택)',teeN:'티',teePh:'예: Blue',yardsN:'코스 길이 (야드)',roundInfo:'라운드 정보',dayTimesL:'날짜별 티타임',officialInfo:'공식 대회 안내',resultLink:'공식 결과 보기',dayTee:'{d} 티타임',logDay:'결과 기록',evNoName:'토너먼트',srch:'검색',rt_list:'기록',rt_stats:'분석',rfSearch:'대회·골프장·메모 검색',rfAll:'전체',rfTourAll:'모든 투어',rfCourseAll:'모든 골프장',rfFrom:'시작일',rfTo:'종료일',rfCount:'{a}개 중 {b}개',rfReset:'필터 지우기',upCnt:'{n}개',showAll:'일정 {t}개 모두 보기',showLess:'접기',moreN:'외 {n}개 더 · 캘린더에서 보기',lowN:'⚠️ 참고용 · 데이터 부족 — 연습 {a} · 시합 {b}라운드. 양쪽 3라운드 이상 쌓이면 믿을 만해져요.',conv9:'9홀 {n}라운드는 ×2로 18홀 환산',conv18:'모두 18홀 기준(환산 없음)',cmpAll:'전체',cmpSim:'비슷한 조건만',simNote:'같은 골프장이거나 티 거리 ±10% 이내만 비교',simNone:'비슷한 조건의 연습·시합이 아직 없어요',fewShots:'참고',fewShotsNote:'샷 {n}개 미만은 회색 — 대표 거리로 보기엔 아직 적어요',median:'중간값',nr:'미기록',autoDone:'✓ 홀별 기록으로 자동 계산: {a}',autoMiss:'미기록(계산 안 함): {a}',autoNone:'홀별 스코어로 스코어만 계산됐어요',missingSt:'미기록 항목',endDate:'종료일 (이틀 이상 대회)',dayN:'{n}일차',total:'합계',logNextDay:'＋ {n}일차 결과 기록',offT:'오늘은 대회·쉬는 날',offS:'토·일과 대회 날은 연습 계획과 퀘스트가 없어요. 연속 기록🔥은 끊기지 않아요.',offQ:'오늘은 퀘스트 쉬는 날',cpGoalL:'목표',cpSec:'📋 선생님 주간 숙제 (요일별)',cpPaste:'선생님이 보낸 숙제 글을 그대로 붙여넣으세요',cpAI:'🤖 AI로 요일별 정리',cpWorking:'정리하는 중… (30초~1분)',cpNone:'붙여넣고 정리하면 라이언 연습 탭에 요일별로 나와요',cpDel:'계획 지우기',cpUnclear:'확인 필요',cpNoTr:'영어 번역은 실패했어요 (한국어로 표시)',cpFrom:'선생님 숙제',cpGoals:'이번 주 목표',cpBlocks:'{a} / {b} 완료',cpClear:'숙제 클리어!',cpGoal:'목표 달성!',cpBest:'개인 최고 기록!',cpRec:'기록 저장',cpSucc:'성공',cpStreak:'최고 연속',cpCount:'개수',cpRepeat:'매주 반복 · 다음 레슨까지',cpReport:'선생님 숙제 결과',cpDone:'완료한 블록',cpPlanVs:'계획 대비',cpStarts:'{d}부터 적용',todayTodo:'오늘 할 일',nextUp:'다음 일정',noNext:'2주 안에 잡힌 일정이 없어요',focusWk:'이번 주 포커스',focusNone:'AI 분석을 하면 이번 주 포커스가 나와요',todoEmpty:'오늘 계획이 없어요. 자유 연습을 기록하거나 AI 분석으로 주간 플랜을 만들어 보세요.',todoLog:'＋ 오늘 연습 기록',tagPlan:'AI 플랜',tagHw:'숙제',didToday:'오늘 함',wkSum:'{n}번 연습',home:'홈',practice:'연습',rounds:'라운드',lessons:'레슨',report:'리포트',coach:'AI 코치',
 thisWeek:'이번 주',lastWeek:'지난주',totalPractice:'총 연습',sessionsN:'{n}회',vsLast:'지난주 대비',
 byCat:'항목별 연습 시간',openHw:'진행 중인 숙제',openHwSub:'레슨에서 받은 드릴 · 다 하면 체크',noHw:'진행 중인 숙제가 없어요',
@@ -477,7 +478,7 @@ evLink:'대회 링크 (BlueGolf 등)',logResult:'⛳ 결과 기록하기',viewRe
 gcalTag:'구글 캘린더',dayEmpty:'이 날은 일정이 없어요',addThisDay:'+ 이 날에 일정 추가',reportSub:'주간·월간 리포트 · 선생님께 PDF 공유',dToday:'오늘',dN:'D-{n}',done:'완료',
 logsDay:'이 날 한 기록',calNote:'일정은 엄마 구글 캘린더의 "Ryan Golf"에도 자동으로 들어가고, 구글 캘린더에서 넣은 일정도 여기 보여요',needDate:'날짜를 넣어주세요',
 allDay:'종일',calLegLog:'기록함',gcalErrMsg:'구글 캘린더 저장 실패 (앱에는 저장됨)'},
-en:{sub:'Golf Log',mgQ:'Quest days',nRounds:'{n} rounds',mgT:'🔁 Move records from a previous server',mgSub:'Copies records from the old server to this one. Nothing is deleted on the old server.',mgUrl:'Old server address (/exec)',mgKey:"Old server's Mom key",mgKeyHelp:'Old Apps Script → ⚙ Project settings → Script properties → PARENT_KEY',mgLoad:'Load and compare',mgLoading:'Loading old server records…',mgSame:'That is the server you are connected to now',mgNeedMom:'A Mom key is needed (Ryan key cannot move records)',mgPlan:'Comparison',mgColOld:'Old',mgColNew:'Now',mgColAdd:'To add',mgColDup:'Both',mgDupT:'On both servers (merged into one)',mgKeepNew:'Kept the current server record',mgFilled:'filled {n} empty fields from the old record',mgMedia:'{n} photos/videos stay in the old Drive (location kept on the record)',mgGo:'Back up both and move',mgWorking:'Moving… {a}/{b}',mgBackup:'Backup saved: {a}',mgDone:'Move complete',mgVerify:'Check',mgOk:'{b} of {a} old-server records are now on this server',mgMiss:'{n} records not moved',mgSkip:'Not moved: AI analyses and AI chat (kept this server’s)',mgOldRyan:'⚠️ Ryan logged on the old server up to {d}. His phone may still be connected to the old server.',prevWarn:'The previous server (…{u}) had {a} records; this server has {b}.',prevWarnBtn:'Move from previous server',switchWarn:'⚠️ You are switching to a different server.\n\nThe {n} records on the current server (…{u}) will NOT move automatically.\nAfter switching, use Settings → "Move records from a previous server".\n\nContinue?',devT:'📱 Devices connected to this server',devKid:"Ryan's phone",devMom:"Mom's device",devNever:'Never connected to this server',devAgo:'last seen {t}',
+en:{sub:'Golf Log',wrT:'Weekly report',wrPrac:'Practice',wrRounds:'Rounds this week',wrNoRound:'No rounds this week',wrHw:'Homework',wrHwV:'{d} of {p} blocks done ({c}%)',wrHwNone:'No coach homework this week',wrAI:'AI summary',wrAIwait:'Week in progress — the summary is made Monday morning',wrAInone:'No AI summary for this week',wrPdf:'📄 Coach report (PDF)',wrTgt:'{l}: goal reached {a} of {b} days',photosVideos:'Photos & videos',trT:'Progress over time',trSub:'Now vs 1 month ago vs 3 months ago',trNow:'Now',trNowS:'Last 30 days',trM1:'1 mo ago',trM1S:'30–59 days ago',trM3:'3 mo ago',trM3S:'75–104 days ago',trAll:'All rounds',trTour:'Tournaments',trPrac:'Practice rounds',trRounds:'Rounds',trToPar:'Avg vs par',trPutts:'Putts / 18',trGir:'GIR',trFw:'Fairways',trTp:'3-putts / 18',trPm:'Practice / week',trHw:'Homework done',trNote:'9-hole rounds scaled ×2 · grey = only 1 round, reference only · green ▲ = better than then, orange ▼ = worse',trEmpty:'No records to compare yet',trend:'Progress over time',weekAI:'Last week (AI)',mgQ:'Quest days',nRounds:'{n} rounds',mgT:'🔁 Move records from a previous server',mgSub:'Copies records from the old server to this one. Nothing is deleted on the old server.',mgUrl:'Old server address (/exec)',mgKey:"Old server's Mom key",mgKeyHelp:'Old Apps Script → ⚙ Project settings → Script properties → PARENT_KEY',mgLoad:'Load and compare',mgLoading:'Loading old server records…',mgSame:'That is the server you are connected to now',mgNeedMom:'A Mom key is needed (Ryan key cannot move records)',mgPlan:'Comparison',mgColOld:'Old',mgColNew:'Now',mgColAdd:'To add',mgColDup:'Both',mgDupT:'On both servers (merged into one)',mgKeepNew:'Kept the current server record',mgFilled:'filled {n} empty fields from the old record',mgMedia:'{n} photos/videos stay in the old Drive (location kept on the record)',mgGo:'Back up both and move',mgWorking:'Moving… {a}/{b}',mgBackup:'Backup saved: {a}',mgDone:'Move complete',mgVerify:'Check',mgOk:'{b} of {a} old-server records are now on this server',mgMiss:'{n} records not moved',mgSkip:'Not moved: AI analyses and AI chat (kept this server’s)',mgOldRyan:'⚠️ Ryan logged on the old server up to {d}. His phone may still be connected to the old server.',prevWarn:'The previous server (…{u}) had {a} records; this server has {b}.',prevWarnBtn:'Move from previous server',switchWarn:'⚠️ You are switching to a different server.\n\nThe {n} records on the current server (…{u}) will NOT move automatically.\nAfter switching, use Settings → "Move records from a previous server".\n\nContinue?',devT:'📱 Devices connected to this server',devKid:"Ryan's phone",devMom:"Mom's device",devNever:'Never connected to this server',devAgo:'last seen {t}',
 badPlace:'Enter the place as a number or like T5 (CUT, WD, DQ ok). Leave it empty if unknown.',bigField:'Players in division is {n}. Is that right?',oddShots:'Some shot distances look unusual:\n{l}\n\nSave anyway?',chkNeed:'⚠️ Please check',chkPlace:'Place looks wrong: {v}',chkField:'Players in division looks too big: {v}',chkShot:'Hole {h} {c} {d} yd',wdFull:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],qHubDrill:'{a}/{b} made · {c}/{d} tries',noteEn:'Note',qUndo:'↩ Undo last shot',qSucc:'Successes: {a}/{b}',qAtt:'Attempts: {a}/{b}',qRun:'In a row: {a}/{b}',qSwapLeft:'{n} swap left today',qSwapConfirm:'Swap "{q}" for a different quest? You can only swap once a day.',tbd:'TBD',girHint:'Holes where you reached the green in 2 fewer shots than par (e.g. in 2 on a par 4)',fwHint:'Par 4s and 5s — usually 14 in 18 holes',dayOfN:'Round {n} of {m}',evSum:'Event summary',momNote:"Mom's note (original)",aiReady:'You have {n} logged records. Tap the button above to run your first analysis.',aiReadyT:'Ready for your first analysis',notEnoughCmp:'Not enough comparable rounds yet',notEnoughSub:'Practice {a} · Tournament {b} rounds (need 3+ each)',showNums:'Show reference numbers',impUrl:'or a BlueGolf link',impUrlPh:'https://scpgajt.bluegolf.com/…',bgFetch:'Could not read that link. Copy and paste the page text, or upload a screenshot.',holeSumBad:'⚠️ Hole total {a} ≠ score {b} — please check',holeMissing:'{n} holes not recorded — cannot check total',bkT:'🗂 Backup & restore',bkSub:'Download your records, or bring back deleted ones within 30 days.',bkJson:'⬇ Full backup (JSON)',bkCsvR:'⬇ Rounds CSV',bkCsvP:'⬇ Practice CSV',bkTrash:'🗑 Trash (restore deleted)',trashT:'Trash',trashNone:'Nothing deleted',restore:'Restore',restored:'Restored',histT:'Edit history',histBtn:'🕘 Edit history',histNone:'No earlier versions',revert:'Revert to this version',confirmRevert:'Revert to this version? The current one stays in history.',savedAt:'Before change on {d}',aiLast:'Last analysis',aiNext:'Next automatic analysis',aiNextV:'Mon {d}, 6 AM',aiAutoErr:'Last automatic analysis failed',aiNever:'None yet',a_prev:'Previous',a_next:'Next',a_close:'Close',a_minus:'Decrease',a_plus:'Increase',vsSameDay:'vs last week through {d}',goalPct:'{p}% of this week\'s {a} plan',modeSimple:'Score only (quick)',modeDetail:'Hole-by-hole / shots',advStats:'Advanced stats (optional)',teeN:'Tee',teePh:'e.g. Blue',yardsN:'Course length (yards)',roundInfo:'Round info',dayTimesL:'Tee time by day',officialInfo:'Event details',resultLink:'Official results',dayTee:'{d} tee time',logDay:'Log result',evNoName:'Tournament',srch:'Search',rt_list:'Rounds',rt_stats:'Analysis',rfSearch:'Search event, course, notes',rfAll:'All',rfTourAll:'All tours',rfCourseAll:'All courses',rfFrom:'From',rfTo:'To',rfCount:'{b} of {a}',rfReset:'Clear filters',upCnt:'{n}',showAll:'View all {t} scheduled',showLess:'Show less',moreN:'+{n} more · open calendar',lowN:'⚠️ For reference only · not enough data — practice {a} · tournament {b} rounds. Reliable once both have 3+.',conv9:'{n} nine-hole rounds scaled ×2 to 18',conv18:'All 18-hole rounds (no scaling)',cmpAll:'All',cmpSim:'Similar only',simNote:'Same course, or tee yardage within ±10%',simNone:'No similar practice/tournament rounds yet',fewShots:'ref',fewShotsNote:'Grey = fewer than {n} shots — not enough to be his typical distance',median:'Median',nr:'Not recorded',autoDone:'✓ Calculated from holes: {a}',autoMiss:'Not recorded (not calculated): {a}',autoNone:'Only the score was calculated from the holes',missingSt:'Not recorded',endDate:'End date (multi-day events)',dayN:'Round {n}',total:'Total',logNextDay:'+ Log round {n}',offT:'Tournament / rest day',offS:'No practice plan or quests on weekends and tournament days. Your 🔥 streak stays safe.',offQ:'No quests today',cpGoalL:'Goal',cpSec:'📋 Coach weekly homework (by day)',cpPaste:'Paste the coach\'s homework message as is',cpAI:'🤖 Organize by day with AI',cpWorking:'Organizing… (30s–1 min)',cpNone:'Paste and organize — it shows up day by day in Ryan\'s Practice tab',cpDel:'Remove plan',cpUnclear:'Please check',cpNoTr:'English translation failed (shown in Korean)',cpFrom:'Coach homework',cpGoals:'This week\'s goals',cpBlocks:'{a} / {b} done',cpClear:'HOMEWORK CLEAR!',cpGoal:'GOAL REACHED!',cpBest:'NEW PERSONAL BEST!',cpRec:'Save',cpSucc:'Made',cpStreak:'Best in a row',cpCount:'Count',cpRepeat:'Repeats weekly · until next lesson',cpReport:'Coach homework results',cpDone:'Blocks done',cpPlanVs:'Plan vs actual',cpStarts:'Starts {d}',todayTodo:'Today',nextUp:'Coming up',noNext:'Nothing scheduled in the next 2 weeks',focusWk:'Focus this week',focusNone:'Run an AI analysis to get this week\'s focus',todoEmpty:'No plan for today. Log free practice or run an AI analysis to get a weekly plan.',todoLog:'+ Log today\'s practice',tagPlan:'AI plan',tagHw:'Homework',didToday:'Done today',wkSum:'{n} sessions',home:'Home',practice:'Practice',rounds:'Rounds',lessons:'Lessons',report:'Report',coach:'AI Coach',
 thisWeek:'This week',lastWeek:'Last week',totalPractice:'Total practice',sessionsN:'{n} sessions',vsLast:'vs last week',
 byCat:'Practice time by area',openHw:'Your practice assignments',openHwSub:'Drills from lessons · check when done',noHw:'No open homework',
@@ -681,7 +682,7 @@ async function call(action,payload,timeout){
   if(!j||!j.ok){const m=(j&&j.error)||'error';if(m==='AUTH'&&S.mode==='app'&&action!=='ping')setTimeout(onAuthFail,0);throw new Error(m)}
   return j.data;
 }
-const APPV='8.11';
+const APPV='8.12';
 async function callAt(url,key,action,payload,timeout){
   const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),timeout||180000);let r,j;
   try{r=await fetch(url,{method:'POST',body:JSON.stringify({key,action,payload:payload||{}}),signal:ctrl.signal,redirect:'follow'});j=await r.json()}
@@ -933,16 +934,35 @@ function vHome(){
   ${todayCard()}${questCard()}<button class="addbtn" onclick="openForm('practice',null,{date:'${td}'})">${t('addP')}</button>
   <section class="card">
    <div class="row between"><button class="icon" onclick="S.wk--;render()">‹</button>
-    <div class="center"><b>${wl}</b><div class="small muted">${fmtS(ws)} – ${fmtS(we)}</div></div>
+    <div class="center"><b>📋 ${t('wrT')} · ${wl}</b><div class="small muted">${fmtS(ws)} – ${fmtS(we)}</div></div>
     <button class="icon" ${S.wk>=0?'disabled':''} onclick="S.wk++;render()">›</button></div>
-   <div class="row between" style="margin-top:10px;align-items:flex-end"><div><div class="wkTot">${fmtMin(tot)}</div><div class="small muted">${t('wkSum',{n:ps.length})}</div></div>
-    <span class="diffc ${diff>=0?'up':'down'}" title="${cur?t('vsSameDay',{d:t('wdFull')[(pd(td).getDay()+6)%7]}):t('vsLast')}">${diff>=0?'+':'−'}${fmtMin(Math.abs(diff))}</span></div>
+   <div class="row between" style="margin-top:10px;align-items:flex-end"><div><div class="small muted">${t('wrPrac')}</div><div class="wkTot">${fmtMin(tot)}</div><div class="small muted">${t('wkSum',{n:ps.length})}</div></div>
+    <span class="diffc ${diff>=0?'up':'down'}">${diff>=0?'+':'−'}${fmtMin(Math.abs(diff))}</span></div>
    <div class="small muted" style="margin-top:4px">${cur?t('vsSameDay',{d:t('wdFull')[(pd(td).getDay()+6)%7]}):t('vsLast')}${goal?' · '+t('goalPct',{a:fmtMin(goal),p:Math.round(tot/goal*100)}):''}</div>
    <div class="days sm">${days.map((x,i)=>`<div class="day ${x.d===td?'today':''}"><div class="dbar"><i style="height:${x.m/dmax*100}%"></i></div><span>${t('days')[i]}</span></div>`).join('')}</div>
+   ${(()=>{const ct=catTot(ps),top=CATS.filter(c=>ct[c]>0).sort((a,b)=>ct[b]-ct[a]).slice(0,4);return top.length?`<div class="small" style="margin-top:8px">${top.map(c=>`<i class="dot" style="background:${CC[c]}"></i>${t('c_'+c)} ${fmtMin(ct[c])}`).join(' · ')}</div>`:''})()}
+   ${weekReportBody(ws,we,cur)}
+   <button class="ghost" style="margin-top:10px" onclick="go('report')">${t('wrPdf')}</button>
   </section>
   <section class="card"><h3>📅 ${t('nextUp')}</h3>${next.length?next.map(e=>evRow(e,true)).join(''):`<div class="small muted">${t('noNext')}</div>`}<div class="small up" style="cursor:pointer;margin-top:6px" onclick="go('cal')">${nextAll.length>3?t('moreN',{n:nextAll.length-3}):t('seeCal')}</div></section>
   <section class="card tempocard" onclick="go('coach')"><div style="font-size:26px">🎯</div><div style="flex:1;min-width:0"><b>${t('focusWk')}</b>${hg?`<div class="small">🎓 ${hg}</div>`:''}<div class="small ${focus||hg?'':'muted'}">${focus?'🤖 '+esc(focus):hg?'':t('focusNone')}</div>${gap&&gap.title?`<div class="small muted">🚀 ${esc(L(gap.title))}</div>`:''}</div><span class="muted" style="font-size:22px">›</span></section>
-  <section class="card tempocard" onclick="go('report')"><div style="font-size:26px">📄</div><div style="flex:1"><b>${t('report')}</b><div class="small muted">${t('reportSub')}</div></div><span class="muted" style="font-size:22px">›</span></section>`;
+`;
+}
+/* 홈 주간 리포트: 라운드 · 숙제 이행 · AI 요약 (월~일) */
+function weekReportBody(ws,we,cur){
+  const a=ymd(ws),b=ymd(we);
+  const rs=S.data.rounds.filter(r=>r.date>=a&&r.date<=b).sort((x,y)=>x.date.localeCompare(y.date));
+  let h=`<div class="sec" style="margin-top:12px">🏌️ ${t('wrRounds')}</div>`;
+  h+=rs.length?rs.map(r=>`<div class="row between small" style="padding:6px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="openDetail('rounds','${r.id}')"><span style="min-width:0">${fmtS(pd(r.date))} · <span class="tag ${r.kind==='tournament'?'t':'pr'}">${r.kind==='tournament'?t('tournament'):t('pr')}</span> ${esc(r.event||r.course||'')}</span><b style="white-space:nowrap">${r.score!=null?r.score:'—'}${r.par&&r.score!=null?` (${r.score-r.par>0?'+':''}${r.score-r.par})`:''}${r.place&&PLACE_RE.test(String(r.place))?' · '+esc(r.place):''}</b></div>`).join(''):`<div class="small muted">${t('wrNoRound')}</div>`;
+  const hw=hwRate(a,b),cr=cpReport(a,b);
+  h+=`<div class="sec">✅ ${t('wrHw')}</div>`;
+  if(hw){h+=`<div class="small">${t('wrHwV',{d:hw.done,p:hw.plan,c:hw.pct})}</div><div class="track" style="margin-top:4px"><i style="width:${hw.pct}%;background:var(--g)"></i></div>`;
+    cr.targets.forEach(o=>{if(o.type==='ratio'||o.goal){const ok=o.rows.filter(r=>r.ok).length;h+=`<div class="small muted" style="margin-top:4px">🎯 ${t('wrTgt',{l:esc(o.label),a:ok,b:o.rows.length})}</div>`}else h+=`<div class="small muted" style="margin-top:4px">🎯 ${esc(o.label)}: ${esc(o.sum)}</div>`})}
+  else h+=`<div class="small muted">${t('wrHwNone')}</div>`;
+  const nx=ymd(addDays(we,1)),lim=ymd(addDays(we,8));
+  const an=(S.analyses||[]).find(x=>x.kind==='full'&&x.result&&x.result.week&&String(x.created||x.date||'').slice(0,10)>=nx&&String(x.created||x.date||'').slice(0,10)<=lim);
+  h+=`<div class="sec">🤖 ${t('wrAI')}</div><div class="small ${an?'':'muted'}">${an?esc(L(an.result.week)):(cur?t('wrAIwait'):t('wrAInone'))}</div>`;
+  return h;
 }
 /* 연습 탭: 오늘 할 일 (AI 플랜 + 레슨 숙제) — 기록하면 자동 체크 */
 function todayCard(){
@@ -1100,7 +1120,7 @@ function drawCpPrev(){
   el.innerHTML=h;
 }
 /* 리포트: 기간 안 선생님 숙제 결과 */
-function cpReport(a,b){
+function cpReport(a,b){a=typeof a==='string'?a:ymd(a);b=typeof b==='string'?b:ymd(b);
   const ps=S.data.practice.filter(p=>p.coach&&inR(p.date,a,b));
   const tg={};let done=0;
   ps.forEach(p=>Object.entries(p.coach).forEach(([k,c])=>{if(!c)return;if(c.done)done++;if(c.val!=null&&c.label){const o=tg[c.label]||(tg[c.label]={type:c.type,n:c.n,goal:c.goal,rows:[]});o.rows.push({date:p.date,val:+c.val,ok:!!c.ok})}}));
@@ -1108,6 +1128,7 @@ function cpReport(a,b){
   return {done,planned,targets:Object.entries(tg).map(([label,o])=>{o.label=label;o.rows.sort((x,y)=>x.date.localeCompare(y.date));
     if(o.type==='ratio'){const m=o.rows.reduce((s,r)=>s+r.val,0),n=o.rows.length*(o.n||1);o.sum=Math.round(m/n*100)+'%'}else o.sum=t('cpStreak')+' '+Math.max(...o.rows.map(r=>r.val));return o})};
 }
+function hwReportCard(a,b){const hw=hwRate(a,b);if(!hw)return '';return `<section class="card"><h3>✅ ${t('wrHw')}</h3><div class="small">${t('wrHwV',{d:hw.done,p:hw.plan,c:hw.pct})}</div><div class="track" style="margin-top:6px"><i style="width:${hw.pct}%;background:var(--g)"></i></div></section>`}
 function cpReportCard(a,b){
   const c=cpReport(a,b);if(!c.planned&&!c.targets.length)return '';
   return `<section class="card"><h3>🎓 ${t('cpReport')}</h3><div class="small">${t('cpDone')}: <b>${c.planned?c.done+' / '+c.planned:c.done}</b></div>${c.targets.map(o=>`<div style="padding:8px 0;border-top:1px solid var(--line);margin-top:6px"><div class="row between"><b class="small">🎯 ${esc(o.label)}${o.type==='ratio'?` (${o.goal||o.n}/${o.n})`:''}</b><span class="small up">${esc(o.sum)}</span></div><div class="small muted">${o.rows.map(r=>`${fmtS(pd(r.date))} ${r.val}${o.n&&o.type==='ratio'?'/'+o.n:''}${r.ok?' ✓':''}`).join(' · ')}</div></div>`).join('')}</section>`;
@@ -1124,6 +1145,33 @@ async function tapHw(id){
   l.push(id);sfx('tick');vib(15);
   if(q)return completeQuest(q);
   await saveLocal('quests',r);render();sync();
+}
+/* ----- 시간 흐름 비교: 지금(최근 30일) vs 1개월 전 vs 3개월 전 ----- */
+function trWin(k){const n=new Date(),w={now:[0,29],m1:[30,59],m3:[75,104]}[k];return [ymd(addDays(n,-w[1])),ymd(addDays(n,-w[0]))]}
+function hwRate(a,b){a=typeof a==='string'?a:ymd(a);b=typeof b==='string'?b:ymd(b);let plan=0,done=0;for(let d=pd(a);ymd(d)<=b&&ymd(d)<=today();d=addDays(d,1)){const k=ymd(d);if(offDay(k))continue;const l=activeCoach(k);if(!l)continue;const bs=coachBlocks(l,k);plan+=bs.length;const st=coachState(k);done+=bs.filter(x=>(st[l.id+'.'+x.id]||{}).done).length}return plan?{plan,done,pct:Math.round(done/plan*100)}:null}
+function trendCard(){
+  const f=S.trK||'all';
+  const W=['m3','m1','now'].map(k=>{const [a,b]=trWin(k);const rs=S.data.rounds.filter(r=>r.finished!==false&&r.holes&&r.date>=a&&r.date<=b&&(f==='all'||(r.kind||'practice')===(f==='tour'?'tournament':'practice')));
+    const pm=S.data.practice.filter(p=>p.date>=a&&p.date<=b).reduce((x,p)=>x+pMin(p),0);return {k,a,b,g:agg(rs),pm:Math.round(pm/30*7),hw:hwRate(a,b)}});
+  const any=W.some(w=>w.g.n)||W.some(w=>w.pm);
+  const seg=`<div class="seg">${[['all',t('trAll')],['tour',t('trTour')],['prac',t('trPrac')]].map(([v,l])=>`<button class="${f===v?'on':''}" onclick="S.trK='${v}';render()">${l}</button>`).join('')}</div>`;
+  const head=`<h3>📈 ${t('trT')}<small>${t('trSub')}</small></h3>${seg}`;
+  if(!any)return `<section class="card">${head}<div class="empty">${t('trEmpty')}</div></section>`;
+  const now=W[2];
+  const row=(lab,get,fmt,lowGood,isRound,dfmt)=>`<tr><td><b>${lab}</b></td>${W.map((w,i)=>{const v=get(w);const few=isRound&&w.g.n===1;
+    let ar='';if(i===2&&v!=null&&dfmt){const ref=[W[1],W[0]].find(x=>get(x)!=null&&!(isRound&&x.g.n<2));if(ref&&!(isRound&&now.g.n<2)){const dlt=v-get(ref);if(Math.abs(dlt)>=0.05){const good=lowGood?dlt<0:dlt>0;ar=`<small class="ar ${good?'g':'b'}" style="display:block">${good?'▲':'▼'} ${dfmt(Math.abs(dlt))} · ${t(ref.k==='m1'?'trM1':'trM3')}</small>`}}}
+    return `<td class="${few?'few':''}">${v==null?'—':fmt(v)}${ar}</td>`}).join('')}</tr>`;
+  const sg=v=>(v>0?'+':'')+v.toFixed(1);
+  return `<section class="card">${head}<table class="trt" style="width:100%;border-collapse:collapse"><tr><th></th>${W.map(w=>`<th>${t(w.k==='now'?'trNow':w.k==='m1'?'trM1':'trM3')}<small>${t(w.k==='now'?'trNowS':w.k==='m1'?'trM1S':'trM3S')}</small></th>`).join('')}</tr>
+   ${row(t('trRounds'),w=>w.g.n,v=>String(v),false,false)}
+   ${row(t('trToPar'),w=>w.g.toPar,sg,true,true,v=>v.toFixed(1))}
+   ${row(t('trPutts'),w=>w.g.putts,v=>v.toFixed(1),true,true,v=>v.toFixed(1))}
+   ${row(t('trGir'),w=>w.g.gir,v=>Math.round(v)+'%',false,true,v=>Math.round(v)+'%p')}
+   ${row(t('trFw'),w=>w.g.fw,v=>Math.round(v)+'%',false,true,v=>Math.round(v)+'%p')}
+   ${row(t('trTp'),w=>w.g.tp,v=>v.toFixed(1),true,true,v=>v.toFixed(1))}
+   ${row(t('trPm'),w=>w.pm||null,v=>fmtMin(v),false,false,v=>fmtMin(Math.round(v)))}
+   ${row(t('trHw'),w=>w.hw?w.hw.pct:null,v=>v+'%',false,false)}
+  </table><div class="small muted" style="margin-top:8px">${t('trNote')}</div></section>`;
 }
 /* ----- 연습 vs 시합 ----- */
 function agg(rs){
@@ -1190,7 +1238,7 @@ function rowHtml(type,r){
   }
   if(type==='rounds'){
     const tp=r.score!=null&&r.par!=null?r.score-r.par:null;
-    const tag=r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`;
+    const tag=r.kind==='tournament'?`<span class="tag t">${t('tournament')}</span>`:`<span class="tag pr">${t('pr')}</span>`;
     const stats=[r.putts!=null?t('putts')+' '+r.putts:'',r.gir!=null?'GIR '+r.gir+'/'+r.holes:'',r.place?'#'+esc(r.place):''].filter(Boolean).join(' · ');
     return `<div class="item" onclick="openDetail('rounds','${r.id}')"><div class="ic r">⛳${pendDot(type,r)}</div><div class="m"><b>${tag}${esc(r.event||r.course||'')}</b><span>${fmtD(r.date)} · ${r.holes}H${r.finished===false?' · '+t('incomplete'):''}${stats?' · '+stats:''}</span></div><div class="s">${r.score!=null?r.score:'–'}<small>${tp!=null?signed(tp,0):''}</small></div></div>`;
   }
@@ -1206,7 +1254,7 @@ function vPractice(){return todayCard()+questCard()+`<section class="card tempoc
 function vRounds(){
   const tab=S.rTab||'list';
   const seg=`<div class="seg" role="tablist">${['list','stats'].map(k=>`<button role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" onclick="S.rTab='${k}';render()">${t('rt_'+k)}</button>`).join('')}</div>`;
-  if(tab==='stats')return seg+cmpCard(S.cmp,true)+shotStatsCard(S.cmp);
+  if(tab==='stats')return seg+trendCard()+shotStatsCard(S.cmp);
   const f=S.rf||(S.rf={q:'',kind:'',tour:'',course:'',from:'',to:''});
   const courses=[...new Set(S.data.rounds.map(r=>r.course).filter(Boolean))].sort();
   const tours=[...new Set(S.data.rounds.filter(r=>r.kind==='tournament').map(r=>normTour(r.tour)).filter(Boolean))].sort();
@@ -1215,8 +1263,7 @@ function vRounds(){
   <section class="card"><div class="rfbar">
    <div><label for="rfQ">${t('srch')}</label><input class="in" id="rfQ" type="search" value="${esc(f.q)}" placeholder="${t('rfSearch')}" oninput="S.rf.q=this.value;drawRList()"></div>
    <div class="seg" style="margin:0">${[['',t('rfAll')],['practice',t('practiceRound')],['tournament',t('tournament')]].map(([v,l])=>`<button class="${f.kind===v?'on':''}" onclick="S.rf.kind='${v}';render()">${l}</button>`).join('')}</div>
-   <div class="row"><div class="fl"><label for="rfT">${t('tour')}</label><select class="in" id="rfT" onchange="S.rf.tour=this.value;drawRList()"><option value="">${t('rfTourAll')}</option>${tours.map(x=>`<option value="${esc(x)}" ${f.tour===x?'selected':''}>${esc(tourLabel(x))}</option>`).join('')}</select></div>
-    <div class="fl"><label for="rfC">${t('course')}</label><select class="in" id="rfC" onchange="S.rf.course=this.value;drawRList()"><option value="">${t('rfCourseAll')}</option>${courses.map(x=>`<option ${f.course===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div>
+   <div class="row"><div class="fl"><label for="rfC">${t('course')}</label><select class="in" id="rfC" onchange="S.rf.course=this.value;drawRList()"><option value="">${t('rfCourseAll')}</option>${courses.map(x=>`<option ${f.course===x?'selected':''}>${esc(x)}</option>`).join('')}</select></div></div>
    <div class="row"><div class="fl"><label for="rfF">${t('rfFrom')}</label><input class="in" id="rfF" type="date" value="${f.from}" onchange="S.rf.from=this.value;drawRList()"></div><div class="fl"><label for="rfTo">${t('rfTo')}</label><input class="in" id="rfTo" type="date" value="${f.to}" onchange="S.rf.to=this.value;drawRList()"></div></div>
   </div><div id="rCount" class="small muted" style="margin-bottom:4px"></div><div id="rList">${rListHtml()}</div></section>`;
 }
@@ -1333,7 +1380,7 @@ function openDetail(type,id){
     if((r.media||[]).length)b+=`<div class="sec">${t('media')}</div>${mediaGrid(r.media)}`;
   }else if(type==='rounds'){
     const tp=r.score!=null&&r.par!=null?r.score-r.par:null;
-    b+=`<div class="row" style="margin-bottom:10px">${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour))} ${t('tournament')}</span>`:`<span class="tag pr">${t('practiceRound')}</span>`}<span class="small muted">${r.course?esc(r.course)+' · ':''}${r.holes}H${r.finished===false?' · '+t('incomplete'):''}</span></div>`;
+    b+=`<div class="row" style="margin-bottom:10px">${r.kind==='tournament'?`<span class="tag t">${t('tournament')}</span>`:`<span class="tag pr">${t('practiceRound')}</span>`}<span class="small muted">${r.course?esc(r.course)+' · ':''}${r.holes}H${r.finished===false?' · '+t('incomplete'):''}</span></div>`;
     b+=`<div class="kv"><div><b>${r.score!=null?r.score:'–'}</b><span>${t('score')}</span></div><div><b>${tp!=null?signed(tp,0):'–'}</b><span>${t('par')} ${r.par!=null?r.par:''}</span></div><div><b>${r.place?'#'+esc(r.place):'–'}</b><span>${t('place')}${r.field?' / '+r.field:''}</span></div></div>`;
     const chk=roundChecks(r);if(chk.length)b+=`<div class="warn dup" style="margin-bottom:8px"><b>${t('chkNeed')}</b><br>${chk.map(esc).join('<br>')}</div>`;
     const info=[[t('division'),r.division],[t('teeN'),r.tee],[t('yardsN'),r.yards!=null?r.yards+(S.lang==='ko'?'야드':' yd'):null]].filter(x=>x[1]);
@@ -1418,19 +1465,18 @@ function openForm(type,id,tpl){
   }else{
     const lastCoach=(S.data.lessons.slice().sort(byDateDesc)[0]||{}).coach;
     b+=`<div class="grid2">${fld(t('date'),inp('date',r?r.date:today(),'type="date"'))}${fld(t('coachN'),inp('coach',r?r.coach:lastCoach,'list="coaches"'))}</div>${datalist('coaches',S.data.lessons.map(l=>l.coach))}`;
-    b+=fld(t('focus'),inp('focus',r&&r.focus,`placeholder="${t('focusPh')}"`));
     b+=fld(t('feedback'),`<textarea class="in" maxlength="4000" name="feedback" placeholder="${t('fbPh')}">${esc(r&&r.feedback||'')}</textarea>`);
-    b+=`<div class="sec">${t('homework')}</div><div id="hws"></div><button type="button" class="ghost" onclick="addHw()">${t('addHw')}</button>`;
+    const oldHw=(r&&r.homework||[]).length>0; // 예전 숙제 목록이 있는 레슨만 그 칸을 보여줌
+    b+=oldHw?`<div class="sec">${t('homework')}</div><div id="hws"></div><button type="button" class="ghost" onclick="addHw()">${t('addHw')}</button>`:'<div id="hws" hidden></div>';
     F.plan=r&&r.plan?r.plan:null;F.planText=r&&r.planText||'';
     b+=`<div class="sec">${t('cpSec')}</div><textarea class="in" id="cpText" maxlength="12000" rows="5" placeholder="${t('cpPaste')}">${esc(F.planText)}</textarea><button type="button" class="ghost" id="cpBtn" style="margin-top:6px" onclick="cpParse()">${t('cpAI')}</button><div id="cpPrev"></div>`;
-    b+=mediaBlock('before',t('before'))+mediaBlock('after',t('after'));
-    b+=`<div class="sec">${t('notes')}</div><textarea class="in" maxlength="4000" name="notes">${esc(r&&r.notes||'')}</textarea>`;
-    b+=mediaBlock('main',t('more'));
+    b+=`<div class="sec"><label for="lnNotes">${t('notes')}</label></div><textarea class="in" id="lnNotes" maxlength="4000" name="notes">${esc(r&&r.notes||'')}</textarea>`;
+    b+=mediaBlock('main',t('photosVideos'));
   }
   b+=`<div class="note">📱 ${t('vidNote')}</div></form>`;
   openSheet((F.isNew?'+ ':t('edit')+' · ')+t(type),b,`<button class="btn sec" onclick="closeSheet()">${t('cancel')}</button><button class="btn" id="saveBtn" onclick="saveForm()">${t('save')}</button>`,'form');
   if(type==='practice')((r&&r.drills)||[]).forEach(d=>addDrill(d));
-  if(type==='lessons'){const hw=(r&&r.homework)||[];if(hw.length)hw.forEach(h=>addHw(h));else addHw();drawCpPrev()}
+  if(type==='lessons'){const hw=(r&&r.homework)||[];if(hw.length)hw.forEach(h=>addHw(h));drawCpPrev()}
   if(type==='rounds'){F.holes=resizeHoles((r&&r.holeData)||[],r?r.holes:18,r&&r.course);F.hi=0;drawHoles();recalcSummary()}
   ['main','before','after'].forEach(drawMedia);
 }
@@ -1512,7 +1558,7 @@ async function saveForm(){
     if(sm.complete)['score','par','putts','gir','fairways','fwHoles','threePutts','birdies','bogeys','doubles','p3','p4','p5'].forEach(k=>{if(sm[k]!=null)rec[k]=sm[k]});
     const odd=oddShots(rec.holeData);if(odd.length&&!confirm(t('oddShots',{l:odd.slice(0,8).join('\n')})))return;
   }else{
-    rec.coach=f.coach.value.trim();rec.focus=f.focus.value.trim();rec.feedback=f.feedback.value.trim();
+    rec.coach=f.coach.value.trim();rec.focus=f.elements.namedItem('focus')?f.elements.namedItem('focus').value.trim():(rec.focus||'');rec.feedback=f.feedback.value.trim();
     rec.homework=[...f.querySelectorAll('.hrow')].map(r=>({id:r.dataset.id,text:r.querySelector('[data-h=text]').value.trim(),target:r.querySelector('[data-h=target]').value.trim(),done:r.querySelector('[data-h=done]').checked})).filter(h=>h.text);
     rec.before=F.media.before;rec.after=F.media.after;rec.media=F.media.main;
     if(F.plan){rec.plan=F.plan;rec.planText=(document.getElementById('cpText')||{}).value||F.planText||''}else{delete rec.plan;delete rec.planText}
@@ -1724,7 +1770,9 @@ function vAnalysis(){
        ${(g.pros||[]).length?`<div class="sec">🎬 ${t('proVids')}</div>${g.pros.map(p=>vidLink(p.player,L(p.watch),p.query)).join('')}`:''}
       </section>`;
     });
-    if(r.pressure)h+=`<section class="card"><h3>⚖️ ${t('pressure')}</h3><div>${esc(L(r.pressure))}</div></section>`;
+    if(r.week)h+=`<section class="card"><h3>🗓 ${t('weekAI')}</h3><div>${esc(L(r.week))}</div></section>`;
+    if(r.trend)h+=`<section class="card"><h3>📈 ${t('trend')}</h3><div>${esc(L(r.trend))}</div></section>`;
+    else if(r.pressure)h+=`<section class="card"><h3>⚖️ ${t('pressure')}</h3><div>${esc(L(r.pressure))}</div></section>`;
     const pi=(r.plan&&r.plan.items)||[];
     if(pi.length){const tot=pi.reduce((s,i)=>s+(+i.minutes||0),0),mx=Math.max(1,...pi.map(i=>+i.minutes||0));
       h+=`<section class="card"><h3>📅 ${t('plan')}<small>${t('totalPlan',{m:fmtMin(tot)})}</small></h3>${pi.map(i=>`<div class="planrow"><span><i class="dot" style="background:${CC[i.cat]||'#999'}"></i>${t('c_'+i.cat)}</span><div class="track"><i style="width:${(+i.minutes||0)/mx*100}%;background:${CC[i.cat]||'#999'}"></i></div><span class="val">${fmtMin(i.minutes)}</span></div>${(i.task||i.day)?`<div class="plantask">${i.day?'<b>'+dayName(i.day)+'</b> · ':''}${esc(L(i.task))}</div>`:''}`).join('')}</section>`}
@@ -1879,7 +1927,7 @@ function upcomingCard(){
 function logsOn(date){return [...S.data.practice.filter(r=>r.date===date).map(r=>({type:'practice',r})),...S.data.rounds.filter(r=>r.date===date).map(r=>({type:'rounds',r})),...S.data.lessons.filter(r=>r.date===date).map(r=>({type:'lessons',r}))]}
 function vCal(){
   const n=new Date(),m0=new Date(n.getFullYear(),n.getMonth()+S.calM,1),sel=S.calSel||today();
-  const gs=weekStart(m0),evs=allEvents(),byD={};evs.forEach(e=>{let d=pd(e.date);const z=evEnd(e);for(let i=0;i<14&&ymd(d)<=z;i++,d=addDays(d,1))(byD[ymd(d)]=byD[ymd(d)]||[]).push(e)});
+  const gs=addDays(m0,-m0.getDay()),evs=allEvents(),byD={}; // 일요일 시작evs.forEach(e=>{let d=pd(e.date);const z=evEnd(e);for(let i=0;i<14&&ymd(d)<=z;i++,d=addDays(d,1))(byD[ymd(d)]=byD[ymd(d)]||[]).push(e)});
   const logged=new Set([...S.data.practice,...S.data.rounds,...S.data.lessons].map(r=>r.date));
   const title=S.lang==='ko'?m0.getFullYear()+'년 '+(m0.getMonth()+1)+'월':m0.toLocaleString('en-US',{month:'long',year:'numeric'});
   let cells='';
@@ -1891,15 +1939,15 @@ function vCal(){
   }
   const dayEv=byD[sel]||[],dayLog=logsOn(sel);
   const upAll=evs.filter(e=>e.kind!=='plan'&&(e.date>today()||(e.date<=today()&&evEnd(e)>=today()&&e.date!==sel))),up=S.upAll?upAll:upAll.slice(0,6);
-  return `<button class="addbtn" onclick="openEventForm(null,'${sel}')">${t('calAdd')}</button>
+  return `<button class="addbtn" onclick="openEventForm(null,'${sel}')">${t('calAdd')} · ${fmtS(pd(sel))}</button>
   <section class="card"><div class="calhd"><button class="icon" onclick="S.calM--;render()">‹</button><b>${title}</b><button class="icon" onclick="S.calM++;render()">›</button></div>
-   <div class="calgrid">${[...t('days')].map(x=>`<div class="dn">${x}</div>`).join('')}${cells}</div>
+   <div class="calgrid">${[t('days')[6],...t('days').slice(0,6)].map(x=>`<div class="dn">${x}</div>`).join('')}${cells}</div>
    <div class="calleg">${['tournament','lesson','practice','plan'].map(k=>`<span><i class="dot" style="background:${EK[k].col}"></i>${t('k_'+k)}</span>`).join('')}<span><b class="up">✓</b> ${t('calLegLog')}</span></div>
    ${S.calM!==0||sel!==today()?`<div class="center" style="margin-top:8px"><button class="chip" onclick="S.calM=0;S.calSel='';render()">${t('dToday')}</button></div>`:''}</section>
   <section class="card"><h3>${fmtD(sel)} ${dLabel(sel)}</h3>
    ${dayEv.length?dayEv.map(e=>evRow(e,false)).join(''):`<div class="empty small">${t('dayEmpty')}</div>`}
    ${dayLog.length?`<div class="sec">${t('logsDay')}</div>${dayLog.map(x=>rowHtml(x.type,x.r)).join('')}`:''}
-   <button class="ghost" style="margin-top:8px" onclick="openEventForm(null,'${sel}')">${t('addThisDay')}</button></section>
+</section>
   ${up.length?`<section class="card"><h3>📅 ${t('upcoming')}<small>${t('upCnt',{n:upAll.length})}</small></h3>${up.map(e=>evRow(e,true)).join('')}${upAll.length>6?`<button class="ghost" style="margin-top:8px" onclick="S.upAll=!S.upAll;render()">${S.upAll?t('showLess'):t('showAll',{n:upAll.length-6,t:upAll.length})}</button>`:''}</section>`:''}
   <div class="note center" style="margin-bottom:12px">${t('calNote')}</div>`;
 }
@@ -2077,7 +2125,7 @@ function drawImport(){
     const r=buildRound(it.raw),tp=r.score!=null&&r.par!=null?r.score-r.par:null,nh=(r.holeData||[]).filter(hasHole).length,ns=(r.holeData||[]).reduce((a,h)=>a+h.shots.length,0);
     const unclear=(it.raw.unclear||[]).filter(Boolean),cf=it.raw.confidence;
     return `<div class="impc ${it.done?'done':''}"><div class="row between"><span class="small muted">${fmtD(r.date)}</span>${cf?`<span class="conf ${esc(cf)}">${t('conf_'+cf)}</span>`:''}</div>
-     <div class="t">${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||t('tournament'))}</span>`:`<span class="tag pr">${t('pr')}</span>`}${esc(r.event||r.course||'–')}</div>
+     <div class="t">${r.kind==='tournament'?`<span class="tag t">${t('tournament')}</span>`:`<span class="tag pr">${t('pr')}</span>`}${esc(r.event||r.course||'–')}</div>
      <div class="small muted">${[r.event&&r.course?esc(r.course):'',r.holes+'H',r.place?'#'+esc(r.place):''].filter(Boolean).join(' · ')}</div>
      <div class="row" style="margin-top:6px;gap:14px"><b style="font-size:20px">${r.score!=null?r.score:'–'}</b><span class="muted">${tp!=null?signed(tp,0):''}</span>
       <span class="small muted">${[r.putts!=null?t('putts')+' '+r.putts:'',nh?t('impHoles',{n:nh}):'',ns?t('impShots',{n:ns}):''].filter(Boolean).join(' · ')}</span></div>
@@ -2602,9 +2650,8 @@ function vReport(){
   <section class="card"><h3>${t('summary')}</h3><div class="kv"><div><b>${fmtMin(d.tot)}</b><span>${t('practiceTime')}</span></div><div><b>${d.ps.length}</b><span>${t('sessions')}</span></div><div><b>${d.rs.length} / ${d.lsn.length}</b><span>${t('rounds')} / ${t('lessons')}</span></div></div>
    <div style="margin-top:12px">${CATS.filter(c=>d.ct[c]).map(c=>`<div class="hbar"><span><i class="dot" style="background:${CC[c]}"></i>${t('c_'+c)}</span><div class="track"><i style="width:${d.ct[c]/cmax*100}%;background:${CC[c]}"></i></div><span class="val">${fmtMin(d.ct[c])}</span></div>`).join('')}</div></section>
   ${d.rs.length?`<section class="card"><h3>${t('rounds')}</h3><table class="rt"><tr><th>${t('date')}</th><th>${t('course')}</th><th>${t('score')}</th><th>${t('putts')}</th><th>GIR</th><th>FW</th></tr>${d.rs.map(r=>`<tr><td>${fmtS(pd(r.date))}</td><td>${r.kind==='tournament'?`<span class="tag t">${esc(tourLabel(r.tour)||'T')}</span>`:''}${esc(r.event||r.course||'')}</td><td><b>${r.score!=null?r.score:'–'}</b> <span class="muted">${r.score!=null&&r.par!=null?signed(r.score-r.par,0):''}</span></td><td>${r.putts!=null?r.putts:'–'}</td><td>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td></tr>`).join('')}</table></section>`:''}
-  ${cmpCard(null,false,a,b)}
+  ${hwReportCard(a,b)}
   ${cpReportCard(a,b)}
-  ${d.lsn.length?`<section class="card"><h3>${t('lessons')}</h3>${d.lsn.map(l=>`<div style="padding:8px 0;border-top:1px solid var(--line)"><b>${fmtD(l.date)} · ${esc(l.focus||'')}</b> <span class="small muted">${esc(l.coach||'')}</span>${l.feedback?`<div class="small" style="white-space:pre-wrap;margin-top:4px">${esc(l.feedback)}</div>`:''}${(l.homework||[]).map(h=>`<div class="small" style="margin-top:4px">${h.done?'✅':'⬜'} ${esc(h.text)} <span class="cnt">${t('practicedN',{n:hwCount(h.id)})}</span></div>`).join('')}</div>`).join('')}</section>`:''}
   ${S.role==='parent'?`<button class="addbtn" id="pdfBtn" ${online()?'':'disabled'} onclick="makePdf()">${t('makePdf')}</button>`:''}${online()?'':`<div class="note center">${t('needOnline')}</div>`}<div id="pdfOut"></div>`}`;
 }
 function pdfHtml(a,b){
@@ -2620,7 +2667,6 @@ function pdfHtml(a,b){
   if(d.rs.length)x+=h2(t('rounds'))+`<table style="border-collapse:collapse;width:100%"><tr><th ${th}>${t('date')}</th><th ${th}>${t('kind')}</th><th ${th}>${t('course')}</th><th ${th}>${t('score')}</th><th ${th}>${t('putts')}</th><th ${th}>GIR</th><th ${th}>FW</th><th ${th}>3P</th><th ${th}>${t('place')}</th></tr>${d.rs.map(r=>`<tr><td ${td}>${fmtS(pd(r.date))}</td><td ${td}>${r.kind==='tournament'?esc(tourLabel(r.tour)||t('tournament')):t('pr')}</td><td ${tdl}>${esc(r.event||'')}${r.event&&r.course?' / ':''}${esc(r.course||'')} (${r.holes}H)</td><td ${td}><b>${r.score!=null?r.score:'–'}</b> ${r.score!=null&&r.par!=null?'('+signed(r.score-r.par,0)+')':''}</td><td ${td}>${r.putts!=null?r.putts:'–'}</td><td ${td}>${r.gir!=null?r.gir+'/'+r.holes:'–'}</td><td ${td}>${r.fairways!=null?r.fairways+'/'+(r.fwHoles||''):'–'}</td><td ${td}>${r.threePutts!=null?r.threePutts:'–'}</td><td ${td}>${esc(r.place||'')}</td></tr>`).join('')}</table>`;
   {const c=cpReport(a,b);if(c.planned||c.targets.length){x+=h2(t('cpReport'))+`<div style="font-size:12px">${t('cpDone')}: <b>${c.planned?c.done+' / '+c.planned:c.done}</b></div>`;
     if(c.targets.length)x+=`<table style="border-collapse:collapse;width:100%;margin-top:6px"><tr><th ${th}>${t('cpReport')}</th><th ${th}>${t('date')}</th><th ${th}>${t('summary')}</th></tr>${c.targets.map(o=>`<tr><td ${tdl}>${esc(o.label)}${o.type==='ratio'?` (${o.goal||o.n}/${o.n})`:''}</td><td ${tdl}>${o.rows.map(r=>`${fmtS(pd(r.date))} ${r.val}${o.type==='ratio'?'/'+o.n:''}${r.ok?' ✓':''}`).join(', ')}</td><td ${td}>${esc(o.sum)}</td></tr>`).join('')}</table>`}}
-  if(d.lsn.length){x+=h2(t('lessons'));d.lsn.forEach(l=>{x+=`<div style="border:1px solid #d6dcd4;padding:8px;margin-bottom:6px;font-size:12px"><b>${fmtD(l.date)} · ${esc(l.focus||'')}</b> <span style="color:#6b756f">${esc(l.coach||'')}</span>${l.feedback?`<div style="margin-top:4px;white-space:pre-wrap">${esc(l.feedback)}</div>`:''}${(l.homework||[]).map(h=>`<div style="margin-top:3px">${h.done?'[✓]':'[ ]'} ${esc(h.text)}${h.target?' — '+esc(h.target):''} · ${t('practicedN',{n:hwCount(h.id)})}</div>`).join('')}</div>`})}
   const notes=d.ps.filter(p=>p.notes);
   if(notes.length)x+=h2(t('notes'))+notes.map(p=>`<div style="font-size:12px;margin-bottom:4px"><b>${fmtS(pd(p.date))}</b> ${esc(p.notes)}</div>`).join('');
   return x+`</body></html>`;
@@ -2665,7 +2711,7 @@ async function openSettings(){
     <div class="row between" style="padding:8px 0"><span class="muted">${t('storage')}</span><b id="stStore">–</b></div></div>
    <button class="btn" style="width:100%" ${S.syncing?'disabled':''} onclick="sync(true)">${S.syncing?'<span class="spin"></span> '+(S.upProg?t('upN',{p:S.upProg}):t('syncing')):'🔄 '+t('syncNow')}</button>
    <button class="ghost" style="margin-top:10px;border-color:var(--or);color:var(--or)" onclick="disconnect()">${t('disconnect')}</button>
-   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.11</div>`;
+   <div class="note center" style="margin-top:14px">Ryan Golf Log · v8.12</div>`;
   openSheet(t('settings'),b,`<button class="btn sec" onclick="closeSheet()">${t('close')}</button>`,'settings');
   try{if(navigator.storage&&navigator.storage.estimate){const e=await navigator.storage.estimate();const el=document.getElementById('stStore');if(el)el.textContent=(e.usage/1048576).toFixed(1)+' MB'}}catch(e){}
 }
